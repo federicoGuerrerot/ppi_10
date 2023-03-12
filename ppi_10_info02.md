@@ -3,7 +3,7 @@
 ##
 
 ## Grupo de facebook: Materias y Electivas Fáciles (UNAL_MED)
-Realmente esta /foro no esta dedicada unicamente a tutorias, esta es solamente un medio por el cual los estudiantes de la unal 
+Realmente esta herramienta/foro no esta dedicada unicamente a tutorias, esta es solamente un medio por el cual los estudiantes de la unal 
 comparten informacion de interes, entre estas tutorias.
 Esta herramienta resulta ser la mas usada por la comunidad.
 
@@ -19,11 +19,15 @@ Es la aplicacion lider en cuanto a tutorias online se refiere, es una app global
 # Librerias Disponibles
 
 ## Pandas
-
+Esta librería de Python especializada en la manipulación y el análisis de datos ofrece estructuras de datos y operaciones para manipular 
+tablas numéricas y series temporales, es como el Excel de Python.
 ## Numpy
-
+Esta librería define un tipo de dato que representa matrices multidimensionales, equivalentes a las matrices del R. Además incluye
+algunas funcionalidades básicas para trabajar con ellas.
 ## Matplotlib
-
+Libreria para la generación de gráficos en dos dimensiones, a partir de datos contenidos en listas o arrays en el lenguaje de programación 
+Python.
 ## Django
-
+Framework web de alto nivel escrito en phyton que permite el desarrollo rápido de sitios web seguros y mantenibles. Desarrollado por 
+programadores experimentados, Django se encarga de gran parte de las complicaciones del desarrollo web
 ## 
