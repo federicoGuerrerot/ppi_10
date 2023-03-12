@@ -1,5 +1,5 @@
 # Herramientas/Aplicativos
 
-# Software Opne Source
+# Software Open Source
 
 # Librerias Disponibles..
