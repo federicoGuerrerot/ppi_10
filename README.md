@@ -1,17 +1,23 @@
-# Title and sub-title
+# TutoUN
+Plataforma enfocada a la búsqueda de tutores dentro de la comunidad de la universidad nacional de Colombia
+sede Medellín.
 
-## Table of Content
+## Desarrolladores
+Federico Guerrero Trejos
+Juan Jose Ospina Erazo
+Alejandro Esteban Muñoz Osorio
 
-## Description
+## Tabla de contenido
+- 
+## Descripción
 
-## Working of the project
+## Trabajando en el proyecto
 A Step-by-step guide for the user about different features and how to use them. Add screenshots to better illustrate the work. You can add diagrams to show the architecture of the project. You can also add videos or gifs in this section.
 
-## Installation Guide
+## Guia de instalación
 
-## Contributing Guidelines
+## Guias de contribución
 If the project is open source, you can talk about guidelines for contributing. You can add any external files too.
 
-## License 
-
+## Licencia
 GPL Vs3
