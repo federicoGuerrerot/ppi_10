@@ -14,9 +14,12 @@ Es la aplicacion lider en cuanto a tutorias online se refiere, es una app global
 
 # Software Open Source
 
-##
-##
-##
+## jQuery
+jQuery es una biblioteca de javascript que puede ser util para la validacion de formularios o la seleccion dinamica de elementos
+
+## SQLAlchemy
+Es una Biblioteca de python que se utiliza para trabajar con Bases de datos relacionales, Permitira trabajar con MySql desde el proyecto
+
 
 # Librerias Disponibles
 
@@ -32,6 +35,5 @@ Python.
 ## Django
 Framework web de alto nivel escrito en phyton que permite el desarrollo rápido de sitios web seguros y mantenibles. Desarrollado por 
 programadores experimentados, Django se encarga de gran parte de las complicaciones del desarrollo web.
-## Flask
-Para crear una interfaz web que permita a los estudiantes y tutores interactuar con la plataforma.
+
 ## 
