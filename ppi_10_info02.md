@@ -14,8 +14,10 @@ Es la aplicacion lider en cuanto a tutorias online se refiere, es una app global
 
 # Software Open Source
 
-##
-##
+## Django
+Framework web de alto nivel escrito en phyton que permite el desarrollo rápido de sitios web seguros y mantenibles. Desarrollado por 
+programadores experimentados, Django se encarga de gran parte de las complicaciones del desarrollo web.
+Se utilizara para desarrolar de la interfaz grafica del proyecto.
 ##
 
 # Librerias Disponibles
@@ -29,9 +31,7 @@ algunas funcionalidades básicas para trabajar con ellas.
 ## Matplotlib
 Libreria para la generación de gráficos en dos dimensiones, a partir de datos contenidos en listas o arrays en el lenguaje de programación 
 Python.
-## Django
-Framework web de alto nivel escrito en phyton que permite el desarrollo rápido de sitios web seguros y mantenibles. Desarrollado por 
-programadores experimentados, Django se encarga de gran parte de las complicaciones del desarrollo web.
+
 ## Flask
 Para crear una interfaz web que permita a los estudiantes y tutores interactuar con la plataforma.
 ## 
