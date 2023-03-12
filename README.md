@@ -32,7 +32,11 @@ Work in progress
 Work in progress
 
 ## Guias de contribución
-If the project is open source, you can talk about guidelines for contributing. You can add any external files too.
+Si se esta interesado en aportar en el proyecto por favor tener en cuenta:
+
+- Relizar sus aportes un una rama nueva, sin afectar la principal. 
+- Realizar commits cortos que permitan hacer un seguimiento facil del codigo.
+- Describir a detalle que se hace en cada commit y ademas, comentar debidamente el codigo.
 
 ## Licencia
 GPL Vs3
