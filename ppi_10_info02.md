@@ -1,5 +1,7 @@
 # Herramientas/Aplicativos
 
+# Software Open Source
+
 ##
 
 ## Grupo de facebook: Materias y Electivas Fáciles (UNAL_MED)
@@ -29,5 +31,7 @@ Libreria para la generación de gráficos en dos dimensiones, a partir de datos 
 Python.
 ## Django
 Framework web de alto nivel escrito en phyton que permite el desarrollo rápido de sitios web seguros y mantenibles. Desarrollado por 
-programadores experimentados, Django se encarga de gran parte de las complicaciones del desarrollo web
+programadores experimentados, Django se encarga de gran parte de las complicaciones del desarrollo web.
+## Flask
+Para crear una interfaz web que permita a los estudiantes y tutores interactuar con la plataforma.
 ## 
