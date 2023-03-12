@@ -1,9 +1,5 @@
 # Herramientas/Aplicativos
 
-# Software Open Source
-
-##
-
 ## Grupo de facebook: Materias y Electivas Fáciles (UNAL_MED)
 Realmente esta herramienta/foro no esta dedicada unicamente a tutorias, esta es solamente un medio por el cual los estudiantes de la unal 
 comparten informacion de interes, entre estas tutorias.
@@ -31,7 +27,6 @@ Se utilizara para desarrolar de la interfaz grafica del proyecto.
 Este es un sistema gestor de bases de datos relacionales de codigo abierto, que podra ser utilizado en el proyecto para almacenar todos los datos de la aplicacion y asi poder trabajar con ellos
 
 # Librerias Disponibles
-
 ## Pandas
 Esta librería de Python especializada en la manipulación y el análisis de datos ofrece estructuras de datos y operaciones para manipular 
 tablas numéricas y series temporales, es como el Excel de Python.
@@ -41,4 +36,3 @@ algunas funcionalidades básicas para trabajar con ellas.
 ## Matplotlib
 Libreria para la generación de gráficos en dos dimensiones, a partir de datos contenidos en listas o arrays en el lenguaje de programación 
 Python.
-## 
