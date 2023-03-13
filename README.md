@@ -1,13 +1,13 @@
 # TutoUN
 Plataforma enfocada a la búsqueda de tutores dentro de la comunidad de la universidad nacional de Colombia
-sede Medellín.
+sede Medellin.
 
 ## Tabla de contenido
 - Desarrolladores
 - Descripción
 - Trabajando en el proyecto
-- Guia de instalación
-- Guias de contribución
+- Guía de instalación
+- Guías de contribución
 - Licencia
 
 ## Desarrolladores
@@ -17,7 +17,7 @@ sede Medellín.
 
 ## Descripción
  Este aplicativo provee una conectividad entre tutores y estudiantes para la Universidad Nacional de Colombia, que permita a los estudiantes 
- buscar e nteractuar con tutores particulares para recibir asesoría en diferentes materias y habilidades. 
+ buscar e interactuar con tutores particulares para recibir asesoría en diferentes materias y habilidades. 
  
  La aplicación también permitirá a los tutores crear perfiles detallados con información sobre su metodología de enseñanza, experiencia y 
  tarifas, y a los estudiantes calificar y dar comentarios sobre la calidad de la enseñanza recibida. 
@@ -26,17 +26,17 @@ sede Medellín.
 
 ## Trabajando en el proyecto
 Work in progress
-(A Step-by-step guide for the user about different features and how to use them. Add screenshots to better illustrate the work. You can add diagrams to show the architecture of the project. You can also add videos or gifs in this section.)
+(A Step-by-step guide for the user about different features and how to use them. Add screenshots to better illustrate the work. You can add diagrams to show the architecture of the project. You can also add videos or gits in this section.)
 
-## Guia de instalación
+## Guía de instalación
 Work in progress
 
-## Guias de contribución
+## Guías de contribución
 Si se esta interesado en aportar en el proyecto por favor tener en cuenta:
 
-- Relizar sus aportes un una rama nueva, sin afectar la principal. 
-- Realizar commits cortos que permitan hacer un seguimiento facil del codigo.
-- Describir a detalle que se hace en cada commit y ademas, comentar debidamente el codigo.
+- Realizar sus aportes un una rama nueva, sin afectar la principal. 
+- Realizar commits cortos que permitan hacer un seguimiento fácil del código.
+- Describir a detalle que se hace en cada commit y ademas, comentar debidamente el código.
 
 ## Licencia
 GPL Vs3
