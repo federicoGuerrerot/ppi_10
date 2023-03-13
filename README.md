@@ -24,7 +24,7 @@ sede Medellin.
  El objetivo final es diversificar el acceso a alternativas que apoyen y complementen el aprendizaje y el desarrollo académico de los 
  estudiantes dentro de la institución
 
-## Trabajando en el proyecto
+## Uso de la herramienta
 Work in progress
 (A Step-by-step guide for the user about different features and how to use them. Add screenshots to better illustrate the work. You can add diagrams to show the architecture of the project. You can also add videos or gits in this section.)
 

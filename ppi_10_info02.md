@@ -33,6 +33,6 @@ tablas numéricas y series temporales, es como el Excel de Python.
 ## [Numpy](https://numpy.org)
 Esta librería define un tipo de dato que representa matrices multidimensional, equivalentes a las matrices del R. Además incluye
 algunas funcionalidades básicas para trabajar con ellas.
-## Matplotlib
+## [Matplotlib](https://matplotlib.org)
 Librería para la generación de gráficos en dos dimensiones, a partir de datos contenidos en listas o arrays en el lenguaje de programación 
 Python.
