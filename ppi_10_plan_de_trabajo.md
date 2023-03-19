@@ -11,29 +11,38 @@ Primeros pasos con Django, familiarizarnos con el entorno y sus características
 
 # Informe 04: 13 horas del viernes 31 de marzo.
 ## Actividades requeridas:
-
+Experimentar con el manejo de formularios y la base de datos de la app.
 
 ## Contenido:
+- Implementación final de las funcionalidades sin registro.
+- Estructura final de atributos de los usuarios y funcionalidades.
 
 # Informe 05: 13 horas del viernes 14 de abril.
 ## Actividades requeridas:
+Experimentar con el manejo de formularios y la base de datos de la app.
 
 ## Contenido:
+- Implementación final de las funcionalidades con registro.
 
 # Informe 06: 13 horas del viernes 21 de abril.
 ## Actividades requeridas:
+Búsqueda, experimentación e implementación de API's.
 
 ## Contenido:
+- Conexión con aplicaciones de terceros (Calendario, contactos, WhatsApp, etc)
 
 # Informe 07: 13 horas del viernes 28 de abril.
 ## Actividades requeridas:
+Búsqueda de paleta de colores, realizar borradores de diseños y realzar integración con las funcionalidades de la aplicación.
 
 ## Contenido:
+- Propuesta inicial de interfaces definitivas para la aplicación.
 
 # Informe 08: 13 horas del viernes 5 de mayo.
 ## Actividades requeridas:
 
 ## Contenido:
+- Interfaces e imagen de la aplicación final.
 
 # Informe 09: 13 horas del viernes 12 de mayo.
 ## Actividades requeridas:
