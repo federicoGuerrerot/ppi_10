@@ -33,3 +33,8 @@ def eliminar_tutoria(request): #falta
     else:
         Tutoria.objects.create(Nombre=request.POST["Nombre"],Tema=request.POST["Tema"])
         return redirect('tutorias')
+    
+#del merge , name='vistaTutoria'
+def vistaTutoria(request):
+    return render(request, 'vistaTutoria.html')
+

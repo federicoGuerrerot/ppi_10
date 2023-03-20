@@ -8,15 +8,35 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #ececec;
+            margin: 0;
+            font-family: "Poppins";
         }
-        header {
+
+        
+        .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #007bff;
-            padding: 1rem;
+            background: linear-gradient(to bottom right, #77b6f8 10%,#3787dd 40%, #0a509c 80%);
+            box-shadow: 0 2px 7px rgba(0, 0, 0, 0.5);
+            padding: 1em;
             color: white;
+            z-index: 1;
         }
+
+
+        .logo{
+                text-decoration: none;
+                font-weight: bold;
+                color: rgb(246, 243, 243);
+                font-size: 1.2em;
+                
+            }
+
+            span{
+                color: #010101;
+            }   
         .search-section {
             display: flex;
             justify-content: center;
@@ -35,7 +55,6 @@
 }
 
 .dropdown-toggle {
-    background-color: #007bff;
     color: white;
     border: none;
     cursor: pointer;
@@ -69,9 +88,12 @@
     </style>
 </head>
 <body>
-    <header>
+    <div class="navbar">
         <!-- Contenido del encabezado -->
-        <h1>TutoUN</h1>
+        <div class="container">
+            <a class="logo" href="#">Tuto<span>UN</span></a>
+        </div>
+
         <div class="dropdown">
             <button class="dropdown-toggle">Menú</button>
             <div class="dropdown-menu">
@@ -80,7 +102,9 @@
                 <a href="/materias/">Materias</a>
                 <a href="/contacto/">Contacto</a>
             </div>
-    </header>
+        </div>
+</div>
+        
 
     <main>
         {% block content %}
@@ -91,6 +115,8 @@
     <footer>
         <!-- Contenido del pie de página -->
         &copy; TutoUN. Todos los derechos reservados.
+        <div><a href="https://www.flaticon.es/iconos-gratis/facebook" title="facebook iconos">Facebook iconos creados por Pixel perfect - Flaticon</a></div>
+        
     </footer>
 </body>
 </html>

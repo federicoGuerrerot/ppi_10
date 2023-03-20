@@ -4,7 +4,10 @@
     Iniciar sesión - TutoUN
 {% endblock %}
 
+{% load static %}
+
 {% block content %}
+
     <style>
         .login-container {
             display: flex;
@@ -14,43 +17,150 @@
             min-height: 80vh;
         }
 
-        form {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            max-width: 300px;
-        }
+        h1 {
+            font-size: 1.8em;
+    margin-bottom: 0;
+    padding: 15px;
+}
 
-        label {
-            margin: 0.5rem 0;
-        }
+        .login-container form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+}
 
-        input {
-            margin-bottom: 1rem;
-            padding: 0.5rem;
-        }
+.login-container label {
+    margin: 0.5rem 0;
+    border-radius: 4px;
+}
 
-        button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 0.5rem;
-            cursor: pointer;
-            margin-bottom: 1rem;
-        }
+.login-container input {
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+}
 
-        button:hover {
-            background-color: #0056b3;
-        }
+.login-container button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
 
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
+.login-container button:hover {
+    background-color: #0056b3;
+}
 
-        a:hover {
-            text-decoration: underline;
-        }
+.login-container .social-login-buttons a {
+    text-decoration: none;
+}
+
+.login-container .social-login-buttons a:hover {
+    text-decoration: underline;
+}
+
+.login-container .social-login-buttons {
+    display: flex;
+    justify-content: space-between;
+    max-width: 300px;
+    margin: 0.2em;
+}
+
+.login-container .social-login-button {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 2px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 4px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.login-container .olvido {
+    display: inline-block;
+    padding: 2px 4px;
+    margin: 1px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 4px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    }
+
+    .login-container .nuevo {
+    display: inline-block;
+    padding: 2px 4px;
+    margin: 1px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 4px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    }
+
+.login-container .icon {
+    width: 24px;
+    height: auto;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.login-container .olvido-button {
+        color: #3B5998;
+        background-color: #ffffff;
+    }
+
+    .login-container .olvido-button:hover {
+        color: #ffffff;
+        background-color: #3B5998;
+    }
+
+    .login-container .nuevo-button {
+        color: #3B5998;
+        background-color: #ffffff;
+    }
+
+    .login-container .nuevo-button:hover {
+        color: #ffffff;
+        background-color: #3B5998;
+    }
+
+.login-container .facebook-button {
+        color: white;
+        background-color: #3B5998;
+    }
+
+    .login-container .facebook-button:hover {
+        color: white; 
+        background-color: #304572;
+    }
+
+    .login-container .google-button {
+        color: #444;
+        background-color: #F4F4F4;
+    }
+
+    .login-container .google-button:hover {
+        background-color: #cbcbcb;
+    }
+
+
+
+        
+
     </style>
 
     <div class="login-container">
@@ -63,8 +173,25 @@
             <input type="password" name="password" id="password" required>
             <button type="submit">Iniciar sesión</button>
         </form>
-        <p><a href="{}">¿Olvidaste tu contraseña?</a></p>
-        <p><a href="{}">¿Eres nuevo aquí? Crea una cuenta</a></p>
+        <div class="social-login-buttons">
+            <a href="{}" class="social-login-button facebook-button">
+                <img src="{% static 'facebook.png' %}" alt="Facebook icon" class="icon"> Facebook
+            </a>
+            <a href="{}" class="social-login-button google-button">
+                <img src="{% static 'google.png' %}" alt="Google icon" class="icon"> Google
+            </a>            
+        </div>
+
+        <div class="olvido">
+            <a class="social-login-button olvido-button" href="{}">¿Olvidaste tu contraseña?</a>         
+        </div>
+
+        <div class="nuevo">
+            <a class="social-login-button nuevo-button" href="{}">¿Eres nuevo aquí? Crea una cuenta</a>         
+        </div>
+    
     </div>
+
+    
 {% endblock %}
 
