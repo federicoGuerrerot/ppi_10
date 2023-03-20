@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+def vistaTutoria(request):
+    return render(request, 'vistaTutoria.html')
+
