@@ -7,13 +7,18 @@
 {% block content %}
 
 <section>
+    {% for tutoria in listatutorias %}
+
     <div class="card">
         <h1>{{tutoria.Nombre}}</h1>
     </div>
+    
+    {% endfor %}
+
 </section>
 <aside>
     <div class="card">
-        <h1>{{tutoria.Fecha}}</h1>
+        <h1>work in progress</h1>
     </div>
 </aside>
 

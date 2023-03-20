@@ -7,13 +7,20 @@
 {% block content %}
 
 <section>
-    <div class="card">
-        <h1>{{tutoria.Nombre}}</h1>
-    </div>
+    <h1>Crear Tutoria</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{form}}
+        <button>
+            Save
+        </button>
+    </form>
 </section>
+
 <aside>
     <div class="card">
-        <h1>{{tutoria.Fecha}}</h1>
+        <h1>work in progress</h1>
     </div>
 </aside>
 

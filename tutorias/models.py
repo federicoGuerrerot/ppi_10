@@ -10,3 +10,6 @@ class Tutoria(models.Model):
     Estado = models.CharField(max_length=200)
     Tutor = models.ForeignKey(userModel.Usuario, on_delete=models.CASCADE)
     Usuario = models.ForeignKey(userModel.Usuario, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.Nombre
