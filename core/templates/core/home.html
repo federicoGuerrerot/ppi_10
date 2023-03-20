@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    TutoUN - Página principal
+{% endblock %}
+
+{% block content %}
+    <div class="search-section">
+        <form action="/search/" method="GET">
+            <label for="search-input">Buscar tutores por temática:</label>
+            <input type="text" id="search-input" name="search" placeholder="Ejemplo: Matemáticas" required>
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+{% endblock %}
