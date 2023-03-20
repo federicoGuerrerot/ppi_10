@@ -8,8 +8,8 @@ class Tutoria(models.Model):
     Fecha = models.DateField
     Tarifa = models.IntegerField
     Estado = models.CharField(max_length=200)
-    Tutor = models.ForeignKey(userModel.Usuario, on_delete=models.CASCADE)
-    Usuario = models.ForeignKey(userModel.Usuario, on_delete=models.CASCADE)
-
+    usuario = models.ForeignKey('users.usuario', on_delete=models.CASCADE, related_name="usuario_tutorias")
+    tutor = models.ForeignKey('users.usuario', on_delete=models.CASCADE, related_name="tutor_tutorias")
+    
     def __str__(self):
         return self.Nombre
