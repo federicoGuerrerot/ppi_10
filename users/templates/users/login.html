@@ -120,7 +120,7 @@
 
 .login-container .olvido-button {
         color: #3B5998;
-        background-color: #ffffff;
+        background-color: #e6e6e6;
     }
 
     .login-container .olvido-button:hover {
@@ -130,7 +130,7 @@
 
     .login-container .nuevo-button {
         color: #3B5998;
-        background-color: #ffffff;
+        background-color: #e6e6e6;
     }
 
     .login-container .nuevo-button:hover {
@@ -141,6 +141,7 @@
 .login-container .facebook-button {
         color: white;
         background-color: #3B5998;
+        border-radius: 8px;
     }
 
     .login-container .facebook-button:hover {
@@ -151,6 +152,7 @@
     .login-container .google-button {
         color: #444;
         background-color: #F4F4F4;
+        border-radius: 8px;
     }
 
     .login-container .google-button:hover {
@@ -158,39 +160,51 @@
     }
 
 
+    .loginsection {
+        margin-bottom: 2em;
+        margin-top: 2em;
+        margin-left: 30em;
+        margin-right: 30em;
+        border-radius: 6px;
+        background-color: #ffffff;
+    }
+
 
         
 
     </style>
 
-    <div class="login-container">
-        <h1>Iniciar sesión</h1>
-        <form method="POST" action="{% url 'users:login' %}">
-            {% csrf_token %}
-            <label for="username">Usuario:</label>
-            <input type="text" name="username" id="username" required>
-            <label for="password">Contraseña:</label>
-            <input type="password" name="password" id="password" required>
-            <button type="submit">Iniciar sesión</button>
-        </form>
-        <div class="social-login-buttons">
-            <a href="{}" class="social-login-button facebook-button">
-                <img src="{% static 'facebook.png' %}" alt="Facebook icon" class="icon"> Facebook
-            </a>
-            <a href="{}" class="social-login-button google-button">
-                <img src="{% static 'google.png' %}" alt="Google icon" class="icon"> Google
-            </a>            
-        </div>
-
-        <div class="olvido">
-            <a class="social-login-button olvido-button" href="{}">¿Olvidaste tu contraseña?</a>         
-        </div>
-
-        <div class="nuevo">
-            <a class="social-login-button nuevo-button" href="{}">¿Eres nuevo aquí? Crea una cuenta</a>         
-        </div>
+    <section class="loginsection">
+        <div class="login-container">
+            <h1>Iniciar sesión</h1>
+            <form method="POST" action="{% url 'users:login' %}">
+                {% csrf_token %}
+                <label for="username">Usuario:</label>
+                <input type="text" name="username" id="username" required>
+                <label for="password">Contraseña:</label>
+                <input type="password" name="password" id="password" required>
+                <button type="submit">Iniciar sesión</button>
+            </form>
+            <div class="social-login-buttons">
+                <a href="{}" class="social-login-button facebook-button">
+                    <img src="{% static 'facebook.png' %}" alt="Facebook icon" class="icon"> Facebook
+                </a>
+                <a href="{}" class="social-login-button google-button">
+                    <img src="{% static 'google.png' %}" alt="Google icon" class="icon"> Google
+                </a>            
+            </div>
     
-    </div>
+            <div class="olvido">
+                <a class="social-login-button olvido-button" href="{}">¿Olvidaste tu contraseña?</a>         
+            </div>
+    
+            <div class="nuevo">
+                <a class="social-login-button nuevo-button" href="{}">¿Eres nuevo aquí? Crea una cuenta</a>         
+            </div>
+        
+        </div>
+    </section>
+
 
     
 {% endblock %}
