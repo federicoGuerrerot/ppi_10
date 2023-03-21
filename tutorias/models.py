@@ -1,7 +1,9 @@
 from django.db import models
 from users.models import Usuario
+
 # Create your models here.
 class Tutoria(models.Model):
+    id = models.IntegerField
     Nombre = models.CharField(max_length=200)
     Tema = models.CharField(max_length=200)
     Fecha = models.DateField

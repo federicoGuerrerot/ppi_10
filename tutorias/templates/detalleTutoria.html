@@ -1,4 +1,4 @@
-{% extends 'templates/base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}
     TutoUN - NOMBRE TUTORIA
@@ -7,13 +7,14 @@
 {% block content %}
 
 <section>
-    <div class="card">
+    <div class="containerTutoria">
         <h1>{{tutoria.Nombre}}</h1>
     </div>
 </section>
 <aside>
-    <div class="card">
-        <h1>{{tutoria.Fecha}}</h1>
+    <div class="containerTutoria">
+        <h1>{{tutoria.Tema}}</h1>
+        <p>descripción de la tutoria</p>
     </div>
 </aside>
 

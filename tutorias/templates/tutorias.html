@@ -1,4 +1,4 @@
-{% extends 'templates/base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}
     TutoUN - NOMBRE TUTORIA
@@ -9,15 +9,17 @@
 <section>
     {% for tutoria in listatutorias %}
 
-    <div class="card">
-        <h1>{{tutoria.Nombre}}</h1>
+    <div class="containerTutoria">
+        <a href="{% url 'detalleTutoria' tutoria.id %}">
+            <h1>{{tutoria.Nombre}}</h1>
+        </a>
     </div>
     
     {% endfor %}
 
 </section>
 <aside>
-    <div class="card">
+    <div class="containerTutoria">
         <h1>work in progress</h1>
     </div>
 </aside>
