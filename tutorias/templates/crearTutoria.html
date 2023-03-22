@@ -1,27 +1,108 @@
-{% extends 'base.html' %}
+{% extends 'core/base.html' %}
 
 {% block title %}
     TutoUN - NOMBRE TUTORIA
 {% endblock %}
 
+{% load static %}
+
 {% block content %}
+<style>
+    section {
+        max-width: 450px; /* Ajusta el ancho máximo de la sección */
+        margin: 15px auto;
+        padding: 2rem;
+        background-color: #f7f7f7;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    form label {
+        font-weight: bold;
+        margin-top: 1rem;
+    }
+
+    form input, form textarea, form select {
+        width: 100%;
+        padding: 0.5rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-top: 0.5rem;
+    }
+
+    textarea[readonly] {
+        resize: none;
+    }
+
+    .envio {
+        background-color: #3787dd;
+        color: white;
+        font-size: 1rem;
+        font-weight: bold;
+        border: none;
+        border-radius: 4px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        margin-top: 2rem;
+        transition: background-color 0.3s;
+    }
+
+    .envio:hover {
+        background-color: #2a62ac;
+    }
+
+    .tutor-info {
+        display: flex;
+        align-items: center;
+    }
+
+    .tutor-info img {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        margin: 1em;
+    }
+</style>
 
 <section>
-    <h1>Crear Tutoria</h1>
+    <h1>Solicitar Tutoria</h1>
 
     <form method="POST">
         {% csrf_token %}
-        {{form}}
-        <button>
-            Save
+        <label for="tutor">Tutor:</label>
+        <div class="tutor-info">
+            <img src="{% static 'usuario.png' %}" class="foto" alt="Foto de perfil del tutor">
+            <span>{{ tutor.nombre }} - Tarifa: ${{ tutor.tarifa_por_hora }}/hora</span>
+            <input type="hidden" name="tutor_id" id="tutor_id" value="{{ tutor.id }}">
+        </div>
+
+        <label for="materia">Materia:</label>
+        <select name="materia" id="materia" required>
+            <!-- Lista de materias disponibles -->
+        </select>
+
+        <label for="tema">Tema o concepto a tratar:</label>
+        <textarea name="tema" id="tema" rows="3" required readonly></textarea>
+
+        <label for="comentarios">Comentarios adicionales (opcional):</label>
+        <textarea name="comentarios" id="comentarios" rows="3" readonly></textarea>
+
+        <button class="envio">
+            Enviar
         </button>
     </form>
 </section>
-
-<aside>
-    <div class="containerTutoria">
-        <h1>work in progress</h1>
-    </div>
-</aside>
 
 {% endblock %}
