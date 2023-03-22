@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager, Permission
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
+import uuid #para crear id unicos, y que sirvan a la hora de migrar la base de datos, si lo vemos necesario.
 import random
 import string
 
@@ -38,6 +39,7 @@ class CustomAccountManager(BaseUserManager):
 
 class Usuario(AbstractUser):
     #Usuario de la app "hereda" del custos AccountManager, ese es el que se encarga de crear los usuarios ya sea los normales o los superusuarios
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     nombre = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
@@ -48,6 +50,9 @@ class Usuario(AbstractUser):
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    is_tutor = models.BooleanField(default=False)
+
+    # falta definir variables propias de tutores
 
     objects = CustomAccountManager()
 
@@ -59,6 +64,10 @@ class Usuario(AbstractUser):
     
     def get_email(self):
         return self.email
+    
+    def listarTutores(request):
+        tutores = Usuario.objects.filter(is_tutor = True)
+        return tutores
     
     #cuando este lista la vista del perfil del usuario, descomentar esto y corregir ruta de la vista
     #def get_absolute_url(self):

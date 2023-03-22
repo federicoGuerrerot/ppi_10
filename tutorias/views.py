@@ -2,11 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required # Para requerir que el usuario esté autenticado
 from users.models import Usuario
 from .models import Tutoria
-from .forms import CreaNuevaTutoria
+from .forms import SolicitaNuevaTutoria
 
 # Create your views here.
-def tutorias(request, id):
-    listatutorias = Tutoria.objects.filter(usuario_id = int(id))
+def tutorias(request, email):
+    listatutorias = Tutoria.objects.filter(usuario_email = email)
     return render(request, 'tutorias.html', {
         'listatutorias' : listatutorias,
     })
@@ -19,20 +19,22 @@ def detalle_tutoria(request, tutoria_id):
     })
 
 @login_required(login_url='core:home')
-def crear_tutoria(request):
+def solicitarTutoria(request, emailtutor):
+    tutor = get_object_or_404(Usuario, email = emailtutor)
     if request.method == 'GET':
-        return render(request, 'crearTutoria.html', {
-            'form': CreaNuevaTutoria()
+        return render(request, 'solicitarTutoria.html', {
+            #'form': SolicitaNuevaTutoria()
+            'tutor': tutor,
         })
     else:
-        Tutoria.objects.create(Nombre=request.POST["Nombre"],Tema=request.POST["Tema"],tutor=get_object_or_404(Usuario, id = 1), usuario=get_object_or_404(Usuario, id = 2))
+        Tutoria.objects.create(Nombre=request.POST["Nombre"],Tema=request.POST["Tema"],tutor=tutor, usuario=get_object_or_404(Usuario, id = 2))
         return redirect('tutorias',2)
 
 @login_required(login_url='core:home')
 def eliminar_tutoria(request): #falta
     if request.method == 'GET':
-        return render(request, 'crearTutoria.html', {
-            'form': CreaNuevaTutoria()
+        return render(request, 'solicitarTutoria.html', {
+            'form': SolicitaNuevaTutoria()
         })
     else:
         Tutoria.objects.create(Nombre=request.POST["Nombre"],Tema=request.POST["Tema"],Usuarioemail = 'admintutor@unal.edu.co')

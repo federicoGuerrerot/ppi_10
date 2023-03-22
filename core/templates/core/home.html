@@ -10,6 +10,14 @@
 <button id="loginBtn">Iniciar sesión</button>
 
 <style>
+    section {
+        max-width: 450px; /* Ajusta el ancho máximo de la sección */
+        margin: 15px auto;
+        padding: 2rem;
+        background-color: #f7f7f7;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
     .slogan {
         font-size: 2em;
         text-align: center;
@@ -108,6 +116,16 @@
         <input type="text" id="search-input" name="search" placeholder="Ejemplo: Matemáticas" required>
         <button type="submit">Buscar</button>
     </form>
+    <section>
+        {% for tutor in tutores %}
+        <div class="containerTutoria">
+            <a href="{% url 'solicitarTutoria' tutor.email %}">
+                <h1>{{tutor.nombre}}</h1>
+            </a>
+        </div>
+        
+        {% endfor %}
+    </section>
 </div>
 
 <a href="/tutorias/2">
