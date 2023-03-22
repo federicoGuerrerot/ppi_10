@@ -81,7 +81,7 @@
 
     <form method="POST">
         {% csrf_token %}
-        <label for="tutor">Tutor:</label>
+        <label for="tutor">Tutor: {{user.nombre}}</label>
         <div class="tutor-info">
             <img src="{% static 'usuario.png' %}" class="foto" alt="Foto de perfil del tutor">
             <span>{{ tutor.nombre }} - Tarifa: ${{ tutor.tarifa_por_hora }}/hora</span>
