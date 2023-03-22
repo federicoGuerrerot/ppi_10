@@ -6,7 +6,7 @@ from .forms import CreaNuevaTutoria
 
 # Create your views here.
 def tutorias(request, id):
-    listatutorias = Tutoria.objects.filter(usuario_id = id)
+    listatutorias = Tutoria.objects.filter(usuario_id = int(id))
     return render(request, 'tutorias.html', {
         'listatutorias' : listatutorias,
     })

@@ -8,6 +8,12 @@
 
 {% block content %}
 
+{% if messages %}
+    {% for message in messages %}
+        <p class="error-message">{{ message }}</p>
+    {% endfor %}
+{% endif %}
+
     <style>
         body {
             background-color: #f6f7fb;
@@ -133,6 +139,13 @@
 
         .extra-links a:hover {
             text-decoration: underline;
+        }
+
+        .error-message {
+        color: red;
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 1rem;
         }
 
     </style>

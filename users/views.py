@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, get_user_model, login, logout # Para autenticar, crear usuarios y cerrar sesión
+from django.contrib import messages 
 from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password # Para encriptar la contraseña
 from django.http.response import HttpResponse, JsonResponse # Para devolver respuestas
@@ -10,10 +11,10 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('core:home')  # Reemplazar 'core:home' con la vista de la página principal en tu proyecto 'tutorias:tutorias'+str(user.id)
+            return redirect('../..')  # Reemplazar 'core:home' con la vista de la página principal en tu proyecto '../../tutorias/'+str(user.id)
         else:
             # Mensaje de error si las credenciales son incorrectas
-            return render(request, 'users/login.html', {'error_message': 'Nombre de usuario o contraseña incorrecta'})
+            messages.error(request, 'Nombre de usuario o contraseña incorrecta')
     return render(request, 'users/login.html')
 
 def user_singup(request):
