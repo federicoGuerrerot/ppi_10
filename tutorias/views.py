@@ -5,8 +5,8 @@ from .models import Tutoria
 from .forms import SolicitaNuevaTutoria
 
 # Create your views here.
-def tutorias(request, email):
-    listatutorias = Tutoria.objects.filter(usuario_email = email)
+def tutorias(request, id):
+    listatutorias = Tutoria.objects.filter(usuario_id = id)
     return render(request, 'tutorias.html', {
         'listatutorias' : listatutorias,
     })
@@ -19,16 +19,17 @@ def detalle_tutoria(request, tutoria_id):
     })
 
 @login_required(login_url='core:home')
-def solicitarTutoria(request, emailtutor):
+def solicitarTutoria(request, emailtutor, emailestudiante):
     tutor = get_object_or_404(Usuario, email = emailtutor)
+    estudiante = get_object_or_404(Usuario, email = emailestudiante)
     if request.method == 'GET':
         return render(request, 'solicitarTutoria.html', {
             #'form': SolicitaNuevaTutoria()
             'tutor': tutor,
         })
     else:
-        Tutoria.objects.create(Nombre=request.POST["Nombre"],Tema=request.POST["Tema"],tutor=tutor, usuario=get_object_or_404(Usuario, id = 2))
-        return redirect('tutorias',2)
+        Tutoria.objects.create(Nombre=request.POST["Nombre"],Tema=request.POST["Tema"],tutor=tutor, usuario=estudiante)
+        return redirect('tutorias',estudiante.id)
 
 @login_required(login_url='core:home')
 def eliminar_tutoria(request): #falta

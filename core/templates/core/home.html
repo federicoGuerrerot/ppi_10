@@ -119,7 +119,7 @@
     <section>
         {% for tutor in tutores %}
         <div class="containerTutoria">
-            <a href="{% url 'solicitarTutoria' tutor.email %}">
+            <a href="{% url 'solicitarTutoria' tutor.email user.email %}">
                 <h1>{{tutor.nombre}}</h1>
             </a>
         </div>
