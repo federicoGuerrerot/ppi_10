@@ -11,7 +11,7 @@ class Tutoria(models.Model):
     Tarifa = models.IntegerField
     Estado = models.CharField(max_length=200)
     usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="usuario_tutorias")
-    tutor = models.ForeignKey(settings.AUTH_USER_MODEL,'users.Usuario', on_delete=models.CASCADE, related_name="tutor_tutorias")
+    tutor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="tutor_tutorias")
 
     def __str__(self):
         return self.Nombre

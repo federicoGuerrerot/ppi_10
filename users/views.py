@@ -10,7 +10,7 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('core:home')  # Reemplazar 'core:home' con la vista de la página principal en tu proyecto
+            return redirect('core:home')  # Reemplazar 'core:home' con la vista de la página principal en tu proyecto 'tutorias:tutorias'+str(user.id)
         else:
             # Mensaje de error si las credenciales son incorrectas
             return render(request, 'users/login.html', {'error_message': 'Nombre de usuario o contraseña incorrecta'})
