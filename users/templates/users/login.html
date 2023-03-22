@@ -9,161 +9,136 @@
 {% block content %}
 
     <style>
+        body {
+            background-color: #f6f7fb;
+        }
+
+        .login-icon {
+        width: 60px;
+        height: auto;
+        margin-bottom: 0px;
+    }
         .login-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            margin: 15px auto;
             min-height: 80vh;
+            background-color: white;
+            max-width: 435px;
+            border-radius: 12px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            padding: 2rem;
         }
 
         h1 {
             font-size: 1.8em;
-    margin-bottom: 0;
-    padding: 15px;
-}
+            margin-bottom: 1.5rem;
+        }
 
         .login-container form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 300px;
-}
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
 
-.login-container label {
-    margin: 0.5rem 0;
-    border-radius: 4px;
-}
+        .login-container label {
+            margin: 0.5rem 0;
+            font-weight: bold;
+        }
 
-.login-container input {
-    margin-bottom: 0.5rem;
-    padding: 0.5rem;
-}
+        .login-container input {
+            margin-bottom: 0.5rem;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
 
-.login-container button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 0.5rem;
-    cursor: pointer;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-}
+        .login-container button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            margin-top: 1rem;
+            border-radius: 6px;
+            font-size: 16px;
+        }
 
-.login-container button:hover {
-    background-color: #0056b3;
-}
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
 
-.login-container .social-login-buttons a {
-    text-decoration: none;
-}
+        .social-login-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem 0;
+        }
 
-.login-container .social-login-buttons a:hover {
-    text-decoration: underline;
-}
+        .social-login-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.25rem;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
 
-.login-container .social-login-buttons {
-    display: flex;
-    justify-content: space-between;
-    max-width: 300px;
-    margin: 0.2em;
-}
+        .icon {
+            width: 24px;
+            height: auto;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
 
-.login-container .social-login-button {
-    display: inline-block;
-    padding: 12px 24px;
-    margin: 2px;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: bold;
-    border-radius: 4px;
-    text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
+        .facebook-button {
+            color: white;
+            background-color: #3B5998;
+        }
 
-.login-container .olvido {
-    display: inline-block;
-    padding: 2px 4px;
-    margin: 1px;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: bold;
-    border-radius: 4px;
-    text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    }
+        .facebook-button:hover {
+            color: white;
+            background-color: #304572;
+        }
 
-    .login-container .nuevo {
-    display: inline-block;
-    padding: 2px 4px;
-    margin: 1px;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: bold;
-    border-radius: 4px;
-    text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    }
+        .google-button {
+            color: #444;
+            background-color: #F4F4F4;
+        }
 
-.login-container .icon {
-    width: 24px;
-    height: auto;
-    margin-right: 8px;
-    vertical-align: middle;
-}
+        .google-button:hover {
+            background-color: #cbcbcb;
+        }
 
-.login-container .olvido-button {
-        color: #3B5998;
-        background-color: #ffffff;
-    }
+        .extra-links {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
 
-    .login-container .olvido-button:hover {
-        color: #ffffff;
-        background-color: #3B5998;
-    }
+        .extra-links a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
 
-    .login-container .nuevo-button {
-        color: #3B5998;
-        background-color: #ffffff;
-    }
-
-    .login-container .nuevo-button:hover {
-        color: #ffffff;
-        background-color: #3B5998;
-    }
-
-.login-container .facebook-button {
-        color: white;
-        background-color: #3B5998;
-    }
-
-    .login-container .facebook-button:hover {
-        color: white; 
-        background-color: #304572;
-    }
-
-    .login-container .google-button {
-        color: #444;
-        background-color: #F4F4F4;
-    }
-
-    .login-container .google-button:hover {
-        background-color: #cbcbcb;
-    }
-
-
-
-        
+        .extra-links a:hover {
+            text-decoration: underline;
+        }
 
     </style>
 
     <div class="login-container">
+        <img src="{% static 'grado.png' %}" alt="Icon" class="login-icon">
         <h1>Iniciar sesión</h1>
         <form method="POST" action="{% url 'users:login' %}">
             {% csrf_token %}
@@ -182,16 +157,12 @@
             </a>            
         </div>
 
-        <div class="olvido">
-            <a class="social-login-button olvido-button" href="{}">¿Olvidaste tu contraseña?</a>         
+        <div class="extra-links">
+            <a href="{}">¿Olvidaste tu contraseña?</a>
+            <a href="{}">¿Eres nuevo aquí? Crea una cuenta</a>
         </div>
 
-        <div class="nuevo">
-            <a class="social-login-button nuevo-button" href="{}">¿Eres nuevo aquí? Crea una cuenta</a>         
-        </div>
-    
     </div>
 
-    
 {% endblock %}
 
