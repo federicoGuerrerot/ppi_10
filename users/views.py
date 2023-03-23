@@ -11,7 +11,7 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('../..')  # Reemplazar 'core:home' con la vista de la página principal en tu proyecto '../../tutorias/'+str(user.id)
+            return redirect('../..')  
         else:
             # Mensaje de error si las credenciales son incorrectas
             messages.error(request, 'Nombre de usuario o contraseña incorrecta')
@@ -22,7 +22,7 @@ def user_singup(request):
         username = request.POST['username']
         name = request.POST['name']
         password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, username=username, nombre=name, password=password)
         try:
             user = get_user_model().objects.create(
                 email=username,
@@ -36,9 +36,9 @@ def user_singup(request):
         except Exception as e:
             print(e)
             return JsonResponse({'detail': f'{e}'})
-    return render(request, 'users/login.html')
+    return render(request, 'users/singup.html')
 
 
 def logout_view(request):
     logout(request)
-    return redirect('core:home')
+    return redirect('home')

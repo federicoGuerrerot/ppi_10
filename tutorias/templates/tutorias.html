@@ -10,7 +10,12 @@
     {% for tutoria in listatutorias %}
 
     <div class="containerTutoria">
+        <label for="Tema">Tema:</label>
         <a href="{% url 'detalleTutoria' tutoria.id %}">
+            <h1>{{tutoria.Tema}}</h1>
+        </a>
+        <label for="Tema">Nombre:</label>
+        <a>
             <h1>{{tutoria.Nombre}}</h1>
         </a>
     </div>
