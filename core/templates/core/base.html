@@ -136,8 +136,10 @@
         </div>
 
         <div class="buttons">
+            {% if not user.is_authenticated %}
             <a href="/users/login/" class="button">Log In</a>
             <a href="/users/signup/" class="button">Sign Up</a>
+            {% endif %}
             <a href="/users/logout/" class="button">Log Out</a>
             <div class="dropdown">
                 <button class="dropdown-toggle">Menú</button>

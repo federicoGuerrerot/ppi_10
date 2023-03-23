@@ -119,7 +119,7 @@
     <section>
         {% for tutor in tutores %}
         <div class="containerTutoria">
-            <a href="{% url 'solicitarTutoria' tutor.email user.email %}">
+            <a href="{% url 'solicitarTutoria' tutor.email %}">
                 <h1>{{tutor.nombre}}</h1>
             </a>
         </div>
@@ -127,10 +127,6 @@
         {% endfor %}
     </section>
 </div>
-
-<a href="/tutorias/2">
-    tutorias activas
-</a>
 
 <!-- Login Modal -->
 <div id="loginModal" class="modal">
@@ -314,7 +310,7 @@
 </script>
 
 
-    <a href="{% url 'tutorias' user.id %}">
+    <a href="{% url 'tutorias' %}">
         tutorias activas
     </a>
 
