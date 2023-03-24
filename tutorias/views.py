@@ -30,7 +30,7 @@ def solicitarTutoria(request, emailtutor):
     else:
         estudiante = request.user
         Tutoria.objects.create(Nombre=request.POST["Nombre"],Tema=request.POST["Tema"],tutor=tutor, usuario=estudiante)
-        return redirect('tutorias',estudiante.id)
+        return redirect('tutorias')
 
 @login_required(login_url='users:login')
 def eliminar_tutoria(request): #falta

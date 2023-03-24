@@ -1,7 +1,8 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager, PermissionsMixin
 from django.db import models
+#from taggit.managers import TaggableManager
 from django.urls import reverse
-from django.utils.text import slugify
+from django.utils.text import slugify  #para crear urls unicas y legibles, identificacion del usuario
 import uuid #para crear id unicos, y que sirvan a la hora de migrar la base de datos, si lo vemos necesario.
 import random
 import string
@@ -46,7 +47,6 @@ class Usuario(AbstractUser):
     celular = models.CharField(max_length=20, blank=True, null=True)
     calificacion = models.FloatField(blank=True, null=True)
     slug = models.SlugField(max_length=255, unique=True)
-    #para urls unicas, identificacion del usuario
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
