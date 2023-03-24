@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager, PermissionsMixin
 from django.db import models
-#from taggit.managers import TaggableManager
+from taggit.managers import TaggableManager
 from django.urls import reverse
 from django.utils.text import slugify  #para crear urls unicas y legibles, identificacion del usuario
 import uuid #para crear id unicos, y que sirvan a la hora de migrar la base de datos, si lo vemos necesario.
@@ -50,9 +50,10 @@ class Usuario(AbstractUser):
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    is_tutor = models.BooleanField(default=False)
 
-    # falta definir variables propias de tutores
+    # variables propias de tutores
+    is_tutor = models.BooleanField(default=False)
+    tags = TaggableManager()
 
     objects = CustomAccountManager()
 
