@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from users.models import Usuario
 from taggit.models import Tag
 
@@ -16,3 +16,18 @@ def home(request):
         'tutores':tutores,
         'populares':populares,	
     })
+
+
+def tutor(request, slug):
+    """Vista de un tutor en particular, muestra los datos del tutor"""
+
+    tutor = get_object_or_404(Usuario, slug=slug)
+    return render(request, 'core/tutor.html', {'tutor':tutor})
+
+def buscar(request, slug):
+    """Vista de busqueda de tutores, muestra los tutores que coinciden
+    se hace uso de la libreria taggit para la busqueda de tags (Temas)"""
+
+    tag = get_object_or_404(Tag, slug=slug)
+    tutores = Usuario.objects.filter(tags=tag)
+    return render(request, 'core/buscar.html', {'tutores':tutores, 'tag':tag})
