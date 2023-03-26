@@ -35,6 +35,11 @@ def solicitarTutoria(request, emailtutor):
         })
     else:
         estudiante = request.user
+        #if form.is_valid():
+            #new_tutoria = form.save(commit=False)
+            #form.save_m2m()
+        #### ejemplo para seguir con usuario, para tutoria es solo: new_tutoria = form.save()
+
         Tutoria.objects.create(nombre=request.POST["Nombre"],tema=request.POST["Tema"],tutor=tutor, usuario=estudiante)
         return redirect('tutorias')
 
