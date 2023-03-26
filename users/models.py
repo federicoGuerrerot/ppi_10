@@ -11,10 +11,14 @@ def rand_slug():
     return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(6))
 
 class CustomAccountManager(BaseUserManager):
+    """'Custom account model manager', se encarga de crear los usuarios ya sea los normales o los superusuarios
+    se hizo de esta manera para utilizar mas eficientemente las herramientas de Django."""
+
     def create_user(self, email, nombre, password, **other_fields):
+        """Crea y guarda un nuevo usuario normal"""
 
         if not email:
-            raise ValueError('You must provide an email address')
+            raise ValueError('Se debe ingresar un email')
 
         email = self.normalize_email(email)
         user = self.model(email=email, nombre=nombre, **other_fields)
@@ -23,6 +27,7 @@ class CustomAccountManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, nombre, password, **other_fields):
+        """Crea y guarda un nuevo superusuario"""
 
         other_fields.setdefault('is_staff', True)
         other_fields.setdefault('is_superuser', True)
@@ -39,7 +44,11 @@ class CustomAccountManager(BaseUserManager):
 
 
 class Usuario(AbstractUser):
-    #Usuario de la app "hereda" del custos AccountManager, ese es el que se encarga de crear los usuarios ya sea los normales o los superusuarios
+    """Modelo de usuario, se hereda de AbstractUser, que es el modelo de usuario de Django, 
+    se le agregan ademas los atributos propios del contexto de la app, como el nombre, 
+    el celular, la calificacion, si es tutor, etc."""
+    
+    # variables propias de usuario/estudiante
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     nombre = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
@@ -48,6 +57,7 @@ class Usuario(AbstractUser):
     calificacion = models.FloatField(blank=True, null=True)
     slug = models.SlugField(max_length=255, unique=True)
 
+    # variables propias de django
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
@@ -61,20 +71,25 @@ class Usuario(AbstractUser):
     REQUIRED_FIELDS = ['nombre']
 
     def __str__(self):
-        return self.nombre
-    
-    def get_email(self):
-        return self.email
+        """Devuelve el nombre del usuario junto con su email"""
+
+        return self.nombre + ", (" + self.email + ")"
     
     def listarTutores(request):
+        """Devuelve una lista de todos los tutores registrados en la plataforma
+        que equivalen a las posibles tutorias que se pueden contratar"""
+        
         tutores = Usuario.objects.filter(is_tutor = True)
         return tutores
-    
-    #cuando este lista la vista del perfil del usuario, descomentar esto y corregir ruta de la vista
-    #def get_absolute_url(self):
-    #    return reverse('users:user_detail', args=[self.slug])
 
     def save(self, *args, **kwargs):
+        """Crea un slug unico para cada usuario, para que su perfil sea identificable
+        antes de guardar el usuario en la base de datos a traves del constructor save"""
+        
         if not self.slug:
             self.slug = slugify(rand_slug() + "-" + self.email)
         super(Usuario, self).save(*args, **kwargs)
+
+    #cuando este lista la vista del perfil del usuario, descomentar esto y corregir ruta de la vista
+    #def get_absolute_url(self):
+    #    return reverse('users:user_detail', args=[self.slug])
