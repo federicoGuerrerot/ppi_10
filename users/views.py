@@ -4,8 +4,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password # Para encriptar la contraseña
 from django.http.response import HttpResponse, JsonResponse
 
+from users.forms import FormCrearUsuario
+
 def user_login(request):
-    """Funcion para iniciar sesion, se encarga de autenticar al usuario y de redirigirlo a la pagina principal
+    """Función para iniciar sesión, se encarga de autenticar al usuario y de redirigir a la pagina principal
     si este existe y las credenciales son correctas, de lo contrario muestra un mensaje de error"""
 
     if request.method == 'POST':
@@ -20,31 +22,30 @@ def user_login(request):
     return render(request, 'users/login.html')
 
 def user_signup(request):
-    """Funcion para crear un nuevo usuario y de redirigirlo a la pagina principal una vez registrado
+    """Función para crear un nuevo usuario y de redirigir a la pagina principal una vez registrado
     En caso de que el usuario ya exista o alguna credencial sea invalida, se muestra un mensaje de error"""
     
     if request.method == 'POST':
-        username = request.POST['username']
-        name = request.POST['name']
-        password = request.POST['password']
-        user = authenticate(request, username=username, nombre=name, password=password)
-        try:
-            user = get_user_model().objects.create(
-                email=username,
-                nombre=name,
-                password=make_password(password),
-                is_active=True
-            )
+        form = FormCrearUsuario(request.POST)
+        if form.is_valid():
+            email = request.POST['email']
+            nombre = request.POST['nombre']
+            password = request.POST['password1']
+            user = form.save(commit=False)
+            user.save()
+            form.save_m2m() # Para guardar los campos ManyToMany (tags:Temas)
+            #user = authenticate(request, email=email, nombre=nombre, password=password)
             login(request, user)
-            return redirect('../..')
+            messages.success(request, 'Usuario creado exitosamente')
 
-        except Exception as e:
-            print(e)
-            return JsonResponse({'detail': f'{e}'})
-    return render(request, 'users/signup.html')
+            return redirect('../..')
+            #return JsonResponse({'username/email': f'{email}','nombre': f'{nombre}','pass': f'{password}'})
+    else:
+        form = FormCrearUsuario()
+    return render(request, 'users/signup.html', {'form': form})
 
 def logout_view(request):
-    """Funcion para cerrar sesion, se encarga de cerrar la sesion del usuario y de redirigirlo a la pagina de login"""
+    """Función para cerrar sesión, se encarga de cerrar la sesión del usuario y de redirigir a la pagina de login"""
 
     logout(request)
     return redirect('users:login')
