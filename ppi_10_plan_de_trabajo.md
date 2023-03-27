@@ -22,7 +22,7 @@ Experimentar con el manejo de formularios, tags, funciones de búsqueda y la bas
 Experimentar con el manejo de formularios y la base de datos de la app.
 
 ## Contenido:
-- Implementación final de las funcionalidades con registro: manejo del perfil, calificaciones/reviews y vistas.
+- Implementación final de las funcionalidades con registro: manejo del perfil, calificaciones/comentarios y vistas.
 
 # Informe 06: 13 horas del viernes 21 de abril.
 ## Actividades requeridas:
@@ -46,14 +46,14 @@ Búsqueda de paleta de colores, realizar borradores de diseños y realzar integr
 
 # Informe 09: 13 horas del viernes 12 de mayo.
 ## Actividades requeridas:
-Refinación de características y realización de pruebas.
+Refinación de características y realización de pruebas exhaustivas.
 
 ## Contenido:
 - Prototipo final de la aplicación donde se probaran todas sus características en búsqueda de posibles errores a corregir. 
 
 # Informe 10: 13 horas del viernes 26 de mayo.
 ## Actividades requeridas: 
-Realización de pruebas exhaustivas del informe 9/prototipo final de la aplicación. 
+Perfeccionar del informe 9/prototipo final de la aplicación. 
 
 ## Contenido:
 - Aplicación final.
