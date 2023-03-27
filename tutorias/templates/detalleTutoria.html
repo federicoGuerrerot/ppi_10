@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    TutoUN - NOMBRE TUTORIA
+{% endblock %}
+
+{% block content %}
+
+<section>
+    <div class="containerTutoria">
+        <h1>{{tutoria.nombre}}</h1>
+    </div>
+</section>
+<aside>
+    <div class="containerTutoria">
+        <h1>{{tutoria.tema}}</h1>
+        <p>descripción de la tutoria</p>
+    </div>
+</aside>
+
+{% endblock %}
