@@ -3,6 +3,8 @@ from django.conf import settings
 import uuid #para crear id unicos, y que sirvan a la hora de migrar la base de datos, si lo vemos necesario.
 
 # Create your models here.
+
+
 class Tutoria(models.Model):
     """Modelo para las tutorias que representa su estructura en la base de datos"""
 
@@ -20,4 +22,4 @@ class Tutoria(models.Model):
 
     def __str__(self):
         """Devuelve el nombre de la tutoria junto a su tema"""
-        return "Tutoria: " + self.Nombre + ". (" + self.Tema + ")"
+        return "Tutoria: " + self.nombre + ". (" + self.tema + ")"

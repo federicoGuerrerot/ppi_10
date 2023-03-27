@@ -140,7 +140,9 @@
             <a href="/users/login/" class="button">Log In</a>
             <a href="/users/signup/" class="button">Sign Up</a>
             {% endif %}
+            {% if user.is_authenticated %}
             <a href="/users/logout/" class="button">Log Out</a>
+            {% endif %}
             <div class="dropdown">
                 <button class="dropdown-toggle">Menú</button>
                 <div class="dropdown-menu">

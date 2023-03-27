@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager, PermissionsMixin
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
+from taggit.models import GenericUUIDTaggedItemBase, TaggedItemBase
 from django.urls import reverse
 from django.utils.text import slugify  #para crear urls unicas y legibles, identificacion del usuario
 import uuid #para crear id unicos, y que sirvan a la hora de migrar la base de datos, si lo vemos necesario.
@@ -9,6 +11,15 @@ import string
 
 def rand_slug():
     return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(6))
+
+class UUIDTaggedItem(GenericUUIDTaggedItemBase, TaggedItemBase):
+    # If you only inherit GenericUUIDTaggedItemBase, you need to define
+    # a tag field. e.g.
+    # tag = models.ForeignKey(Tag, related_name="uuid_tagged_items", on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = _("Tag")
+        verbose_name_plural = _("Tags")
 
 class CustomAccountManager(BaseUserManager):
     """'Custom account model manager', se encarga de crear los usuarios ya sea los normales o los superusuarios
@@ -63,7 +74,7 @@ class Usuario(AbstractUser):
 
     # variables propias de tutores
     is_tutor = models.BooleanField(default=False)
-    #tags = TaggableManager()
+    tags = TaggableManager(through=UUIDTaggedItem, blank=True)
 
     objects = CustomAccountManager()
 
