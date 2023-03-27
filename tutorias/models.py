@@ -13,8 +13,8 @@ class Tutoria(models.Model):
     hora = models.TimeField
     tarifa = models.IntegerField
     duracion = models.IntegerField
-    lugar = models.CharField(max_length=200)
-    estado = models.CharField(max_length=200)
+    lugar = models.CharField(max_length=200, default="Biblioteca")
+    estado = models.CharField(max_length=200, default="Solicitada")
     usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="usuario_tutorias")
     tutor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="tutor_tutorias")
 

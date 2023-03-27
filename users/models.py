@@ -63,7 +63,7 @@ class Usuario(AbstractUser):
 
     # variables propias de tutores
     is_tutor = models.BooleanField(default=False)
-    tags = TaggableManager()
+    #tags = TaggableManager()
 
     objects = CustomAccountManager()
 
