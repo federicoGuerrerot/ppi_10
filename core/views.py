@@ -17,7 +17,6 @@ def home(request):
         'populares':populares,	
     })
 
-
 def tutor(request, slug):
     """Vista de un tutor en particular, muestra los datos del tutor"""
 

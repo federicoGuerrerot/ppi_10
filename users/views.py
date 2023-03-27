@@ -28,17 +28,14 @@ def user_signup(request):
     if request.method == 'POST':
         form = FormCrearUsuario(request.POST)
         if form.is_valid():
-            email = request.POST['email']
-            nombre = request.POST['nombre']
-            password = request.POST['password1']
             user = form.save(commit=False)
             user.save()
             form.save_m2m() # Para guardar los campos ManyToMany (tags:Temas)
-            #user = authenticate(request, email=email, nombre=nombre, password=password)
             login(request, user)
             messages.success(request, 'Usuario creado exitosamente')
 
             return redirect('../..')
+            #Prueba de envió de datos
             #return JsonResponse({'username/email': f'{email}','nombre': f'{nombre}','pass': f'{password}'})
     else:
         form = FormCrearUsuario()

@@ -152,6 +152,9 @@
                     <a href="/">Inicio</a>
                     <a href="/Temas/">Materias</a>
                     <a href="/contacto/">Contacto</a>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'tutorias' %}">Mis tutorías</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
