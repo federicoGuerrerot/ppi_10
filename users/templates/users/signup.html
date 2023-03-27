@@ -153,7 +153,7 @@
     <div class="login-container">
         <img src="{% static 'grado.png' %}" alt="Icon" class="login-icon">
         <h1>Registrarse</h1>
-        <form method="POST" action="{% url 'users:login' %}">
+        <form method="POST" action="{% url 'users:signup' %}">
             {% csrf_token %}
             <label for="username">Correo Electronico:</label>
             <input type="text" name="username" id="username" required>

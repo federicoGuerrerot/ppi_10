@@ -19,13 +19,13 @@ def user_login(request):
             messages.error(request, 'Nombre de usuario o contraseña incorrecta')
     return render(request, 'users/login.html')
 
-def user_singup(request):
+def user_signup(request):
     """Funcion para crear un nuevo usuario y de redirigirlo a la pagina principal una vez registrado
     En caso de que el usuario ya exista o alguna credencial sea invalida, se muestra un mensaje de error"""
     
     if request.method == 'POST':
         username = request.POST['username']
-        name = request.POST['Nombre']
+        name = request.POST['name']
         password = request.POST['password']
         user = authenticate(request, username=username, nombre=name, password=password)
         try:
@@ -36,12 +36,12 @@ def user_singup(request):
                 is_active=True
             )
             login(request, user)
-            return redirect('core:home')
+            return redirect('../..')
 
         except Exception as e:
             print(e)
             return JsonResponse({'detail': f'{e}'})
-    return render(request, 'users/singup.html')
+    return render(request, 'users/signup.html')
 
 def logout_view(request):
     """Funcion para cerrar sesion, se encarga de cerrar la sesion del usuario y de redirigirlo a la pagina de login"""
