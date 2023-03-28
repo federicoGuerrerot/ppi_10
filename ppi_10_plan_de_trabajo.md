@@ -3,6 +3,8 @@
 Primeros pasos con Django, familiarizarnos con el entorno y sus características y ultimar detalles respecto a métodos de trabajo.
 
 ## Contenido:
+
+- [Hola mundo](http://fguerrerot.pythonanywhere.com/) de la app.
 - Registro de usuarios (creación de cuentas y contraseñas)
 - Guardar información de usuarios
 - Funcionalidades básicas de la aplicación sin registro (público en general)
