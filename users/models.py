@@ -97,6 +97,9 @@ class Usuario(AbstractUser):
         """Crea un slug único para cada usuario, para que su perfil sea identificable
         antes de guardar el usuario en la base de datos a traves del constructor save"""
         
+        if not self.username:
+            self.username = self.email
+
         if not self.slug:
             self.slug = slugify(rand_slug() + "-" + self.email)
         super(Usuario, self).save(*args, **kwargs)
