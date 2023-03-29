@@ -117,15 +117,33 @@
         <button type="submit">Buscar</button>
     </form>
 </div>
-<section>
-    {% for tutor in tutores %}
-    <div class="containerTutoria">
-        <a href="{% url 'tutor' tutor.slug %}">
-            <h1>{{tutor.nombre}}</h1>
-        </a>
-    </div>
+
+<p>Temas comunes: 
+    {% for tag in populares %}
+        <a href="{% url 'buscar' tag.slug %}" class="badge badge-success">{{tag}}</a>
     {% endfor %}
-</section>
+</p>
+<div class="row mb-2 posts">
+    {% for tutor in tutores %}
+        <div class="col-md-6">
+            <div class="cards">
+                <div class="row no-gutters border rounded  flex-md-row mb-4 shadow-sm h-md-250">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <h3 class="my-1"><a href="{% url 'tutor' tutor.slug %}">{{tutor.nombre}}</a></h3>
+                        <div style="display:flex">
+                            {% for tag in tutor.tags.all %}
+                            <a href="{% url 'buscar' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
+                            {% endfor %}
+                        </div>
+                        <p class="mb-auto">Calificacion: {{tutor.calificacion}}</p>
+                        <p class="mb-auto text-muted">Calular: {{tutor.celular}}</p>
+                    </div>
+                </div>
+            </div>       
+        </div>
+        {% endfor %}
+</div>
+
 
 <!-- Login Modal -->
 <div id="loginModal" class="modal">

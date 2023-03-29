@@ -7,7 +7,6 @@
 {% load static %}
 
 {% block content %}
-<button id="loginBtn">Iniciar sesión</button>
 
 <style>
     section {
@@ -107,24 +106,18 @@
         max-width: 435px;
     }
 </style>
-
-<div class="slogan">TutoUN el lugar que te conecta con el aprendizaje</div>
-<img class="degree-icon" src="../../../static/grado.png" alt="Grado icon">
-<div class="search-section">
-    <form class="search-form" action="/search/" method="GET">
-        <label for="search-input">Buscar tutores por temática:</label>
-        <input type="text" id="search-input" data-role="tagsinput" name="search" placeholder="Ejemplo: Matemáticas" required>
-        <button type="submit">Buscar</button>
-    </form>
-</div>
 <section>
-    {% for tutor in tutores %}
-    <div class="containerTutoria">
-        <a href="{% url 'tutor' tutor.slug %}">
-            <h1>{{tutor.nombre}}</h1>
-        </a>
+    <h2>{{tutor.nombre}}</h2>
+    <div style="display:flex">
+        {% for tag in tutor.tags.all %}
+        <a href="{% url 'buscar' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
+        {% endfor %}
     </div>
-    {% endfor %}
+    <p class="mb-auto">Calificacion: {{tutor.calificacion}}</p>
+    <p class="mb-auto text-muted">Calular: {{tutor.celular}}</p>
+    <form>
+        <button type="submit">Solicitar Tutoria</button>
+    </form>
 </section>
 
 <!-- Login Modal -->
