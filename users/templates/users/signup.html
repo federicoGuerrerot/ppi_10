@@ -15,138 +15,145 @@
 {% endif %}
 
     <style>
-        body {
-            background-color: #f6f7fb;
-        }
+.signup-icon {
+  width: 60px;
+  height: auto;
+  margin-bottom: 0px;
+}
 
-        .login-icon {
-        width: 60px;
-        height: auto;
-        margin-bottom: 0px;
-    }
-        .login-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin: 15px auto;
-            min-height: 80vh;
-            background-color: white;
-            max-width: 435px;
-            border-radius: 12px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            padding: 2rem;
-        }
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
 
-        h1 {
-            font-size: 1.8em;
-            margin-bottom: 1.5rem;
-        }
+.form-group {
+  margin: 0.5rem 0;
+}
 
-        .login-container form {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-        }
+.form-label {
+  font-weight: bold;
+}
 
-        .login-container label {
-            margin: 0.5rem 0;
-            font-weight: bold;
-        }
+.form-input {
+  margin-bottom: 0.5rem;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
 
-        .login-container input {
-            margin-bottom: 0.5rem;
-            padding: 0.75rem;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 16px;
-        }
+.signup-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  border-radius: 6px;
+  font-size: 16px;
+}
 
-        .login-container button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 0.75rem;
-            cursor: pointer;
-            margin-bottom: 1rem;
-            margin-top: 1rem;
-            border-radius: 6px;
-            font-size: 16px;
-        }
+.signup-button:hover {
+  background-color: #0056b3;
+}
 
-        .login-container button:hover {
-            background-color: #0056b3;
-        }
+.social-login-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
 
-        .social-login-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin: 1rem 0;
-        }
+.social-login-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.25rem;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
 
-        .social-login-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.75rem 1.25rem;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 6px;
-            text-align: center;
-            vertical-align: middle;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
+.icon {
+  width: 24px;
+  height: auto;
+  margin-right: 8px;
+  vertical-align: middle;
+}
 
-        .icon {
-            width: 24px;
-            height: auto;
-            margin-right: 8px;
-            vertical-align: middle;
-        }
+.facebook-button {
+  color: white;
+  background-color: #3B5998;
+}
 
-        .facebook-button {
-            color: white;
-            background-color: #3B5998;
-        }
+.facebook-button:hover {
+  color: white;
+  background-color: #304572;
+}
 
-        .facebook-button:hover {
-            color: white;
-            background-color: #304572;
-        }
+.google-button {
+  color: #444;
+  background-color: #F4F4F4;
+}
 
-        .google-button {
-            color: #444;
-            background-color: #F4F4F4;
-        }
+.google-button:hover {
+  background-color: #cbcbcb;
+}
 
-        .google-button:hover {
-            background-color: #cbcbcb;
-        }
+.extra-links {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
 
-        .extra-links {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-        }
+.extra-links a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
 
-        .extra-links a {
-            text-decoration: none;
-            color: #007bff;
-            font-weight: bold;
-        }
+.extra-links a:hover {
+  text-decoration: underline;
+}
 
-        .extra-links a:hover {
-            text-decoration: underline;
-        }
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 15px auto;
+  min-height: 80vh;
+  background-color: white;
+  max-width: 435px;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+}
 
-        .error-message {
-        color: red;
-        text-align: center;
-        font-weight: bold;
-        margin-bottom: 1rem;
-        }
+h1 {
+  font-size: 1.8em;
+  margin-bottom: 1.5rem;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 500px) {
+  .signup-container {
+    max-width: 95%;
+  }
+}
+
 
     </style>
 
@@ -155,58 +162,50 @@
         <p class="error-message">{{form.errors}}</p>
     {% endif %}
 
-    <div class="login-container">
-        <img src="{% static 'grado.png' %}" alt="Icon" class="login-icon">
+    <div class="signup-container">
+        <img src="{% static 'grado.png' %}" alt="Icon" class="signup-icon">
         <h1>Registrarse</h1>
-        <form method=POST action="{% url 'users:signup' %}">
+        <form method="POST" action="{% url 'users:signup' %}" class="signup-form">
             {% csrf_token %}
-            <!--('email', 'nombre', 'celular', 'is_tutor', 'tags')-->
-            <!--no se envía el form por que los tags necesitan de css y js-->
             <div class="form-group">
-                <label>Email</label>
-                <input type="text" class="form-control" name="email" placeholder="ejemplo@unal.edu.co">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-input" name="email" placeholder="ejemplo@unal.edu.co" required>
             </div>
             <div class="form-group">
-                <label>Nombre</label>
-                <input type="text" class="form-control" name="nombre" placeholder="Nombre">
+                <label class="form-label">Nombre</label>
+                <input type="text" class="form-input" name="nombre" placeholder="Nombre" required>
             </div>
             <div class="form-group">
-                <label>Celular</label>
-                <input type="text" class="form-control" name="celular" placeholder="Celular">
+                <label class="form-label">Celular</label>
+                <input type="tel" class="form-input" name="celular" placeholder="Celular" required>
             </div>
             <div class="form-group">
-                <label>¿Eres tutor?</label>
-                <input type="checkbox" class="form-control" name="is_tutor">
+                <label class="form-label">¿Eres tutor?</label>
+                <input type="checkbox" class="form-input" name="is_tutor">
             </div>
             <div class="form-group">
-                <label>Tags</label>
-                <input type="text" data-role="tagsinput" class="form-control" name="tags">
+                <label class="form-label">Contraseña</label>
+                <input type="password" class="form-input" name="password1" placeholder="Contraseña" required>
             </div>
             <div class="form-group">
-                <label>Contraseña</label>
-                <input type="password" class="form-control" name="password1" placeholder="Contraseña">
+                <label class="form-label">Confirma tu contraseña</label>
+                <input type="password" class="form-input" name="password2" placeholder="Confirma" required>
             </div>
-            <div class="form-group">
-                <label>Confirma tu contraseña</label>
-                <input type="password" class="form-control" name="password2" placeholder="Confirma">
-            </div>
-
-            <button type="submit">Registrarse</button>
+            <button type="submit" class="signup-button">Registrarse</button>
         </form>
         <div class="social-login-buttons">
-            <a href="{}" class="social-login-button facebook-button">
+            <a href="#" class="social-login-button facebook-button">
                 <img src="{% static 'facebook.png' %}" alt="Facebook icon" class="icon"> Facebook
             </a>
-            <a href="{}" class="social-login-button google-button">
+            <a href="#" class="social-login-button google-button">
                 <img src="{% static 'google.png' %}" alt="Google icon" class="icon"> Google
             </a>            
         </div>
 
         <div class="extra-links">
-            <a href="{}">¿Olvidaste tu contraseña?</a>
-            <a href="{}">¿Eres nuevo aquí? Crea una cuenta</a>
+            <a href="#">¿Olvidaste tu contraseña?</a>
+            <a href="#">¿Eres nuevo aquí? Crea una cuenta</a>
         </div>
-
     </div>
 
 {% endblock %}
