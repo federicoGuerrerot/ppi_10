@@ -8,14 +8,39 @@
 
 {% block content %}
 <style>
+    /* Estilos para el header */
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .header .logo {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .header .menu {
+        display: flex;
+    }
+
+    .header .menu button {
+        margin-left: 1rem;
+        font-size: 1.1rem;
+        padding: 0.25rem 0.75rem;
+        vertical-align: middle;
+    }
+
+    /* Estilos para la sección principal */
     section {
-        max-width: 450px; /* Ajusta el ancho máximo de la sección */
+        max-width: 450px;
         margin: 15px auto;
         padding: 2rem;
         background-color: #f7f7f7;
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
+
     .slogan {
         font-size: 2em;
         text-align: center;
@@ -83,18 +108,37 @@
         background-color: #2a5a96;
     }
 
+    /* Estilos para los recuadros de los tutores */
+    .tutor-link {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .tutor-card {
+        transition: background-color 0.2s;
+    }
+
+    .tutor-card:hover {
+        background-color: #3787dd;
+        color: white;
+    }
+
+    .tutor-card:hover .badge-info {
+        color: #3787dd;
+        background-color: white;
+    }
 </style>
 
 <div class="slogan">TutoUN el lugar que te conecta con el aprendizaje</div>
 <img class="degree-icon" src="../../../static/grado.png" alt="Grado icon">
+
 <div class="search-section">
-    <form class="search-form" action="/buscarbarra/" method="GET">
+    <form class="search-form" action="/search/" method="GET">
         <label for="search-input">Buscar tutores por temática:</label>
-        <input type="text" id="search-input" data-role="tagsinput" name="buscar" placeholder="Ejemplo: Matemáticas" required>
+        <input type="text" id="search-input" data-role="tagsinput" name="search" placeholder="Ejemplo: Matemáticas" required>
         <button type="submit">Buscar</button>
     </form>
 </div>
-<!-- action="/buscar/" -->
 <p>Temas comunes: 
     {% for tag in populares %}
         <a href="{% url 'buscar' tag.slug %}" class="badge badge-success">{{tag}}</a>
@@ -104,20 +148,22 @@
     {% for tutor in tutores %}
         <div class="col-md-6">
             <div class="cards">
-                <div class="row no-gutters border rounded  flex-md-row mb-4 shadow-sm h-md-250">
-                    <div class="col p-4 d-flex flex-column position-static">
-                        <h3 class="my-1"><a href="{% url 'tutor' tutor.slug %}">{{tutor.nombre}}</a></h3>
-                        <div style="display:flex">
-                            {% for tag in tutor.tags.all %}
-                            <a href="{% url 'buscar' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
-                            {% endfor %}
+                <div class="row no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250 tutor-card">
+                    <a href="{% url 'tutor' tutor.slug %}" class="tutor-link">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <h3 class="my-1">{{tutor.nombre}}</h3>
+                            <div style="display:flex">
+                                {% for tag in tutor.tags.all %}
+                                <a href="{% url 'buscar' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
+                                {% endfor %}
+                            </div>
+                            <p class="mb-auto">Calificacion: {{tutor.calificacion}}</p>
+                            <p class="mb-auto text-muted">Celular: {{tutor.celular}}</p>
                         </div>
-                        <p class="mb-auto">Calificacion: {{tutor.calificacion}}</p>
-                        <p class="mb-auto text-muted">Calular: {{tutor.celular}}</p>
-                    </div>
+                    </a>
                 </div>
             </div>       
         </div>
-        {% endfor %}
+    {% endfor %}
 </div>
 {% endblock %}
