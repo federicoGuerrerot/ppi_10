@@ -18,15 +18,16 @@
         }
 
         .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: linear-gradient(to bottom right, #77b6f8 10%,#3787dd 40%, #0a509c 80%);
-            box-shadow: 0 2px 7px rgba(0, 0, 0, 0.5);
-            padding: 1em;
-            color: white;
-            z-index: 1;
-        }
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(to bottom right, #77b6f8 10%,#3787dd 40%, #0a509c 80%);
+        box-shadow: 0 2px 7px rgba(0, 0, 0, 0.5);
+        padding: 1em;
+        color: white;
+        z-index: 1;
+        flex-wrap: nowrap; /* Agregar esta línea */
+    }
 
         .logo{
             text-decoration: none;
@@ -110,20 +111,30 @@
         }
 
         .button {
-            background-color: white;
-            border: 1px solid #3787dd;
-            color: #3787dd;
-            padding: 6px 12px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin-right: 0.5em;
-            cursor: pointer;
-            border-radius: 20px;
-            transition: background-color 0.2s, color 0.2s;
-        }
+        background-color: white;
+        border: 1px solid #3787dd;
+        color: #3787dd;
+        padding: 6px 12px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-right: 0.5em;
+        cursor: pointer;
+        border-radius: 20px;
+        transition: background-color 0.2s, color 0.2s;
 
+        /* Remover la propiedad height */
+        line-height: 1.5; /* Ajustar la posición del texto verticalmente */
+        white-space: nowrap; /* Asegurar que el texto se mantenga en una sola línea */
+    }
+
+
+        .buttons {
+        display: flex;
+        align-items: center;
+        margin-left: auto; /* Agregar esta línea */
+    }
         .button:hover {
             background-color: #3787dd;
             color: white;
