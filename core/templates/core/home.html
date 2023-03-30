@@ -16,7 +16,18 @@
 <div class="slogan">TutoUN el lugar que te conecta con el aprendizaje</div>
 <img class="degree-icon" src="../../../static/grado.png" alt="Grado icon">
 <!-- ... -->
-
+<div class="search-section">
+    <form class="search-form" action="/search/" method="GET">
+        <label for="search-input">Buscar tutores por temática:</label>
+        <input type="text" id="search-input" data-role="tagsinput" name="search" placeholder="Ejemplo: Matemáticas" required>
+        <button type="submit">Buscar</button>
+    </form>
+</div>
+<p>Temas comunes: 
+    {% for tag in populares %}
+        <a href="{% url 'buscar' tag.slug %}" class="badge badge-success">{{tag}}</a>
+    {% endfor %}
+</p>
 <div class="row mb-2 posts">
     {% for tutor in tutores %}
         <div class="col-md-6">
