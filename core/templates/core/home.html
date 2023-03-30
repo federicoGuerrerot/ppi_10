@@ -109,24 +109,31 @@
     }
 
     /* Estilos para los recuadros de los tutores */
-    .tutor-link {
-        text-decoration: none;
-        color: inherit;
-    }
 
     .tutor-card {
-        transition: background-color 0.2s;
+        cursor: pointer;
+        transition: background-color 0.3s;
     }
 
     .tutor-card:hover {
         background-color: #3787dd;
         color: white;
+        
+
+    }
+
+    .tutor-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
     }
 
     .tutor-card:hover .badge-info {
         color: #3787dd;
         background-color: white;
     }
+
+    
 </style>
 
 <div class="slogan">TutoUN el lugar que te conecta con el aprendizaje</div>
@@ -148,22 +155,33 @@
     {% for tutor in tutores %}
         <div class="col-md-6">
             <div class="cards">
-                <div class="row no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250 tutor-card">
-                    <a href="{% url 'tutor' tutor.slug %}" class="tutor-link">
-                        <div class="col p-4 d-flex flex-column position-static">
-                            <h3 class="my-1">{{tutor.nombre}}</h3>
-                            <div style="display:flex">
-                                {% for tag in tutor.tags.all %}
-                                <a href="{% url 'buscar' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
-                                {% endfor %}
-                            </div>
-                            <p class="mb-auto">Calificacion: {{tutor.calificacion}}</p>
-                            <p class="mb-auto text-muted">Celular: {{tutor.celular}}</p>
+                <div class="row no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250 tutor-card" id="tutor-card-{{ tutor.id }}" data-url="{% url 'tutor' tutor.slug %}">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <h3 class="my-1">{{tutor.nombre}}</h3>
+                        <div style="display:flex">
+                            {% for tag in tutor.tags.all %}
+                            <a href="{% url 'buscar' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
+                            {% endfor %}
                         </div>
-                    </a>
+                        <p class="mb-auto">Calificacion: {{tutor.calificacion}}</p>
+                        <p class="mb-auto text-muted">Celular: {{tutor.celular}}</p>
+                    </div>
                 </div>
             </div>       
         </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var tutorCards = document.querySelectorAll('.tutor-card');
+                
+                tutorCards.forEach(function(card) {
+                    card.addEventListener('click', function() {
+                        var url = this.getAttribute('data-url');
+                        location.href = url;
+                    });
+                });
+            });
+            </script>
     {% endfor %}
 </div>
 {% endblock %}
