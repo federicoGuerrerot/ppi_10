@@ -23,11 +23,12 @@
         <button type="submit">Buscar</button>
     </form>
 </div>
-<p>Temas comunes: 
+<div class="common-tags">
+    <p>Temas comunes:</p>
     {% for tag in populares %}
         <a href="{% url 'buscar' tag.slug %}" class="badge badge-success">{{tag}}</a>
     {% endfor %}
-</p>
+</div>
 <div class="row mb-2 posts">
     {% for tutor in tutores %}
         <div class="col-md-6">

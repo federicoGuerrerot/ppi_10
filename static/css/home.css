@@ -1,13 +1,15 @@
- /* Estilos para el header */
+/* Estilos para el header */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #f0f2f5;
 }
 
 .header .logo {
     font-size: 2rem;
     font-weight: bold;
+    color: #1877f2;
 }
 
 .header .menu {
@@ -19,6 +21,13 @@
     font-size: 1.1rem;
     padding: 0.25rem 0.75rem;
     vertical-align: middle;
+    background-color: #f0f2f5;
+    color: #1c1e21;
+    border: none;
+}
+
+.header .menu button:hover {
+    color: #1877f2;
 }
 
 /* Estilos para la sección principal */
@@ -26,7 +35,7 @@ section {
     max-width: 450px;
     margin: 15px auto;
     padding: 2rem;
-    background-color: #f7f7f7;
+    background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -35,6 +44,7 @@ section {
     font-size: 2em;
     text-align: center;
     margin: 2rem 0;
+    color: #1c1e21;
     text-shadow: 1.5px 1.5px 3.5px rgba(0, 0, 0, 0.4);
     animation: fadeIn 2s;
 }
@@ -64,7 +74,7 @@ section {
 .search-form {
     display: flex;
     align-items: center;
-    background-color: white;
+    background-color: #f0f2f5;
     border-radius: 25px;
     padding: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -72,6 +82,7 @@ section {
 
 .search-form label {
     margin-right: 1rem;
+    color: #1c1e21;
 }
 
 .search-form input {
@@ -81,10 +92,12 @@ section {
     font-size: 16px;
     flex-grow: 1;
     border-radius: 20px;
+    background-color: #ffffff;
+    color: #1c1e21;
 }
 
 .search-form button {
-    background-color: #3787dd;
+    background-color: #1877f2;
     color: white;
     border: none;
     padding: 8px 16px;
@@ -95,21 +108,21 @@ section {
 }
 
 .search-form button:hover {
-    background-color: #2a5a96;
+    background-color: #1255d5;
 }
 
 /* Estilos para los recuadros de los tutores */
 
 .tutor-card {
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, border-color 0.3s;
+    border-color: #1877F2; /* Nuevo color de borde azul */
+    border-width: 2px; /* Ajusta el grosor del borde */
 }
 
 .tutor-card:hover {
-    background-color: #3787dd;
+    background-color: #1877f2;
     color: white;
-    
-
 }
 
 .tutor-link {
@@ -119,6 +132,20 @@ section {
 }
 
 .tutor-card:hover .badge-info {
-    color: #3787dd;
+    color: #1877f2;
     background-color: white;
+}
+
+.common-tags {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    margin: 2rem 0;
+    color: #1c1e21;
+}
+
+.common-tags a {
+    font-size: 1.1em;
+    margin: 0.25rem;
+    padding: 0.5rem 1rem;
 }
