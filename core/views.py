@@ -37,3 +37,16 @@ def buscar(request, slug):
         'populares':populares,
         'tutores':tutores, 
     })
+
+def buscarbarra(request):
+    """Metodo de busqueda editado para que funcione la barra de busqueda
+    mediante un form GET"""
+
+    slug = request.GET['buscar'].lower()
+    tag = get_object_or_404(Tag, slug=slug)
+    populares = Usuario.tags.most_common()[:5]
+    tutores = Usuario.objects.filter(tags=tag)
+    return render(request, 'core/home.html', {
+        'populares':populares,
+        'tutores':tutores, 
+    })
