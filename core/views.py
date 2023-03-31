@@ -1,3 +1,4 @@
+from pyexpat.errors import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from users.models import Usuario
 from taggit.models import Tag
@@ -44,9 +45,13 @@ def buscarbarra(request):
 
     slug = request.GET['buscar'].lower()
     tag = get_object_or_404(Tag, slug=slug)
-    populares = Usuario.tags.most_common()[:5]
-    tutores = Usuario.objects.filter(tags=tag)
-    return render(request, 'core/home.html', {
-        'populares':populares,
-        'tutores':tutores, 
-    })
+    if tag:
+        populares = Usuario.tags.most_common()[:5]
+        tutores = Usuario.objects.filter(tags=tag)
+        return render(request, 'core/home.html', {
+            'populares':populares,
+            'tutores':tutores, 
+        })
+    else:
+        messages.error(request, 'No se encontraron resultados')
+    
