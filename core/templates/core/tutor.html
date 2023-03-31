@@ -115,10 +115,12 @@
     </div>
     <p class="card-text">Precio por hora: ${{tutor.tarifa_por_hora}}</p>
     <p class="mb-auto">Calificacion: {{tutor.calificacion}}</p>
+
     <p class="mb-auto text-muted">Calular: {{tutor.celular}}</p>
     <form>
         <a href="{% url 'solicitarTutoria' tutor.email %}" class="btn btn-primary">Solicitar Tutoría</a>
     </form>
+
 </section>
 
 

@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %}
 
 {% block title %}
-    TutoUN - NOMBRE TUTORIA
+    TutoUN - {{tutor.nombre}}
 {% endblock %}
 
 {% load static %}
@@ -92,10 +92,10 @@
 
         <label for="Tema">Tema:</label>
         <select name="Tema" id="Tema" required>
-            <!-- Lista de materias disponibles -->
-            <option value="Matematicas">Matematicas</option>
-            <option value="Quimica" selected>Quimica</option>
-            <option value="Inlges">Ingles</option>
+            <!-- Lista de materias disponibles -->            
+            {% for tag in tutor.tags.all %}
+            <option value="{{ tag.slug }}">{{tag.name}}</option>
+            {% endfor %}
         </select>
 
         <label for="Nombre">Tema o concepto a tratar:</label>
