@@ -67,7 +67,8 @@ class Usuario(AbstractUser):
     celular = models.CharField(max_length=20, blank=True, null=True)
     calificacion = models.FloatField(blank=True, null=True)
     slug = models.SlugField(max_length=255, unique=True)
-
+    descripcion = models.TextField(blank=True, null=True)
+    foto_perfil = models.ImageField(upload_to='fotos_perfil/', blank=True, null=True)
     # variables propias de django
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
