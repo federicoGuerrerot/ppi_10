@@ -10,7 +10,9 @@ def mi_perfil(request):
         form = PerfilForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('perfiles:mi_perfil')
+            return redirect('mi_perfil')
     else:
         form = PerfilForm(instance=request.user)
     return render(request, 'perfiles/mi_perfil.html', {'form': form})
+
+

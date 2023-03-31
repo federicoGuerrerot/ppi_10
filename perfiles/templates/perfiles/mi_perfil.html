@@ -1,10 +1,38 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
-    <h1>Mi perfil</h1>
-    <form method="post" enctype="multipart/form-data">
+<div class="container mt-5">
+    <h1 class="mb-4">Mi perfil</h1>
+    
+    {% if usuario.foto_perfil %}
+        <div class="text-center mb-4">
+            <img src="{{ usuario.foto_perfil.url }}" alt="{{ usuario.username }}'s profile picture" class="rounded-circle" style="width: 150px; height: 150px;">
+        </div>
+    {% else %}
+        <p class="text-center mb-4">No se ha subido ninguna foto de perfil.</p>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data" class="row g-3">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Guardar cambios</button>
+        <div class="col-md-6">
+            <label for="{{ form.nombre.id_for_label }}" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="{{ form.nombre.id_for_label }}" name="{{ form.nombre.html_name }}" value="{{ form.nombre.value|default:'' }}">
+        </div>
+        <div class="col-md-6">
+            <label for="{{ form.celular.id_for_label }}" class="form-label">Celular</label>
+            <input type="text" class="form-control" id="{{ form.celular.id_for_label }}" name="{{ form.celular.html_name }}" value="{{ form.celular.value|default:'' }}">
+        </div>
+        <div class="col-12">
+            <label for="{{ form.descripcion.id_for_label }}" class="form-label">Descripción</label>
+            <textarea class="form-control" id="{{ form.descripcion.id_for_label }}" name="{{ form.descripcion.html_name }}" rows="3">{{ form.descripcion.value|default:'' }}</textarea>
+        </div>
+        <div class="col-12">
+            <label for="{{ form.foto_perfil.id_for_label }}" class="form-label">Foto de perfil</label>
+            <input class="form-control" type="file" id="{{ form.foto_perfil.id_for_label }}" name="{{ form.foto_perfil.html_name }}">
+        </div>
+        <div class="col-12 mt-3">
+            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        </div>
     </form>
+</div>
 {% endblock %}
