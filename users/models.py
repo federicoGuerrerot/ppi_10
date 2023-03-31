@@ -4,8 +4,8 @@ from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
 from taggit.models import GenericUUIDTaggedItemBase, TaggedItemBase
 from django.urls import reverse
-from django.utils.text import slugify  #para crear urls unicas y legibles, identificacion del usuario
-import uuid #para crear id unicos, y que sirvan a la hora de migrar la base de datos, si lo vemos necesario.
+from django.utils.text import slugify  #para crear urls únicas y legibles, identificación del usuario
+import uuid #para crear id únicos, y que sirvan a la hora de migrar la base de datos, si lo vemos necesario.
 import random
 import string
 
@@ -22,7 +22,7 @@ class UUIDTaggedItem(GenericUUIDTaggedItemBase, TaggedItemBase):
         verbose_name_plural = _("Tags")
 
 class CustomAccountManager(BaseUserManager):
-    """'Custom account model manager', se encarga de crear los usuarios ya sea los normales o los superusuarios
+    """'Custom account model manager', se encarga de crear los usuarios ya sea los normales o los super usuarios
     se hizo de esta manera para utilizar mas eficientemente las herramientas de Django."""
 
     def create_user(self, email, nombre, password, **other_fields):
@@ -38,7 +38,7 @@ class CustomAccountManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, nombre, password, **other_fields):
-        """Crea y guarda un nuevo superusuario"""
+        """Crea y guarda un nuevo super usuario"""
 
         other_fields.setdefault('is_staff', True)
         other_fields.setdefault('is_superuser', True)
@@ -57,7 +57,7 @@ class CustomAccountManager(BaseUserManager):
 class Usuario(AbstractUser):
     """Modelo de usuario, se hereda de AbstractUser, que es el modelo de usuario de Django, 
     se le agregan ademas los atributos propios del contexto de la app, como el nombre, 
-    el celular, la calificacion, si es tutor, etc."""
+    el celular, la calificación, si es tutor, etc."""
     
     # variables propias de usuario/estudiante
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
@@ -67,7 +67,8 @@ class Usuario(AbstractUser):
     celular = models.CharField(max_length=20, blank=True, null=True)
     calificacion = models.FloatField(blank=True, null=True)
     slug = models.SlugField(max_length=255, unique=True)
-
+    descripcion = models.TextField(blank=True, null=True)
+    foto_perfil = models.ImageField(upload_to='fotos_perfil/', blank=True, null=True)
     # variables propias de django
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -88,19 +89,22 @@ class Usuario(AbstractUser):
     
     def listarTutores(request):
         """Devuelve una lista de todos los tutores registrados en la plataforma
-        que equivalen a las posibles tutorias que se pueden contratar"""
+        que equivalen a las posibles tutorías que se pueden contratar"""
         
         tutores = Usuario.objects.filter(is_tutor = True)
         return tutores
 
     def save(self, *args, **kwargs):
-        """Crea un slug unico para cada usuario, para que su perfil sea identificable
+        """Crea un slug único para cada usuario, para que su perfil sea identificable
         antes de guardar el usuario en la base de datos a traves del constructor save"""
         
+        if not self.username:
+            self.username = self.email
+
         if not self.slug:
             self.slug = slugify(rand_slug() + "-" + self.email)
         super(Usuario, self).save(*args, **kwargs)
 
-    #cuando este lista la vista del perfil del usuario, descomentar esto y corregir ruta de la vista
+    #cuando este lista la vista del perfil del usuario, des comentar esto y corregir ruta de la vista
     #def get_absolute_url(self):
     #    return reverse('users:user_detail', args=[self.slug])

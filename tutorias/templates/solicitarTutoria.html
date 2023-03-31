@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %}
 
 {% block title %}
-    TutoUN - NOMBRE TUTORIA
+    TutoUN - {{tutor.nombre}}
 {% endblock %}
 
 {% load static %}
@@ -83,7 +83,11 @@
         {% csrf_token %}
         <label for="nombretutor">Tutor: {{tutor.nombre}}</label>
         <div class="tutor-info">
+            {% if tutor.foto_perfil %}
+            <img src="{{ tutor.foto_perfil.url }}" class="foto" alt="Foto de perfil del tutor">
+            {% else %}
             <img src="{% static 'usuario.png' %}" class="foto" alt="Foto de perfil del tutor">
+            {% endif %}
             <span>{{ tutor.nombre }} - Tarifa: ${{ tutor.tarifa_por_hora }}/hora</span>
             <input type="hidden" name="tutor_id" id="tutor_id" value="{{ tutor.email }}">
         </div>
@@ -92,10 +96,10 @@
 
         <label for="Tema">Tema:</label>
         <select name="Tema" id="Tema" required>
-            <!-- Lista de materias disponibles -->
-            <option value="Matematicas">Matematicas</option>
-            <option value="Quimica" selected>Quimica</option>
-            <option value="Inlges">Ingles</option>
+            <!-- Lista de materias disponibles -->            
+            {% for tag in tutor.tags.all %}
+            <option value="{{ tag.slug }}">{{tag.name}}</option>
+            {% endfor %}
         </select>
 
         <label for="Nombre">Tema o concepto a tratar:</label>

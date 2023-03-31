@@ -1,5 +1,6 @@
 # [TutoUN](http://fguerrerot.pythonanywhere.com/)
-*Click en el titulo para visitar la pagina web (Hola mundo)*
+*Ultima actualización 31-03-2023 con las mejoras del informe 4*
+
 Plataforma enfocada a la búsqueda de tutores dentro de la comunidad de la universidad nacional de Colombia
 sede Medellin.
 
@@ -14,7 +15,6 @@ sede Medellin.
 ## Desarrolladores
 - Federico Guerrero Trejos
 - Juan Jose Ospina Erazo
-- Alejandro Esteban Muñoz Osorio
 
 ## Descripción
  Este aplicativo provee una conectividad entre tutores y estudiantes para la Universidad Nacional de Colombia, que permita a los estudiantes 
@@ -26,11 +26,14 @@ sede Medellin.
  estudiantes dentro de la institución
 
 ## Uso de la herramienta
-Work in progress
-(A Step-by-step guide for the user about different features and how to use them. Add screenshots to better illustrate the work. You can add diagrams to show the architecture of the project. You can also add videos or gits in this section.)
+Para poder usar la herramienta simplemente debe ingresar al enlace de la pagina web ubicado al inicio de este documento, allí podrá interactuar con las diferentes funcionalidades que ofrece TutoUN.
 
 ## Guía de instalación
-Work in progress
+Para poder instalar y manipular el código del proyecto en su maquina local, debe tener instalado python 3.8.5 o superior, ademas de tener instalado el gestor de paquetes pip.
+Se recomienda ademas el uso de virtualenv para poder crear un entorno virtual y poder trabajar de forma mas organizada.
+Instalación de dependencias:
+
+"python -m pip install -r requirements.txt"
 
 ## Guías de contribución
 Si se esta interesado en aportar en el proyecto por favor tener en cuenta:

@@ -1,50 +1,73 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/tagsinput.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-iBBgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjptBC+D+h7lK0l8WG2Y" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
     <link rel="icon" href="../../../static/grado.png">
     <title>{% block title %}TutoUN{% endblock %}</title>
-    <!-- Añade tus estilos CSS aquí -->
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #ececec;
+            background-color: #f0f2f5;
+            color: #1c1e21;
             margin: 0;
             font-family: "Poppins";
         }
-
+    
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(to bottom right, #77b6f8 10%,#3787dd 40%, #0a509c 80%);
-            box-shadow: 0 2px 7px rgba(0, 0, 0, 0.5);
-            padding: 1em;
+            background-color: #1877f2;
+            padding: 0.5em;
             color: white;
             z-index: 1;
+            flex-wrap: nowrap;
         }
-
-        .logo{
+    
+        .logo {
             text-decoration: none;
             font-weight: bold;
-            color: rgb(246, 243, 243);
+            color: #ffffff;
             font-size: 1.2em;
         }
-
-        span{
-            color: #010101;
-        }
-
-        .search-section {
+    
+        .buttons {
             display: flex;
-            justify-content: center;
-            margin: 2rem 0;
+            align-items: center;
+            margin-left: auto;
         }
-
-        footer {
-            background-color: #000;
+    
+        .button {
+            background-color: #ffffff;
+            border: 1px solid #146cdf;
+            color: #1877f2;
+            padding: 6px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-right: 0.5em;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: background-color 0.2s, color 0.2s;
+            line-height: 1.5;
+            white-space: nowrap;
+        }
+    
+        .button:hover {
+            background-color: #3762b4;
             color: white;
+        }
+    
+        footer {
+            background-color: #f0f2f5;
+            color: #65676b;
             padding: 1rem;
             text-align: center;
         }
@@ -70,7 +93,7 @@
         .dropdown-toggle:hover {
             border-radius: 20px;
             margin-right: 0.5em;
-            background-color: #3787dd;
+            background-color: #3762b4;
             color: white;
             border-color: #3787dd;
         }
@@ -100,72 +123,59 @@
         .dropdown:hover .dropdown-menu {
             display: block;
         }
-
-        .buttons {
-            display: flex;
-            align-items: center;
-        }
-
-        .button {
-            background-color: white;
-            border: 1px solid #3787dd;
-            color: #3787dd;
-            padding: 6px 12px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin-right: 0.5em;
-            cursor: pointer;
-            border-radius: 20px;
-            transition: background-color 0.2s, color 0.2s;
-        }
-
-        .button:hover {
-            background-color: #3787dd;
-            color: white;
-        }
-        
     </style>
+    
+{% load static %}
+{% block head_extra %}{% endblock %}
 </head>
 <body>
-    <div class="navbar">
-        <!-- Contenido del encabezado -->
-        <div class="container">
-            <a class="logo" href="/">Tuto<span>UN</span><img src="../../../static/grado.png" alt="Grado Icon" style="height: 24px; margin-right: 5px;"></a>
-        </div>
+<div class="navbar">
+<div class="container">
+    <a class="logo" href="/">Tuto<span>UN</span><img src="../../../static/grado.png" alt="Grado Icon" style="height: 24px; margin-right: 5px;"></a>
+</div>
 
-        <div class="buttons">
-            {% if not user.is_authenticated %}
-            <a href="/users/login/" class="button">Log In</a>
-            <a href="/users/signup/" class="button">Sign Up</a>
-            {% endif %}
+<div class="buttons">
+    {% if not user.is_authenticated %}
+    <a href="/users/login/" class="button">Log In</a>
+    <a href="/users/signup/" class="button">Sign Up</a>
+    {% endif %}
+    {% if user.is_authenticated %}
+    <a href="/users/logout/" class="button">Log Out</a>
+    {% endif %}
+    <div class="dropdown">
+        <button class="dropdown-toggle">Menú</button>
+        <div class="dropdown-menu">
+            <a href="/">Inicio</a>
             {% if user.is_authenticated %}
-            <a href="/users/logout/" class="button">Log Out</a>
+            <a href="{% url 'tutorias' %}">Mis tutorías</a>
+            <a href="{% url 'mi_perfil' %}">Mi perfil</a> <!-- Añadir enlace a la página de perfil del usuario -->
             {% endif %}
-            <div class="dropdown">
-                <button class="dropdown-toggle">Menú</button>
-                <div class="dropdown-menu">
-                    <a href="/">Inicio</a>
-                    <a href="/Temas/">Materias</a>
-                    <a href="/contacto/">Contacto</a>
-                </div>
-            </div>
+            <a href="/contacto/">Contacto</a>
         </div>
     </div>
+</div>
+</div>
+    </div>
+</div>
+</div>
 
-    <main>
-        {% block content %}
-        <!-- El contenido de esta sección será reemplazado por las plantillas que extiendan 'base.html' -->
-        {% endblock %}
-    </main>
+<main>
+{% block content %}
+<!-- El contenido de esta sección será reemplazado por las plantillas que extiendan 'base.html' -->
+{% endblock %}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="/static/js/tagsinput.js"></script>
+<script>
+$("#post-form").submit(function(e){
+    e.preventDefault();
+});</script>
+</main>
 
-    <footer>
-        <!-- Contenido del pie de página -->
-        &copy; TutoUN. Todos los derechos reservados.
-        <div><a href="https://www.flaticon.es/iconos-gratis/facebook" title="facebook iconos">Facebook iconos creados por Pixel perfect - Flaticon</a></div>
-        
-    </footer>
+<footer>
+&copy; TutoUN. Todos los derechos reservados.
+<div><a href="https://www.flaticon.es/iconos-gratis/facebook" title="facebook iconos">Facebook iconos creados por Pixel perfect - Flaticon</a></div>
+</footer>
 </body>
 </html>
-
