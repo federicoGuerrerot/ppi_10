@@ -114,10 +114,9 @@
         {% endfor %}
     </div>
     <p class="mb-auto">Calificacion: {{tutor.calificacion}}</p>
-    <p class="mb-auto text-muted">Calular: {{tutor.celular}}</p>
-    <form>
-        <button type="submit">Solicitar Tutoria</button>
-    </form>
+    <p class="mb-auto text-muted">Celular: {{tutor.celular}}</p>
+    <a href="{% url 'solicitarTutoria' tutor.email %}"><button type="button">Solicitar Tutoria</button></a>
+
 </section>
 
 <!-- Login Modal -->

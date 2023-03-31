@@ -1,32 +1,46 @@
 {% extends 'core/base.html' %}
 
 {% block title %}
-    TutoUN - NOMBRE TUTORIA
+    TutoUN - {{user.email}}
+{% endblock %}
+
+{% load static %}
+
+{% block head_extra %}
+    <link rel="stylesheet" href="/static/css/home.css">
 {% endblock %}
 
 {% block content %}
 
-<section>
+<div class="row mb-2 posts">
     {% for tutoria in listatutorias %}
-
-    <div class="containerTutoria">
-        <label for="Tema">Tema:</label>
-        <a href="{% url 'detalleTutoria' tutoria.id %}">
-            <h1>{{tutoria.tema}}</h1>
-        </a>
-        <label for="Tema">Nombre:</label>
-        <a>
-            <h1>{{tutoria.nombre}}</h1>
-        </a>
-    </div>
-    
+        <div class="col-md-6">
+            <div class="cards">
+                <div class="row no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250 tutor-card" id="tutor-card-{{ tutoria.id }}" data-url="{% url 'detalleTutoria' tutoria.id %}">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <h3 class="my-1">{{tutoria.tema}}</h3>
+                        <p class="mb-auto">Tutor : {{tutoria.tutor.email}}</p>
+                        <p class="mb-auto">Fecha : {{tutoria.fecha}}</p>
+                        <p class="mb-auto">Nombre : {{tutoria.nombre}}</p>
+                        <p class="mb-auto">Estado : {{tutoria.estado}}</p>
+                    </div>
+                    <a href="{% url 'eliminarTutoria' tutoria.id %}">Eliminar tutoria</a> 
+                </div>
+            </div>
+        </div>
     {% endfor %}
+</div>
 
-</section>
-<aside>
-    <div class="containerTutoria">
-        <h1>work in progress</h1>
-    </div>
-</aside>
-
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var tutorCards = document.querySelectorAll('.tutor-card');
+        
+        tutorCards.forEach(function(card) {
+            card.addEventListener('click', function() {
+                var url = this.getAttribute('data-url');
+                location.href = url;
+            });
+        });
+    });
+</script>
 {% endblock %}

@@ -21,11 +21,8 @@ def home(request):
 def tutor(request, tutorslug):
     """Vista de un tutor en particular, muestra los datos del tutor"""
 
-    if request.method == 'GET':
-        tutor = get_object_or_404(Usuario, slug=tutorslug)
-        return render(request, 'core/tutor.html', {'tutor':tutor})
-    else:
-        return render(request, 'tutorias/solicitarTutoria.html', {'tutor' : tutor}) ## no sirve
+    tutor = get_object_or_404(Usuario, slug=tutorslug)
+    return render(request, 'core/tutor.html', {'tutor':tutor})
 
 def buscar(request, slug):
     """Vista de busqueda de tutores, muestra los tutores que coinciden
@@ -45,13 +42,11 @@ def buscarbarra(request):
 
     slug = request.GET['buscar'].lower()
     tag = get_object_or_404(Tag, slug=slug)
-    if tag:
-        populares = Usuario.tags.most_common()[:5]
-        tutores = Usuario.objects.filter(tags=tag)
-        return render(request, 'core/home.html', {
-            'populares':populares,
-            'tutores':tutores, 
-        })
-    else:
-        messages.error(request, 'No se encontraron resultados')
+    populares = Usuario.tags.most_common()[:5]
+    tutores = Usuario.objects.filter(tags=tag)
+    return render(request, 'core/home.html', {
+        'populares':populares,
+        'tutores':tutores, 
+    })
+
     
