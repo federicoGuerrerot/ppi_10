@@ -105,22 +105,33 @@
         border-radius: 12px;
         max-width: 435px;
     }
+
+    
 </style>
 <section>
-    <h2>{{tutor.nombre}}</h2>
-    <div style="display:flex">
-        {% for tag in tutor.tags.all %}
-        <a href="{% url 'buscar' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
-        {% endfor %}
+    <div style="display: flex; align-items: flex-start;">
+        <div style="flex-grow: 1;">
+            <h2>{{tutor.nombre}}</h2>
+            <div style="display:flex">
+                {% for tag in tutor.tags.all %}
+                <a href="{% url 'buscar' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
+                {% endfor %}
+            </div>
+            <p class="card-text">Precio por hora: ${{tutor.tarifa_por_hora}}</p>
+            <p class="mb-auto">Calificación: {{tutor.calificacion}}</p>
+            <p class="mb-auto text-muted">Celular: {{tutor.celular}}</p>
+            <form>
+                <a href="{% url 'solicitarTutoria' tutor.email %}" class="btn btn-primary">Solicitar Tutoría</a>
+            </form>
+        </div>
+        <div style="margin-left: 1rem; display: flex; justify-content: center; align-items: flex-start; width: 150px;">
+            {% if tutor.foto_perfil %}
+            <img src="{{ tutor.foto_perfil.url }}" class="foto" alt="Foto de perfil del tutor" style="max-width: 150px; height: auto; border-radius: 50%;">
+            {% else %}
+            <img src="{% static 'usuario.png' %}" class="foto" alt="Foto de perfil del tutor" style="max-width: 150px; height: auto; border-radius: 50%;">
+            {% endif %}
+        </div>
     </div>
-    <p class="card-text">Precio por hora: ${{tutor.tarifa_por_hora}}</p>
-    <p class="mb-auto">Calificacion: {{tutor.calificacion}}</p>
-
-    <p class="mb-auto text-muted">Celular: {{tutor.celular}}</p>
-    <form>
-        <a href="{% url 'solicitarTutoria' tutor.email %}" class="btn btn-primary">Solicitar Tutoría</a>
-    </form>
-
 </section>
 
 
