@@ -13,6 +13,5 @@ def mi_perfil(request):
             return redirect('mi_perfil')
     else:
         form = PerfilForm(instance=request.user)
-    return render(request, 'perfiles/mi_perfil.html', {'form': form})
-
-
+    usuario = request.user
+    return render(request, 'perfiles/mi_perfil.html', {'form': form, 'usuario': usuario})
