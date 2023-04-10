@@ -48,12 +48,7 @@ def eliminar_tutoria(request, tutoria_id):
     """Vista para eliminar una tutoria"""
 
     tutoria = get_object_or_404(Tutoria, id = tutoria_id)
-    if request.method == 'GET':
-        return render(request, 'eliminarTutoria.html', {
-            'tutoria': tutoria
-        })
-    else:
-        tutoria.delete()
-        return redirect('tutorias')
+    tutoria.delete()
+    return redirect('tutorias')
     
 
