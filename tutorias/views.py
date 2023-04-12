@@ -3,14 +3,31 @@ from django.contrib.auth.decorators import login_required
 from users.models import Usuario
 from .models import Tutoria
 from .forms import SolicitaNuevaTutoria
+from mensajes.models import Mensaje
 
 @login_required(login_url='users:login')
 def tutorias(request):
     """Vista de las tutorias del usuario, muestra las tutorias que ha solicitado, tiene activas
     y en el caso de ser tutor, las que ha aceptado y las que ha rechazado"""
-    
+
     listatutorias = Tutoria.objects.filter(usuario = request.user)
+    mensajes = Mensaje.getMensajes(usuario=request.user)
+    chatActivo = None
+    chats = None
+	
+    if mensajes:
+        mensaje = mensajes[0]
+        chatActivo = mensaje['Usuario'].username
+        chats = Mensaje.objects.filter(usuario=request.user, receptor=mensaje['Usuario'])
+        chats.update(leido=True)
+        for mensaje in mensajes:
+            if mensaje['Usuario'].username == chatActivo:
+                mensaje['unread'] = 0
+                
     return render(request, 'tutorias.html', {
+        'chats': chats,
+		'mensajes': mensajes,
+		'chatActivo': chatActivo,
         'listatutorias' : listatutorias,
     })
 

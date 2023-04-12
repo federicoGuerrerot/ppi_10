@@ -3,16 +3,17 @@ from users.models import Usuario
 from django.db.models import Max
 
 # Create your models here.
-class mensaje(models.Model):
+class Mensaje(models.Model):
 	usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='Usuario')
 	emisor = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='emisor')
 	receptor = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='receptor')
 	cuerpo = models.TextField(max_length=1000, blank=True, null=True)
 	fecha = models.DateTimeField(auto_now_add=True)
 	leido = models.BooleanField(default=False)
+	
 
 	def enviarMensaje(emisor, receptor, cuerpo):
-		emisorMensaje = mensaje(
+		emisorMensaje = Mensaje(
 			usuario=emisor,
 			emisor=emisor,
 			receptor=receptor,
@@ -20,7 +21,7 @@ class mensaje(models.Model):
 			leido=True)
 		emisorMensaje.save()
 
-		receptorMensaje = mensaje(
+		receptorMensaje = Mensaje(
 			usuario=receptor,
 			emisor=emisor,
 			cuerpo=cuerpo,
@@ -28,13 +29,13 @@ class mensaje(models.Model):
 		receptorMensaje.save()
 		return emisorMensaje
 
-	def get_messages(Usuario):
-		mensajes = mensaje.objects.filter(usuario=Usuario).values('receptor').annotate(last=Max('fecha')).order_by('-last')
-		users = []
+	def getMensajes(usuario):
+		mensajes = Mensaje.objects.filter(usuario=usuario).values('receptor').annotate(last=Max('fecha')).order_by('-last')
+		usuarios = []
 		for mensaje in mensajes:
-			users.append({
+			usuarios.append({
 				'Usuario': Usuario.objects.get(pk=mensaje['receptor']),
 				'last': mensaje['last'],
-				'unread': mensaje.objects.filter(usuario=Usuario, recipient__pk=mensaje['receptor'], leido=False).count()
+				'unread': Mensaje.objects.filter(usuario=usuario, receptor__pk=mensaje['receptor'], leido=False).count()
 				})
-		return users
+		return usuarios

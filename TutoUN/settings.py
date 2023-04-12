@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'users',
     'core',
     'tutorias',
+    'mensajes',
     'perfiles',
     'taggit',
     'django.contrib.admin',
