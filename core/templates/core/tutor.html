@@ -117,11 +117,11 @@
                 <a href="{% url 'buscar' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
                 {% endfor %}
             </div>
-            <p class="card-text">Precio por hora: ${{tutor.tarifa_por_hora}}</p>
+            <p class="card-text">Precio por hora: ${{tutor.tarifa}}</p>
             <p class="mb-auto">Calificación: {{tutor.calificacion}}</p>
             <p class="mb-auto text-muted">Descripción: {{tutor.descripcion}}</p>
 
-            <a href="{% url 'nuevaConversacion' tutor.email %}" class="button is-success">Solicita información</a>
+            <a href="{% url 'solicitarTutoria' tutor.email %}" class="button is-success">Solicita tutoria</a>
         </div>
         <div style="margin-left: 1rem; display: flex; justify-content: center; align-items: flex-start; width: 150px;">
             {% if tutor.foto_perfil %}

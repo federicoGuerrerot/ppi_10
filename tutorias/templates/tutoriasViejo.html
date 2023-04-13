@@ -1,0 +1,103 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+TutoUN - Tutorias de {{user.email}}
+{% endblock %}
+
+{% load static %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="/static/css/home.css">
+{% endblock %}
+
+{% block content %}
+<div style="padding:15px;">
+    <div>
+        <h1>Chats</h1>
+        {% for mensaje in mensajes %}
+
+        <a class="{% if chatActivo == mensaje.Usuario.username %}is-active{% endif %}"
+            href="{% url 'directs' mensaje.Usuario.email %}">
+            <div class="box">
+                <article class="media">
+                    <div class="media-left">
+                        <figure class="image is-64x64">
+                            {% if mensaje.Usuario.foto_perfil %}
+                            <img src="{{ mensaje.Usuario.foto_perfil.url }}" class="foto" alt="Foto de perfil del tutor"
+                                style="max-width: 96px; height: auto; border-radius: 50%;">
+                            {% else %}
+                            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                            {% endif %}
+                        </figure>
+                    </div>
+                    <div class="media-content">
+
+                        <div class="content">
+                            <p>
+                                <strong>{{ mensaje.Usuario.nombre }}</strong> <small>-{{ mensaje.Usuario.email }}</small>
+                                <br>
+                                {% for tag in mensaje.Usuario.tags.all %}
+                                    <a href="{% url 'buscar' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
+                                {% endfor %}
+                            </p>
+                        </div>
+
+                        <div class="content">
+                            {% if mensaje.leido %}
+                            <p style="font-weight: bold; color: red;">
+                                <i class="material-icons">mark_chat_unread</i> {{ mensaje.leido }}
+                            </p>
+                            {% endif %}
+                        </div>
+                        <!-- agregar control quien puede crear -->
+                        <a href="{% url 'solicitarTutoria' mensaje.Usuario.email %}" class="button is-success">Solicitar
+                            Tutoria</a>
+                    </div>
+                </article>
+            </div>
+        </a>
+        {% endfor %}
+
+    </div>
+
+    <div class="row mb-2 posts">
+        <div>
+            <h1>Mis Tutorias</h1>
+        </div>
+        {% for tutoria in listatutorias %}
+        <div class="col-md-6">
+            <div class="cards">
+                <div class="row no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250 tutor-card"
+                    id="tutor-card-{{ tutoria.id }}" data-url="{% url 'detalleTutoria' tutoria.id %}">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <h3 class="my-1">{{tutoria.tema}}</h3>
+                        <p class="mb-auto">Tutor : {{tutoria.tutor.email}}</p>
+                        <p class="mb-auto">Fecha : {{tutoria.fecha}}</p>
+                        <p class="mb-auto">Nombre : {{tutoria.nombre}}</p>
+                        <p class="mb-auto">Estado : {{tutoria.estado}}</p>
+                    </div>
+                    <a href="{% url 'eliminarTutoria' tutoria.id %}">Eliminar tutoria</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div>
+        <h1>Historial</h1>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var tutorCards = document.querySelectorAll('.tutor-card');
+
+        tutorCards.forEach(function (card) {
+            card.addEventListener('click', function () {
+                var url = this.getAttribute('data-url');
+                location.href = url;
+            });
+        });
+    });
+</script>
+{% endblock %}

@@ -76,6 +76,7 @@ class Usuario(AbstractUser):
     # variables propias de tutores
     is_tutor = models.BooleanField(default=False)
     tags = TaggableManager(through=UUIDTaggedItem, blank=True)
+    tarifa = models.FloatField(blank=True, null=True)
 
     objects = CustomAccountManager()
 

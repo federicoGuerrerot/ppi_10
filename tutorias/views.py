@@ -2,33 +2,32 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from users.models import Usuario
 from .models import Tutoria
-from .forms import SolicitaNuevaTutoria
 from mensajes.models import Mensaje
 
 @login_required(login_url='users:login')
 def tutorias(request):
-    """Vista de las tutorias del usuario, muestra las tutorias que ha solicitado, tiene activas
+    """Vista de las tutorias del usuario (representadas por mensajes), muestra las tutorias que ha solicitado, tiene activas
     y en el caso de ser tutor, las que ha aceptado y las que ha rechazado"""
 
-    listatutorias = Tutoria.objects.filter(usuario = request.user)
-    mensajes = Mensaje.getMensajes(usuario=request.user)
+    chats = Mensaje.getMensajes(usuario=request.user)
     chatActivo = None
-    chats = None
+    mensajes = None
 	
-    if mensajes:
-        mensaje = mensajes[0]
-        chatActivo = mensaje['Usuario'].username
-        chats = Mensaje.objects.filter(usuario=request.user, receptor=mensaje['Usuario'])
-        chats.update(leido=True)
-        for mensaje in mensajes:
-            if mensaje['Usuario'].username == chatActivo:
-                mensaje['unread'] = 0
+    if chats:
+        chat = chats[0]
+        chatActivo = chat['Usuario'].username
+        mensajes = Mensaje.objects.filter(usuario=request.user, receptor=chat['Usuario'])
+        mensajes.update(leido=True)
+        tutoriaActiva = chat['tutoria']
+        for chat in chats:
+            if chat['Usuario'].username == chatActivo:
+                chat['unread'] = 0
                 
     return render(request, 'tutorias.html', {
-        'chats': chats,
-		'mensajes': mensajes,
+        'mensajes': mensajes,
+		'chats': chats,
 		'chatActivo': chatActivo,
-        'listatutorias' : listatutorias,
+        'tutoriaActiva': tutoriaActiva,
     })
 
 @login_required(login_url='users:login')
@@ -57,8 +56,24 @@ def solicitarTutoria(request, emailtutor):
             #form.save_m2m()
         #### ejemplo para seguir con usuario, para tutoria es solo: new_tutoria = form.save().
 
-        Tutoria.objects.create(nombre=request.POST["Nombre"],tema=request.POST["Tema"],tutor=tutor, usuario=estudiante)
-        return redirect('tutorias')
+        tutoria = Tutoria.objects.create(nombre=request.POST["Nombre"],tema=request.POST["Tema"],tutor=tutor, usuario=estudiante)
+        return redirect('nuevaConversacion', emailtutor, tutoria.id)
+
+@login_required(login_url='users:login')
+def aceptar_tutoria(request, tutoria_id):
+    """Vista para aceptar una tutoria"""
+
+    tutoria = get_object_or_404(Tutoria, id = tutoria_id)
+    tutoria.update(estado='Aceptada')
+    return redirect('tutorias')
+
+@login_required(login_url='users:login')
+def rechazar_tutoria(request, tutoria_id):
+    """Vista para rechazar una tutoria"""
+
+    tutoria = get_object_or_404(Tutoria, id = tutoria_id)
+    tutoria.update(estado='Rechazada')
+    return redirect('tutorias')
 
 @login_required(login_url='users:login')
 def eliminar_tutoria(request, tutoria_id):
