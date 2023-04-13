@@ -30,9 +30,46 @@
             <label for="{{ form.foto_perfil.id_for_label }}" class="form-label">Foto de perfil</label>
             <input class="form-control" type="file" id="{{ form.foto_perfil.id_for_label }}" name="{{ form.foto_perfil.html_name }}">
         </div>
+
+        <div class="col-12">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="{{ form.is_tutor.id_for_label }}" name="{{ form.is_tutor.html_name }}" {% if form.is_tutor.value %}checked{% endif %}>
+                <label class="form-check-label" for="{{ form.is_tutor.id_for_label }}">Soy tutor</label>
+            </div>
+        </div>
+        <div class="col-md-6" id="tarifa-container" {% if not form.is_tutor.value %}style="display:none;"{% endif %}>
+            <label for="{{ form.tarifa.id_for_label }}" class="form-label">Tarifa (en dólares)</label>
+            <input type="number" step="0.01" class="form-control" id="{{ form.tarifa.id_for_label }}" name="{{ form.tarifa.html_name }}" value="{{ form.tarifa.value|default:'' }}">
+        </div>
+        <div class="col-md-6" id="tags-container" {% if not form.is_tutor.value %}style="display:none;"{% endif %}>
+            <label for="{{ form.tags.id_for_label }}" class="form-label">Temáticas</label>
+            <input type="text" class="form-control" id="{{ form.tags.id_for_label }}" name="{{ form.tags.html_name }}" value="{{ form.tags.value|default:'' }}">
+        </div>
+        
         <div class="col-12 mt-3">
             <button type="submit" class="btn btn-primary">Guardar cambios</button>
         </div>
     </form>
 </div>
 {% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var isTutorCheckbox = document.getElementById("{{ form.is_tutor.id_for_label }}");
+    var tarifaContainer = document.getElementById("tarifa-container");
+    var tagsContainer = document.getElementById("tags-container");
+
+    isTutorCheckbox.addEventListener('change', function() {
+        if (isTutorCheckbox.checked) {
+            tarifaContainer.style.display = "block";
+            tagsContainer.style.display = "block";
+        } else {
+            tarifaContainer.style.display = "none";
+            tagsContainer.style.display = "none";
+        }
+    });
+});
+</script>
+{% endblock %}
+
