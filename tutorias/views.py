@@ -15,13 +15,13 @@ def tutorias(request):
 	
     if chats:
         chat = chats[0]
-        chatActivo = chat['Usuario'].username
+        chatActivo = chat['Usuario']
         mensajes = Mensaje.objects.filter(usuario=request.user, receptor=chat['Usuario'])
         mensajes.update(leido=True)
         tutoriaActiva = chat['tutoria']
         for chat in chats:
-            if chat['Usuario'].username == chatActivo:
-                chat['unread'] = 0
+            if chat['Usuario'] == chatActivo:
+                chat['sinleer'] = 0
                 
     return render(request, 'tutorias.html', {
         'mensajes': mensajes,

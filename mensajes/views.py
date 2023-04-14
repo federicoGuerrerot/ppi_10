@@ -16,13 +16,13 @@ def directs(request, email, tutoria_id):
 
 	usuario = request.user
 	chats = Mensaje.getMensajes(usuario=usuario)
-	chatActivo = email
+	chatActivo = Usuario.objects.get(email=email)
 	mensajes = Mensaje.objects.filter(usuario=usuario, receptor__email=email)
 	mensajes.update(leido=True)
 	tutoriaActiva = Tutoria.objects.get(id=tutoria_id)
 	for chat in chats:
-		if chat['Usuario'].email == email:
-			chat['unread'] = 0
+		if chat['Usuario'] == chatActivo:
+			chat['sinleer'] = 0
 
 	context = {
 		'mensajes': mensajes,
@@ -59,6 +59,7 @@ def enviar(request):
 	
 	if request.method == 'POST':
 		receptor = Usuario.objects.get(username=receptor_username)
+		tutoria = Tutoria.objects.get(id=tutoria)
 		Mensaje.enviarMensaje(emisor, receptor, cuerpo, tutoria)
 		return redirect('tutorias')
 	else:

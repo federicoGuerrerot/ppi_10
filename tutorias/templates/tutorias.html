@@ -7,120 +7,136 @@ TutoUN - Tutorias
 {% load static %}
 
 {% block content %}
+<style>
+    body {
+  background-color: #74EBD5;
+  background-image: linear-gradient(90deg, #74EBD5 0%, #9FACE6 100%);
 
-<div class="columns is-mobile" style="padding: 15px;">
-    <div class="column is-one-quarter">
-        <aside class="menu">
-            <h1 class="title is-2">
-                Tutorias
-            </h1>
-            <ul style="overflow-y: scroll; height: 500px" class="menu-list">
+  min-height: 100vh;
+}
 
-                {% for chat in chats %}
+::-webkit-scrollbar {
+  width: 7px;
+}
 
-                <a class="{% if chatActivo == chat.Usuario.username %}is-active{% endif %}"
-                    href="{% url 'directs' chat.Usuario.email chat.tutoria.id %}">
-                    <div class="box">
-                        <article class="media">
-                            <div class="media-left">
-                                <figure class="image is-64x64">
-                                    {% if chat.Usuario.foto_perfil %}
-                                    <img src="{{ chat.Usuario.foto_perfil.url }}" class="foto"
-                                        alt="Foto de perfil del tutor"
-                                        style="max-width: 96px; height: auto; border-radius: 50%;">
-                                    {% else %}
-                                    <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-                                    {% endif %}
-                                </figure>
-                            </div>
-                            <div class="media-content">
+::-webkit-scrollbar-track {
+  width: 7px;
+  background: #d8d7d7;
+}
 
-                                <div class="content">
-                                    <p>
-                                        <strong>{{ chat.Usuario.nombre }}</strong> <small>-{{ chat.Usuario.email}}</small>
-                                    </p>
+::-webkit-scrollbar-thumb {
+  width: 1em;
+  background-color: #646363;
+  outline: 1px solid slategrey;
+  border-radius: 1rem;
+}
+
+.text-small {
+  font-size: 0.9rem;
+}
+
+.messages-box,
+.chat-box {
+  height: 510px;
+  overflow-y: scroll;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+input::placeholder {
+  font-size: 0.9rem;
+  color: #999;
+}
+</style>
+<div class="container-fluid py-4 px-5">
+<div class="row rounded-lg overflow-hidden shadow">
+<!-- Chat box-->
+    <div class="col-3 px-0">
+        <div class="bg-white">
+
+            <div class="px-4 py-2" style="background-color: #ddd;">
+                <p class="h5 mb-0 py-1">Tutorias</p>
+            </div>
+
+            <div class="messages-box">
+                <div class="list-group rounded-0">
+                    {% for chat in chats %}
+                    <a class="list-group-item list-group-item-action {% if chatActivo.username == chat.Usuario.username %}active text-white{% else %}text-black{% endif %} rounded-0" href="{% url 'directs' chat.Usuario.email chat.tutoria.id %}">
+                        <div class="media">
+                            {% if chat.Usuario.foto_perfil %}
+                                <img src="{{ chat.Usuario.foto_perfil.url }}" alt="user" width="50" class="rounded-circle">
+                            {% else %}
+                                <img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle">
+                            {% endif %}
+                            <div class="media-body ml-2">
+                                <div class="d-flex align-items-center justify-content-between mb-1">
+                                    <h6 class="mb-0">{{ chat.Usuario.nombre }}</h6><strong>{{ chat.tutoria.estado }}</strong><small class="small font-weight-bold"><p class="mb-auto">{{ chat.sinleer }}</p></small>
                                 </div>
-
-                                <div class="content">
-                                    {% if chat.leido %}
-                                    <p style="font-weight: bold; color: red;">
-                                        <i class="material-icons">mark_chat_unread</i> {{ chat.leido }}
-                                    </p>
-                                    {% endif %}
+                                <div class="mb-1 small">
+                                    <h6 class="my-1">Tema: {{ chat.tutoria.tema }}</h6>
+                                    <p class="mb-auto">Calificacion tutor: {{ chat.tutoria.tutor.calificacion }}</p>
+                                    <p class="mb-auto">Tarifa {{ chat.tutoria.tutor.tarifa }}</p>
                                 </div>
-                                {% if chat.tutoria.tutor == user %}
-                                <a href="{% url 'aceptarTutoria' chat.tutoria.id %}" class="button is-success">Aceptar Tutoria</a>
-                                <a href="{% url 'rechazarTutoria' chat.tutoria.id %}" class="button is-danger">Rechazar Tutoria</a>
-                                {% endif %}
-                                <a href="{% url 'eliminarTutoria' chat.tutoria.id %}">Eliminar tutoria</a>
+                                <p class="font-italic mb-0 text-small">{{ chat.ultimo }} cambiar a ultimo mensaje.</p>
                             </div>
-                        </article>
-                    </div>
-                </a>
-                {% endfor %}
-
-            </ul>
-        </aside>
-    </div>
-
-    <div class="column">
-
-        <div style="overflow-y: scroll; height: 500px">
-            <h1>Estado: {{tutoriaActiva.estado}}</h1>
-            {% for mensaje in mensajes %}
-            <div class="box">
-                <article class="media">
-                    <div class="media-left">
-                    </div>
-                    <div class="media-content">
-                        <div class="content">
-                            <p>
-                                <strong>{{ mensaje.emisor.nombre }}</strong> <small>@{{ mensaje.emisor.email }}</small> on:
-                                <strong><small>{{ mensaje.fecha|date:'N d G:i' }}</small></strong>
-                            </p>
-                            {{ mensaje.cuerpo }}
                         </div>
+                    </a>
+                    {% endfor %}
+                </div>                
+            </div>
+        </div>
+    </div>
+    <!-- Mensajes Box--> 
+    <div class="col-9 px-0">
+        <div class="justify-content-between px-4 py-2" style="display: flex;background-color: #ddd;">
+            <div style="display: flex;">
+                {% if chatActivo.foto_perfil %}
+                    <img src="{{ chatActivo.foto_perfil.url }}" class="foto"
+                        alt="Foto de perfil"
+                        style="max-width: 30px; height: auto; border-radius: 50%;">
+                {% else %}
+                    <img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="30" class="rounded-circle">
+                {% endif %}
+                <p class="h5 mb-0 py-1 ml-3">{{ chatActivo.nombre }}</p>
+            </div>
+            <div style="text-align: right;">
+                {% if tutoriaActiva.tutor == user %}
+                <button href="{% url 'aceptarTutoria' tutoriaActiva.id %}" class="btn btn-success btn-sm ml-3" type="button">Aceptar Tutoria</button>
+                <button href="{% url 'rechazarTutoria' tutoriaActiva.id %}" class="btn btn-danger btn-sm ml-3" type="button">Rechazar Tutoria</button>
+                {% endif %}
+                <button href="{% url 'eliminarTutoria' tutoriaActiva.id %}" class="btn btn-secondary btn-sm ml-3" type="button">Eliminar tutoria</button>
+            </div>
+        </div>
+        <div class="px-4 py-5 chat-box bg-white">
+            <!-- Mensajes-->
+            {% for mensaje in mensajes %}
+            <div class="media w-50 mb-3">
+                <div class="media-body">
+                    <div class="bg-{% if mensaje.emisor == user %}primary{% else %}secondary{% endif %} rounded py-2 px-3 mb-2 ">
+                        <p class="text-small mb-0 text-white">{{ mensaje.cuerpo }}</p>
                     </div>
-                </article>
+                    <p class="small text-muted">{{ mensaje.fecha|date:'N d G:i' }}</p>
+                </div>
             </div>
             {% endfor %}
-
-
         </div>
 
-
-        <form role="form" method="POST" action="{% url 'enviar' %}">
+        <!-- Typing area -->
+        <form role="form" method="POST" action="{% url 'enviar' %}" style="padding: 10px;background-color: #ddd;">
             {% csrf_token %}
-            <article class="media">
-                <figure class="media-left">
-                    <p class="image is-64x64">
-                        <img src="https://bulma.io/images/placeholders/128x128.png">
-                    </p>
-                </figure>
-                <div class="media-content">
-                    <input type="hidden" name="receptor" value="{{ chatActivo }}">
-                    <input type="hidden" name="tutoria" value="{{ tutoriaActiva }}">
-                    <div class="field">
-                        <p class="control">
-                            <textarea class="textarea" name="cuerpo" placeholder="Tu chat..."></textarea>
-                        </p>
-                    </div>
-                    <nav class="level">
-                        <div class="level-left">
-                            <div class="level-item">
-                                <button type="submit" name="action" class="button is-info">Enviar</buttom>
-                            </div>
-                        </div>
-                    </nav>
+            <div class="input-group">
+                <input type="hidden" name="receptor" value="{{ chatActivo.username }}">
+                <input type="hidden" name="tutoria" value="{{ tutoriaActiva.id }}">
+                <input type="text" placeholder="Escribre tu mensaje" name="cuerpo" class="form-control rounded-0 border-0 py-4 bg-light">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-link">enviar</button>
                 </div>
-            </article>
-        </form>
+            </div>
+        </form>        
 
-    </div>
-    
-    <div>
-        <h1>Historial</h1>
     </div>
 </div>
-
+</div>
 {% endblock %}

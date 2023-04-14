@@ -38,8 +38,8 @@ class Mensaje(models.Model):
 		for chat in chats:
 			usuarios.append({
 				'Usuario': Usuario.objects.get(pk=chat['receptor']),
-				'last': chat['last'],
-				'unread': Mensaje.objects.filter(usuario=usuario, receptor__pk=chat['receptor'], leido=False).count(),
+				'ultimo': chat['last'],
+				'sinleer': Mensaje.objects.filter(usuario=usuario, receptor__pk=chat['receptor'], leido=False).count(),
 				'tutoria': Tutoria.objects.get(pk=chat['tutoria'])
 				})
 		return usuarios
