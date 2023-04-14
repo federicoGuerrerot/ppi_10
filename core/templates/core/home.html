@@ -1,61 +1,65 @@
 {% extends 'core/base.html' %}
 
 {% block title %}
-    TutoUN - Página principal
+TutoUN - Página principal
 {% endblock %}
 
 {% load static %}
 
 {% block head_extra %}
-    <link rel="stylesheet" href="/static/css/home.css">
+<link rel="stylesheet" href="/static/css/home.css">
 {% endblock %}
 
 {% block content %}
 <!-- Contenido HTML -->
-
-<div class="slogan">TutoUN el lugar que te conecta con el aprendizaje</div>
-<img class="degree-icon" src="../../../static/grado.png" alt="Grado icon">
-<!-- ... -->
-<div class="search-section">
-    <form class="search-form" action="/buscarbarra/" method="GET">
-        <label for="search-input">Buscar tutores por temática:</label>
-        <input type="text" id="search-input" data-role="tagsinput" name="buscar" placeholder="Ejemplo: Matemáticas" required>
-        <button type="submit">Buscar</button>
-    </form>
-</div>
-<div class="common-tags">
-    <p>Temas comunes:</p>
-    {% for tag in populares %}
+<div style="padding: 15px;">
+    <div class="slogan">TutoUN el lugar que te conecta con el aprendizaje</div>
+    <img class="degree-icon" src="../../../static/grado.png" alt="Grado icon">
+    <!-- ... -->
+    <div class="search-section">
+        <form class="search-form" action="/buscarbarra/" method="GET">
+            <label for="search-input">Buscar tutores por temática:</label>
+            <input type="text" id="search-input" data-role="tagsinput" name="buscar" placeholder="Ejemplo: Matemáticas"
+                required>
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+    <div class="common-tags">
+        <p>Temas comunes:</p>
+        {% for tag in populares %}
         <a href="{% url 'buscar' tag.slug %}" class="badge badge-success">{{tag}}</a>
-    {% endfor %}
-</div>
-<div class="row mb-2 posts">
-    {% for tutor in tutores %}
+        {% endfor %}
+    </div>
+    <div class="row mb-2 posts">
+        {% for tutor in tutores %}
         <div class="col-md-6">
             <div class="cards">
-                <div class="row no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250 tutor-card" id="tutor-card-{{ tutor.id }}" data-url="{% url 'tutor' tutor.slug %}">
+                <div class="row no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250 tutor-card"
+                    id="tutor-card-{{ tutor.id }}" data-url="{% url 'tutor' tutor.slug %}">
                     <div class="col p-4 d-flex flex-column position-static">
-                        <h3 class="my-1">{{tutor.nombre}}</h3>
+                        <h3 class="my-1">{{tutor.nombre}}</h3> <strong>{{tutor.tarifa}}</strong>
                         <div style="display:flex">
                             {% for tag in tutor.tags.all %}
                             <a href="{% url 'buscar' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
                             {% endfor %}
                         </div>
                         <p class="mb-auto">Calificacion: {{tutor.calificacion}}</p>
-                        <p class="mb-auto text-muted">Celular: {{tutor.celular}}</p>
+                        <p class="mb-auto text-muted">Descripción: {{tutor.descripcion}}</p>
                     </div>
                 </div>
-            </div>       
+            </div>
         </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
 </div>
 
+
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         var tutorCards = document.querySelectorAll('.tutor-card');
-        
-        tutorCards.forEach(function(card) {
-            card.addEventListener('click', function() {
+
+        tutorCards.forEach(function (card) {
+            card.addEventListener('click', function () {
                 var url = this.getAttribute('data-url');
                 location.href = url;
             });

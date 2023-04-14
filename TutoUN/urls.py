@@ -9,4 +9,5 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('', include('tutorias.urls')),
     path('', include('perfiles.urls')),
+    path('', include('mensajes.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

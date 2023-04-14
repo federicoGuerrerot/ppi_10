@@ -33,8 +33,10 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'users',
+    'TutoUN',
     'core',
     'tutorias',
+    'mensajes',
     'perfiles',
     'taggit',
     'django.contrib.admin',
