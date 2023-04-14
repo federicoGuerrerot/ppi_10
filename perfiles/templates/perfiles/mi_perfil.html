@@ -1,9 +1,28 @@
 {% extends 'core/base.html' %}
+{% load templatetags %}
 
 {% block content %}
 <div class="container mt-5">
     <h1 class="mb-4">Mi perfil</h1>
     
+    <style>
+.tag {
+    display: inline-block;
+    padding: 2px 8px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 20px;
+    margin: 5px 5px 0 0;
+    font-size: 0.8rem;
+}
+
+.tag-remove {
+    margin-left: 4px;
+    cursor: pointer;
+}
+
+
+    </style>
     {% if usuario.foto_perfil %}
         <div class="text-center mb-4">
             <img src="{{ usuario.foto_perfil.url }}" alt="{{ usuario.username }}'s profile picture" class="rounded-circle" style="width: 150px; height: 150px;">
@@ -38,17 +57,27 @@
             </div>
         </div>
         <div class="col-md-6" id="tarifa-container" {% if not form.is_tutor.value %}style="display:none;"{% endif %}>
-            <label for="{{ form.tarifa.id_for_label }}" class="form-label">Tarifa (en dólares)</label>
-            <input type="number" step="0.01" class="form-control" id="{{ form.tarifa.id_for_label }}" name="{{ form.tarifa.html_name }}" value="{{ form.tarifa.value|default:'' }}">
+            <label for="{{ form.tarifa.id_for_label }}" class="form-label">Tarifa</label>
+            <input type="number" step="1000" min="0" class="form-control" id="{{ form.tarifa.id_for_label }}" name="{{ form.tarifa.html_name }}" value="{{ form.tarifa.value|default:'' }}">
         </div>
         <div class="col-md-6" id="tags-container" {% if not form.is_tutor.value %}style="display:none;"{% endif %}>
-            <label for="{{ form.tags.id_for_label }}" class="form-label">Temáticas</label>
-            <input type="text" class="form-control" id="{{ form.tags.id_for_label }}" name="{{ form.tags.html_name }}" value="{{ form.tags.value|default:'' }}">
+            <label for="tag-input" class="form-label">Temáticas</label>
+            <div id="tag-container" class="my-2" style="border: 1px solid #ced4da; border-radius: 0.25rem; min-height: 45px; padding: 6px 12px;">
+                {% for tag in usuario.tags.all %}
+                    <span class="tag">{{ tag }} <span class="tag-remove">&times;</span></span>
+                {% endfor %}
+            </div>
+            <input type="text" id="tag-input" class="form-control" placeholder="Agrega una temática y presiona Enter" style="margin-top: 5px;">
+            <input type="hidden" name="{{ form.tags.html_name }}" id="tags-value" value="{% for tag in usuario.tags.all %}{{ tag }}{% if not forloop.last %}, {% endif %}{% endfor %}">
         </div>
         
-        <div class="col-12 mt-3">
+        </div>
+        
+        
+        <div class="col-12 mt-3 d-flex justify-content-center">
             <button type="submit" class="btn btn-primary">Guardar cambios</button>
         </div>
+        
     </form>
 </div>
 {% endblock %}
@@ -70,6 +99,45 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+var tagInput = document.getElementById("tag-input");
+var tagContainer = document.getElementById("tag-container");
+var tagsValue = document.getElementById("tags-value");
+
+tagInput.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        var tag = tagInput.value.trim();
+        if (tag.length > 0) {
+            addTag(tag);
+            tagInput.value = "";
+            updateTagsValue();
+        }
+    }
+});
+
+tagContainer.addEventListener("click", function (event) {
+    if (event.target.classList.contains("tag-remove")) {
+        event.target.parentElement.remove();
+        updateTagsValue();
+    }
+});
+
+function addTag(tagName) {
+    var tagElement = document.createElement("span");
+    tagElement.className = "tag";
+    tagElement.innerHTML = tagName + ' <span class="tag-remove">&times;</span>';
+    tagContainer.appendChild(tagElement);
+}
+
+function updateTagsValue() {
+    var tags = [];
+    tagContainer.querySelectorAll(".tag").forEach(function (tagElement) {
+        tags.push(tagElement.childNodes[0].textContent.trim());
+    });
+    tagsValue.value = tags.join(", ");
+}
+
 </script>
 {% endblock %}
 
