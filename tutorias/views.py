@@ -64,7 +64,8 @@ def aceptar_tutoria(request, tutoria_id):
     """Vista para aceptar una tutoria"""
 
     tutoria = get_object_or_404(Tutoria, id = tutoria_id)
-    tutoria.update(estado='Aceptada')
+    tutoria.estado='Aceptada'
+    tutoria.save()
     return redirect('tutorias')
 
 @login_required(login_url='users:login')
@@ -72,7 +73,8 @@ def rechazar_tutoria(request, tutoria_id):
     """Vista para rechazar una tutoria"""
 
     tutoria = get_object_or_404(Tutoria, id = tutoria_id)
-    tutoria.update(estado='Rechazada')
+    tutoria.estado='Rechazada'
+    tutoria.save()
     return redirect('tutorias')
 
 @login_required(login_url='users:login')

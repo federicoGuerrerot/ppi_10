@@ -8,12 +8,12 @@ TutoUN - Tutorias
 
 {% block content %}
 <style>
-    body {
+    /* body {
   background-color: #74EBD5;
   background-image: linear-gradient(90deg, #74EBD5 0%, #9FACE6 100%);
 
   min-height: 100vh;
-}
+} */
 
 ::-webkit-scrollbar {
   width: 7px;
@@ -102,11 +102,11 @@ input::placeholder {
                 <p class="h5 mb-0 py-1 ml-3">{{ chatActivo.nombre }}</p>
             </div>
             <div style="text-align: right;">
-                {% if tutoriaActiva.tutor == user %}
-                <button href="{% url 'aceptarTutoria' tutoriaActiva.id %}" class="btn btn-success btn-sm ml-3" type="button">Aceptar Tutoria</button>
-                <button href="{% url 'rechazarTutoria' tutoriaActiva.id %}" class="btn btn-danger btn-sm ml-3" type="button">Rechazar Tutoria</button>
+                {% if tutoriaActiva.tutor == user and tutoriaActiva.estado == 'Solicitada' %}
+                <a href="{% url 'aceptarTutoria' tutoriaActiva.id %}" class="btn btn-success btn-sm ml-3" type="button">Aceptar Tutoria</a>
+                <a href="{% url 'rechazarTutoria' tutoriaActiva.id %}" class="btn btn-danger btn-sm ml-3" type="button">Rechazar Tutoria</a>
                 {% endif %}
-                <button href="{% url 'eliminarTutoria' tutoriaActiva.id %}" class="btn btn-secondary btn-sm ml-3" type="button">Eliminar tutoria</button>
+                <a href="{% url 'eliminarTutoria' tutoriaActiva.id %}" class="btn btn-secondary btn-sm ml-3" type="button">Eliminar tutoria</a>
             </div>
         </div>
         <div class="px-4 py-5 chat-box bg-white">
