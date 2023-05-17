@@ -63,7 +63,7 @@ input::placeholder {
             <div class="messages-box">
                 <div class="list-group rounded-0">
                     {% for chat in chats %}
-                    <a class="list-group-item list-group-item-action {% if chatActivo.username == chat.Usuario.username %}active text-white{% else %}text-black{% endif %} rounded-0" href="{% url 'directs' chat.Usuario.email chat.tutoria.id %}">
+                    <a class="list-group-item list-group-item-action {% if tutoriaActiva.id == chat.tutoria.id %}active text-white{% else %}text-black{% endif %} rounded-0" href="{% url 'directs' chat.Usuario.email chat.tutoria.id %}">
                         <div class="media">
                             {% if chat.Usuario.foto_perfil %}
                                 <img src="{{ chat.Usuario.foto_perfil.url }}" alt="user" width="50" class="rounded-circle">

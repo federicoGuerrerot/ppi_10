@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-
+{% load i18n %}
 {% block title %}
     Iniciar sesión - TutoUN
 {% endblock %}
@@ -7,12 +7,6 @@
 {% load static %}
 
 {% block content %}
-
-{% if messages %}
-    {% for message in messages %}
-        <p class="error-message">{{ message }}</p>
-    {% endfor %}
-{% endif %}
 
     <style>
 .signup-icon {
@@ -157,37 +151,37 @@ h1 {
 
     </style>
 
-    {% if form.errors %}
-        <p class="error-message">Por favor corrige los errores</p>
-        <p class="error-message">{{form.errors}}</p>
-    {% endif %}
-
     <div class="signup-container">
         <img src="{% static 'grado.png' %}" alt="Icon" class="signup-icon">
         <h1>Registrarse</h1>
         <form method="POST" action="{% url 'users:signup' %}" class="signup-form">
             {% csrf_token %}
             <div class="form-group">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-input" name="email" placeholder="ejemplo@unal.edu.co" required>
+              {% for field in form %}
+              <p>
+                {{ field.label_tag }}
+                {{ field }}
+                <!-- {% trans 'I have read and accept the' %} -->
+      
+              {% if field.help_text %}
+              <small class="form-text text-muted"><p>{{ field.help_text }}</p></small>
+              {% endif %}
+      
+              {% if field.errors %}
+              <div class="alert alert-danger" role="alert">
+                  {% for error in field.errors %}
+                      {{ error }}</br>
+                  {% endfor %}
+              </div>
+              {% endif %}
+      
+              </p>
+              {% endfor %}
+      
             </div>
-            <div class="form-group">
-                <label class="form-label">Nombre</label>
-                <input type="text" class="form-input" name="nombre" placeholder="Nombre" required>
+            <div>
+              <button type="submit" class="signup-button">Registrarse</button>
             </div>
-            <div class="form-group">
-                <label class="form-label">Celular</label>
-                <input type="tel" class="form-input" name="celular" placeholder="Celular" required>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Contraseña</label>
-                <input type="password" class="form-input" name="password1" placeholder="Contraseña" required>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Confirma tu contraseña</label>
-                <input type="password" class="form-input" name="password2" placeholder="Confirma" required>
-            </div>
-            <button type="submit" class="signup-button">Registrarse</button>
         </form>
         <div class="social-login-buttons">
             <a href="#" class="social-login-button facebook-button">
@@ -198,10 +192,6 @@ h1 {
             </a>            
         </div>
 
-        <div class="extra-links">
-            <a href="#">¿Olvidaste tu contraseña?</a>
-            <a href="#">¿Eres nuevo aquí? Crea una cuenta</a>
-        </div>
     </div>
 
 {% endblock %}

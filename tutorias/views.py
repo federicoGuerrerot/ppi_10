@@ -16,7 +16,7 @@ def tutorias(request):
     if chats:
         chat = chats[0]
         chatActivo = chat['Usuario']
-        mensajes = Mensaje.objects.filter(usuario=request.user, receptor=chat['Usuario'])
+        mensajes = Mensaje.objects.filter(usuario=request.user, receptor=chat['Usuario'], tutoria__id=chat['tutoria'].id)
         mensajes.update(leido=True)
         tutoriaActiva = chat['tutoria']
         for chat in chats:
