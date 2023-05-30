@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load templatetags %}
 
 {% block title %}
     TutoUN - {{tutoria.nombre}}
@@ -83,36 +84,51 @@
         <a href="{% url 'buscar' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
         {% endfor %}
     </div>
-    <div class="tutor-info">
-        <img src="{% static 'usuario.png' %}" class="foto" alt="Foto de perfil del tutor">
-        <div>
-            <span>{{ tutoria.tutor.nombre }}</span>
+    <div class="tutor-info col">
+        <div class="text-center mb-4">
+            {% if chatActivo.foto_perfil %}
+                <img src="{{ tutoria.tutor.foto_perfil.url }}" alt="{{ tutoria.tutor.username }}'s profile picture" class="rounded-circle" style="width: 150px; height: 150px;">
+            {% else %}
+                <img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" style="width: 150px; height: 150px;" class="rounded-circle">
+            {% endif %}
         </div>
-        <div>
-            <span>${{ tutoria.tutor.tarifa }}/hora</span>
+        <div class="list-group rounded-0">
+            <div>
+                <small class="small font-weight-bold"> {{ tutoria.tutor.nombre }} </small>
+            </div>
+            <div>
+                <span>${{ tutoria.tutor.tarifa }} /hora</span>
+            </div>
         </div>
-        <input type="hidden" name="tutor_id" id="tutor_id" value="{{ tutor.email }}">
     </div>
-    
-            <!-- <div class="col-md-6"> -->
-                <div class="cards">
-                    <div class="row no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250 tutor-card" id="tutor-card-{{ tutoria.tutor.id }}">
-                        <div class="col p-4 d-flex flex-column position-static">
-                            <h3 class="my-1">{{tutoria.tema}}</h3>
 
-                            <p class="mb-auto">Nombre: {{tutoria.nombre}}</p>
-                            <p class="mb-auto">Fecha : {{tutoria.fecha}}</p>
-                            <p class="mb-auto">Hora : {{tutoria.hora}}</p>
-                            <p class="mb-auto">Tarifa : {{tutoria.tarifa}}</p>
-                            <p class="mb-auto">Duracion : {{tutoria.duracion}}</p>
-                        </div>
-                    </div>
-                </div>       
-            <!-- </div> -->
-    
-    <div class="containerTutoria">
-        <h1>{{tutoria.nombre}}</h1>
-    </div>
+    <form method="post" enctype="multipart/form-data" class="row g-3">
+        {% csrf_token %}
+        <div class="col-md-6">
+            <label for="{{ form.nombre.id_for_label }}" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="{{ form.nombre.id_for_label }}" name="{{ form.nombre.html_name }}" value="{{ form.nombre.value|default:'' }}">
+        </div>
+        <div class="col-md-6">
+            <label for="{{ form.fecha.id_for_label }}" class="form-label">Fecha</label>
+            <input type="datetime-local" class="form-control" id="{{ form.fecha.id_for_label }}" name="{{ form.fecha.html_name }}" value="{{ form.fecha.value|default:'' }}">
+        </div>
+        <div class="col-md-6">
+            <label for="{{ form.tema.id_for_label }}" class="form-label">Tema</label>
+            <input type="text" class="form-control" id="{{ form.tema.id_for_label }}" name="{{ form.tema.html_name }}" value="{{ form.tema.value|default:'' }}">
+        </div>
+        <div class="col-md-6">
+            <label for="{{ form.lugar.id_for_label }}" class="form-label">Lugar</label>
+            <input type="text" class="form-control" id="{{ form.lugar.id_for_label }}" name="{{ form.lugar.html_name }}" value="{{ form.lugar.value|default:'' }}">
+        </div>
+        <div class="col-md-6">
+            <label for="{{ form.duracion.id_for_label }}" class="form-label">Duracion</label>
+            <span>En minutos</span>
+            <input type="text" class="form-control" id="{{ form.duracion.id_for_label }}" name="{{ form.duracion.html_name }}" value="{{ form.duracion.value|default:'' }}">
+        </div>
+        <div class="col-12 mt-3 d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">Agendar Tutoria</button>
+        </div>
+    </form>
 </section>
 
 {% endblock %}
