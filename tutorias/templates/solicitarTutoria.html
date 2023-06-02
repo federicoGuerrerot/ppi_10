@@ -87,7 +87,7 @@
             {% else %}
             <img src="{% static 'usuario.png' %}" class="foto" alt="Foto de perfil del tutor">
             {% endif %}
-            <span><strong>{{ tutor.nombre }}</strong> - Tarifa: ${{ tutor.tarifa_por_hora }}/hora</span>
+            <span><strong>{{ tutor.nombre }}</strong> - Tarifa: $ {{ tutor.tarifa }} /hora</span>
             <input type="hidden" name="tutor_id" id="tutor_id" value="{{ tutor.email }}">
         </div>
 

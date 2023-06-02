@@ -3,7 +3,6 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
 from taggit.models import GenericUUIDTaggedItemBase, TaggedItemBase
-from django.urls import reverse
 from django.utils.text import slugify  #para crear urls únicas y legibles, identificación del usuario
 import uuid #para crear id únicos, y que sirvan a la hora de migrar la base de datos, si lo vemos necesario.
 import random
@@ -105,7 +104,3 @@ class Usuario(AbstractUser):
         if not self.slug:
             self.slug = slugify(rand_slug() + "-" + self.email)
         super(Usuario, self).save(*args, **kwargs)
-
-    #cuando este lista la vista del perfil del usuario, des comentar esto y corregir ruta de la vista
-    #def get_absolute_url(self):
-    #    return reverse('users:user_detail', args=[self.slug])

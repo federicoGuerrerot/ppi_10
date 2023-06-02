@@ -17,7 +17,7 @@ def directs(request, email, tutoria_id):
 	usuario = request.user
 	chats = Mensaje.getMensajes(usuario=usuario)
 	chatActivo = Usuario.objects.get(email=email)
-	mensajes = Mensaje.objects.filter(usuario=usuario, receptor__email=email)
+	mensajes = Mensaje.objects.filter(usuario=usuario, receptor__email=email, tutoria__id=tutoria_id)
 	mensajes.update(leido=True)
 	tutoriaActiva = Tutoria.objects.get(id=tutoria_id)
 	for chat in chats:

@@ -7,3 +7,11 @@ class SolicitaNuevaTutoria(forms.Form):
     class Meta:
         model = Tutoria
         fields = ('nombre', 'tema', 'is_tutor', 'tags')
+
+class Calendario(forms.ModelForm):
+
+    fecha = forms.DateTimeField(label="startDateTime", input_formats=['%Y/%m/%d %H:%M'], required=True)
+
+    class Meta:
+        model = Tutoria
+        fields = ('nombre', 'tema', 'fecha', 'lugar', 'duracion')

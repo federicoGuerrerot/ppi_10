@@ -63,7 +63,7 @@ input::placeholder {
             <div class="messages-box">
                 <div class="list-group rounded-0">
                     {% for chat in chats %}
-                    <a class="list-group-item list-group-item-action {% if chatActivo.username == chat.Usuario.username %}active text-white{% else %}text-black{% endif %} rounded-0" href="{% url 'directs' chat.Usuario.email chat.tutoria.id %}">
+                    <a class="list-group-item list-group-item-action {% if tutoriaActiva.id == chat.tutoria.id %}active text-white{% else %}text-black{% endif %} rounded-0" href="{% url 'directs' chat.Usuario.email chat.tutoria.id %}">
                         <div class="media">
                             {% if chat.Usuario.foto_perfil %}
                                 <img src="{{ chat.Usuario.foto_perfil.url }}" alt="user" width="50" class="rounded-circle">
@@ -78,6 +78,8 @@ input::placeholder {
                                     <h6 class="my-1">Tema: {{ chat.tutoria.tema }}</h6>
                                     <p class="mb-auto">Calificacion tutor: {{ chat.tutoria.tutor.calificacion }}</p>
                                     <p class="mb-auto">Tarifa {{ chat.tutoria.tutor.tarifa }}</p>
+                                    <p class="mb-auto">Fecha: {{ chat.tutoria.fecha|date:'N d G:i' }}</p>
+                                    <p class="mb-auto">Lugar: {{ chat.tutoria.lugar }}</p>
                                 </div>
                                 <p class="font-italic mb-0 text-small">{{ chat.ultimo }} cambiar a ultimo mensaje.</p>
                             </div>
@@ -102,6 +104,7 @@ input::placeholder {
                 <p class="h5 mb-0 py-1 ml-3">{{ chatActivo.nombre }}</p>
             </div>
             <div style="text-align: right;">
+                <a href="{% url 'agendar' tutoriaActiva.id %}" class="btn btn-success btn-sm ml-3" type="button">¡Agenda tu Tutoria!</a>
                 {% if tutoriaActiva.tutor == user and tutoriaActiva.estado == 'Solicitada' %}
                 <a href="{% url 'aceptarTutoria' tutoriaActiva.id %}" class="btn btn-success btn-sm ml-3" type="button">Aceptar Tutoria</a>
                 <a href="{% url 'rechazarTutoria' tutoriaActiva.id %}" class="btn btn-danger btn-sm ml-3" type="button">Rechazar Tutoria</a>

@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from users.models import Usuario
 from .models import Tutoria
 from mensajes.models import Mensaje
+from .forms import Calendario
 
 @login_required(login_url='users:login')
 def tutorias(request):
@@ -16,7 +17,7 @@ def tutorias(request):
     if chats:
         chat = chats[0]
         chatActivo = chat['Usuario']
-        mensajes = Mensaje.objects.filter(usuario=request.user, receptor=chat['Usuario'])
+        mensajes = Mensaje.objects.filter(usuario=request.user, receptor=chat['Usuario'], tutoria__id=chat['tutoria'].id)
         mensajes.update(leido=True)
         tutoriaActiva = chat['tutoria']
         for chat in chats:
@@ -58,6 +59,24 @@ def solicitarTutoria(request, emailtutor):
 
         tutoria = Tutoria.objects.create(nombre=request.POST["Nombre"],tema=request.POST["Tema"],tutor=tutor, usuario=estudiante)
         return redirect('nuevaConversacion', emailtutor, tutoria.id)
+
+@login_required(login_url='users:login')
+def agendar(request, tutoria_id):
+    """Vista para agendar la tutoria en google calendar"""
+
+    tutoria = get_object_or_404(Tutoria, id = tutoria_id)
+    if request.method == "POST":
+        form = Calendario(request.POST, instance=tutoria)#, request.FILES, instance=tutoria)
+        if form.is_valid():
+            form.save()
+            tutoria.addCalendario()
+            return redirect('tutorias')
+    else:
+        form = Calendario(instance=tutoria)
+        return render(request, 'detalleTutoria.html', {
+            'form': form,
+            'tutoria': tutoria,
+        })
 
 @login_required(login_url='users:login')
 def aceptar_tutoria(request, tutoria_id):
