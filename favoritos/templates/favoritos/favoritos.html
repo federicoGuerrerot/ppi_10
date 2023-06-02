@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+{% block title %}Mis Tutores Favoritos{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Mis Tutores Favoritos</h1>
+    <hr>
+    {% if favoritos %}
+        <ul>
+            {% for tutor in favoritos %}
+                <li>
+                    <h2>{{ tutor.nombre }}</h2>
+                    <p>{{ tutor.descripcion }}</p>
+                    <a href="{% url 'tutor_detalle' tutor.id %}">Ver Detalles</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aún no tienes tutores favoritos.</p>
+    {% endif %}
+</div>
+{% endblock %}

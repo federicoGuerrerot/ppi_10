@@ -148,7 +148,8 @@
             <a href="/">Inicio</a>
             {% if user.is_authenticated %}
             <a href="{% url 'tutorias' %}">Mis tutorías</a>
-            <a href="{% url 'mi_perfil' %}">Mi perfil</a> <!-- Añadir enlace a la página de perfil del usuario -->
+            <a href="{% url 'mi_perfil' %}">Mi perfil</a> 
+            <a href="/favoritos/">Mis favoritos</a> 
             {% endif %}
             <a href="/contacto/">Contacto</a>
         </div>

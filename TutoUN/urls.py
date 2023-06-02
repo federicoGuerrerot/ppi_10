@@ -9,8 +9,11 @@ urlpatterns = [
     path('', include('core.urls')),
     path('users/', include('users.urls')),
     path('', include('tutorias.urls')),
+    path('', include('favoritos.urls')),
     path('', include('perfiles.urls')),
     path('', include('mensajes.urls')),
+    path('accounts/', include('allauth.urls')),
+
     
     # Reset password
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name='users/password_reset.html'), name='password_reset'),
