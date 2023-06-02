@@ -1,5 +1,5 @@
 # [TutoUN](http://fguerrerot.pythonanywhere.com/)
-*Ultima actualización 14-04-2023 con las mejoras del informe 5*
+*Ultima actualización 02-06-2023 con las mejoras del informe 6*
 
 Plataforma enfocada a la búsqueda de tutores dentro de la comunidad de la universidad nacional de Colombia
 sede Medellin.

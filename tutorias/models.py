@@ -57,7 +57,6 @@ class Tutoria(models.Model):
             with open('token.json', 'w') as token:
                 token.write(creds.to_json())
 
-        #start_time = datetime.datetime.strptime(self.fecha,"%Y/%m/%d %H:%M")
         start_time = self.fecha
         end_time= start_time + timedelta(minutes=120)
         
