@@ -5,11 +5,16 @@ from .models import Tutoria
 from mensajes.models import Mensaje
 from .forms import Calendario
 
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+import os
+
 @login_required(login_url='users:login')
 def tutorias(request):
     """Vista de las tutorias del usuario (representadas por mensajes), muestra las tutorias que ha solicitado, tiene activas
     y en el caso de ser tutor, las que ha aceptado y las que ha rechazado"""
-
+        
     chats = Mensaje.getMensajes(usuario=request.user)
     chatActivo = None
     mensajes = None
@@ -69,7 +74,8 @@ def agendar(request, tutoria_id):
         form = Calendario(request.POST, instance=tutoria)#, request.FILES, instance=tutoria)
         if form.is_valid():
             form.save()
-            tutoria.addCalendario()
+            creds = Credentials(**request.session['credentials'])
+            tutoria.addCalendario(creds)
             return redirect('tutorias')
     else:
         form = Calendario(instance=tutoria)
@@ -104,4 +110,57 @@ def eliminar_tutoria(request, tutoria_id):
     tutoria.delete()
     return redirect('tutorias')
     
+    # Pasos API
+    # 1. Verificar si existen las credenciales
+    # 2. Si no existen, crearlas y guardarlas en la sesion
+    # Para crear las credenciales se redirecciona a la vista de autorizacion de Google "authorization_url"
+    # 
+    # 3. Si existen, cargarlas y ejecutar la funcion addCalendario() de la clase Tutoria
+    # 4. Redireccionar a la vista de tutorias
 
+@login_required(login_url='users:login')
+def test_api(request, tutoria_id):
+    """Realiza la verificacion de credenciales para la API de Google Calendar, si no existen las credenciales, procede a crearlas.
+    Si existen las credenciales, las carga y ejecuta la funcion addCalendario() de la clase Tutoria y redirecciona a la vista de tutorias"""
+
+    SCOPES = ['https://www.googleapis.com/auth/calendar']
+    if 'credentials' not in request.session:
+
+        flow = InstalledAppFlow.from_client_secrets_file('client_secret.json', SCOPES)
+        flow.redirect_uri = 'http://127.0.0.1:8000/test_api2'
+
+        authorization_url, state = flow.authorization_url(
+            # Enable offline access so that you can refresh an access token without
+            # re-prompting the user for permission. Recommended for web server apps.
+            access_type='offline',
+            # Enable incremental authorization. Recommended as a best practice.
+            include_granted_scopes='true')
+
+        request.session['state'] = state
+
+        return redirect(authorization_url)
+
+    return redirect('agendar', tutoria_id)
+
+def test_api2(request):
+    """Vista para obtener las credenciales de la API de Google Calendar"""
+
+    SCOPES = ['https://www.googleapis.com/auth/calendar']    
+    
+    flow = InstalledAppFlow.from_client_secrets_file('client_secret.json', SCOPES, state=request.session['state'])
+    flow.redirect_uri = 'http://127.0.0.1:8000/test_api2'
+
+    # Verifica las credenciales
+    flow.fetch_token(authorization_response=request.build_absolute_uri(
+                ).replace('http', 'https'))
+    
+    creds = flow.credentials
+    # refresca las credenciales por si estas se han actualizado
+    request.session['credentials'] = {'token': creds.token,
+                                    'refresh_token': creds.refresh_token,
+                                    'token_uri': creds.token_uri,
+                                    'client_id': creds.client_id,
+                                    'client_secret': creds.client_secret,
+                                    'scopes': creds.scopes}
+    
+    return redirect('tutorias')

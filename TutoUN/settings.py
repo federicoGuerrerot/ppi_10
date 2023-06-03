@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ebjp=ge1e^)qk9$3w0@nykqm^^h0iexf^al5(220mlm*cn_d2t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['fguerrerot.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -73,6 +73,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+#os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 ROOT_URLCONF = 'TutoUN.urls'
 

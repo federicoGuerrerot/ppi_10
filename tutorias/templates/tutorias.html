@@ -104,7 +104,7 @@ input::placeholder {
                 <p class="h5 mb-0 py-1 ml-3">{{ chatActivo.nombre }}</p>
             </div>
             <div style="text-align: right;">
-                <a href="{% url 'agendar' tutoriaActiva.id %}" class="btn btn-success btn-sm ml-3" type="button">¡Agenda tu Tutoria!</a>
+                <a href="{% url 'test_api' tutoriaActiva.id %}" class="btn btn-success btn-sm ml-3" type="button">¡Agenda tu Tutoria!</a>
                 {% if tutoriaActiva.tutor == user and tutoriaActiva.estado == 'Solicitada' %}
                 <a href="{% url 'aceptarTutoria' tutoriaActiva.id %}" class="btn btn-success btn-sm ml-3" type="button">Aceptar Tutoria</a>
                 <a href="{% url 'rechazarTutoria' tutoriaActiva.id %}" class="btn btn-danger btn-sm ml-3" type="button">Rechazar Tutoria</a>
