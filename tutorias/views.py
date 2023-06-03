@@ -114,8 +114,7 @@ def eliminar_tutoria(request, tutoria_id):
     # 1. Verificar si existen las credenciales
     # 2. Si no existen, crearlas y guardarlas en la sesion
     # Para crear las credenciales se redirecciona a la vista de autorizacion de Google "authorization_url"
-    # 
-    # 3. Si existen, cargarlas y ejecutar la funcion addCalendario() de la clase Tutoria
+    # 3. Si existen, se redirecciona a agendar y se ejecuta la funcion addCalendario() de la clase Tutoria
     # 4. Redireccionar a la vista de tutorias
 
 @login_required(login_url='users:login')
