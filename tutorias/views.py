@@ -8,7 +8,32 @@ from .forms import Calendario
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
-import os
+
+@login_required(login_url='users:login')
+def tuto(request):
+    """Vista de las tutorias del usuario (representadas por mensajes), muestra las tutorias que ha solicitado, tiene activas
+    y en el caso de ser tutor, las que ha aceptado y las que ha rechazado"""
+        
+    chats = Mensaje.getMensajes(usuario=request.user)
+    chatActivo = None
+    mensajes = None
+	
+    if chats:
+        chat = chats[0]
+        chatActivo = chat['Usuario']
+        mensajes = Mensaje.objects.filter(usuario=request.user, receptor=chat['Usuario'], tutoria__id=chat['tutoria'].id)
+        mensajes.update(leido=True)
+        tutoriaActiva = chat['tutoria']
+        for chat in chats:
+            if chat['Usuario'] == chatActivo:
+                chat['sinleer'] = 0
+                
+    return render(request, 'tuto.html', {
+        'mensajes': mensajes,
+		'chats': chats,
+		'chatActivo': chatActivo,
+        'tutoriaActiva': tutoriaActiva,
+    })
 
 @login_required(login_url='users:login')
 def tutorias(request):
