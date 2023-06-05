@@ -7,7 +7,6 @@ from .forms import Calendario
 
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
-from googleapiclient.discovery import build
 
 @login_required(login_url='users:login')
 def tuto(request):
@@ -175,8 +174,7 @@ def test_api2(request):
     flow.redirect_uri = 'http://127.0.0.1:8000/test_api2'
 
     # Verifica las credenciales
-    flow.fetch_token(authorization_response=request.build_absolute_uri(
-                ).replace('http', 'https'))
+    flow.fetch_token(authorization_response=request.build_absolute_uri().replace('http', 'https'))
     
     creds = flow.credentials
     # refresca las credenciales por si estas se han actualizado

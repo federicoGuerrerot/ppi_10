@@ -54,7 +54,11 @@ INSTALLED_APPS = [
 ]
 
 AUTHENTICATION_BACKENDS = (
+    # Recordar que en la funcion login se especifica el metodo de autenticacion a usar
+
+    # metodo de autenticacion de django por defecto
     "django.contrib.auth.backends.ModelBackend",
+    # metodo de autenticacion de allauth, para poder usar el login con google
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
@@ -73,8 +77,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-#os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 ROOT_URLCONF = 'TutoUN.urls'
 
@@ -132,7 +134,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Bogota'
 
 USE_I18N = True
 

@@ -31,7 +31,7 @@ def user_signup(request):
             user = form.save(commit=False)
             user.save()
             form.save_m2m() # Para guardar los campos ManyToMany (tags:Temas)
-            login(request, user)
+            login(request, user, backend="django.contrib.auth.backends.ModelBackend")
 
             return redirect('../..')
             #Prueba de envió de datos
