@@ -12,6 +12,13 @@ TutoUN - Página principal
 
 {% block content %}
 <!-- Contenido HTML -->
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 <div style="padding: 15px;">
     <div class="slogan">TutoUN el lugar que te conecta con el aprendizaje</div>
     <img class="degree-icon" src="../../../static/grado.png" alt="Grado icon">

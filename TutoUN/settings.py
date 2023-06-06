@@ -28,6 +28,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Para despliegue
+#DEBUG = False
+
+#ALLOWED_HOSTS = ['https://fguerrerot.pythonanywhere.com/']
 
 # Application definition
 

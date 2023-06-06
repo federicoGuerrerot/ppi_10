@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from users.models import Usuario
 from .models import Tutoria
@@ -38,27 +39,31 @@ def tuto(request):
 def tutorias(request):
     """Vista de las tutorias del usuario (representadas por mensajes), muestra las tutorias que ha solicitado, tiene activas
     y en el caso de ser tutor, las que ha aceptado y las que ha rechazado"""
-        
+
     chats = Mensaje.getMensajes(usuario=request.user)
-    chatActivo = None
-    mensajes = None
-	
     if chats:
-        chat = chats[0]
-        chatActivo = chat['Usuario']
-        mensajes = Mensaje.objects.filter(usuario=request.user, receptor=chat['Usuario'], tutoria__id=chat['tutoria'].id)
-        mensajes.update(leido=True)
-        tutoriaActiva = chat['tutoria']
-        for chat in chats:
-            if chat['Usuario'] == chatActivo:
-                chat['sinleer'] = 0
-                
-    return render(request, 'tutorias.html', {
-        'mensajes': mensajes,
-		'chats': chats,
-		'chatActivo': chatActivo,
-        'tutoriaActiva': tutoriaActiva,
-    })
+        chatActivo = None
+        mensajes = None
+        
+        if chats:
+            chat = chats[0]
+            chatActivo = chat['Usuario']
+            mensajes = Mensaje.objects.filter(usuario=request.user, receptor=chat['Usuario'], tutoria__id=chat['tutoria'].id)
+            mensajes.update(leido=True)
+            tutoriaActiva = chat['tutoria']
+            for chat in chats:
+                if chat['Usuario'] == chatActivo:
+                    chat['sinleer'] = 0
+                    
+        return render(request, 'tutorias.html', {
+            'mensajes': mensajes,
+            'chats': chats,
+            'chatActivo': chatActivo,
+            'tutoriaActiva': tutoriaActiva,
+        })
+    
+    messages.info(request, "No tienes tutorias")
+    return redirect('home')
 
 @login_required(login_url='users:login')
 def detalle_tutoria(request, tutoria_id):
@@ -81,11 +86,6 @@ def solicitarTutoria(request, emailtutor):
         })
     else:
         estudiante = request.user
-        #if form.is_valid():
-            #new_tutoria = form.save(commit=False)
-            #form.save_m2m()
-        #### ejemplo para seguir con usuario, para tutoria es solo: new_tutoria = form.save().
-
         tutoria = Tutoria.objects.create(nombre=request.POST["Nombre"],tema=request.POST["Tema"],tutor=tutor, usuario=estudiante)
         return redirect('nuevaConversacion', emailtutor, tutoria.id)
 
@@ -95,7 +95,7 @@ def agendar(request, tutoria_id):
 
     tutoria = get_object_or_404(Tutoria, id = tutoria_id)
     if request.method == "POST":
-        form = Calendario(request.POST, instance=tutoria)#, request.FILES, instance=tutoria)
+        form = Calendario(request.POST, instance=tutoria)
         if form.is_valid():
             form.save()
             creds = Credentials(**request.session['credentials'])
@@ -149,6 +149,10 @@ def test_api(request, tutoria_id):
     SCOPES = ['https://www.googleapis.com/auth/calendar']
     if 'credentials' not in request.session:
 
+        # para despliegue
+        #flow = InstalledAppFlow.from_client_secrets_file('/home/fguerrerot/ppi_10/client_secret.json', SCOPES)
+        #flow.redirect_uri = 'https://fguerrerot.pythonanywhere.com/test_api2'
+        
         flow = InstalledAppFlow.from_client_secrets_file('client_secret.json', SCOPES)
         flow.redirect_uri = 'http://127.0.0.1:8000/test_api2'
 
@@ -170,6 +174,10 @@ def test_api2(request):
 
     SCOPES = ['https://www.googleapis.com/auth/calendar']    
     
+    # para despliegue
+    #flow = InstalledAppFlow.from_client_secrets_file('/home/fguerrerot/ppi_10/client_secret.json', SCOPES, state=request.session['state'])
+    #flow.redirect_uri = 'https://fguerrerot.pythonanywhere.com/test_api2'
+
     flow = InstalledAppFlow.from_client_secrets_file('client_secret.json', SCOPES, state=request.session['state'])
     flow.redirect_uri = 'http://127.0.0.1:8000/test_api2'
 
