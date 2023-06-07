@@ -73,17 +73,21 @@ TutoUN - Tutorias
         </div>
         <div id="app" class="px-4 py-5 chat-box bg-white">
             <!-- Mensajes-->
-            {% for mensaje in mensajes %}
+            <input type="hidden" name="tutoriavue" value="{{ tutoriaActiva.id }}">
+            <input type="hidden" name="Usuariovue" value="{{ Usuario.id }}">
+            <p>{$ tutoria $}</p>
+            <p v-for="mensaje in mensajes">{$ mensaje.cuerpo $}</p>
+            <!-- {$ for mensaje in mensajes $}
             <div class="media w-50 mb-3">
                 <div class="media-body">
                     <div class="bg-{% if mensaje.emisor == user %}primary{% else %}secondary{% endif %} rounded py-2 px-3 mb-2 ">
-                        <p class="text-small mb-0 text-white">{{ mensaje.cuerpo }}</p>
+                        <p class="text-small mb-0 text-white">{$ mensaje.cuerpo $}</p>
                     </div>
-                    <p class="small text-muted">{{ mensaje.fecha|date:'N d G:i' }}</p>
+                    <p class="small text-muted">{$ mensaje.fecha|date:'N d G:i' $}</p>
                 </div>
             </div>
-            {% endfor %}
-            <p>{$ message $}</p>
+            {$ endfor $}
+            <p>{$ message $}</p> -->
         </div>
 
         <!-- Typing area -->

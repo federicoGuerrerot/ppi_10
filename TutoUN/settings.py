@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'core',
     'tutorias',
     'mensajes',
+    'comentarios',
     'perfiles',
     'taggit',
     'favoritos',

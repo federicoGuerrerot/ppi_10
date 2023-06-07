@@ -12,6 +12,7 @@ urlpatterns = [
     path('', include('favoritos.urls')),
     path('', include('perfiles.urls')),
     path('', include('mensajes.urls')),
+    path('', include('comentarios.urls')),
     path('accounts/', include('allauth.urls')),
 
     
