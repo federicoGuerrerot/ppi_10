@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+TutoUN - Página principal
+{% endblock %}
+
+{% load static %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="/static/css/home.css">
+{% endblock %}
+
+{% block content %}
+
+<section>
+    <form method="post" enctype="multipart/form-data" class="col g-3">
+        {% csrf_token %}
+        <div class="col-md-9">
+            <h3>{{ comentario.titular.nombre }}</h3>
+        </div>
+        <div class="col-md-9">
+            <label for="{{ form.calificacion.id_for_label }}" class="form-label">Calificacion</label>
+            <input type="number" min="1" max="5" class="form-control" id="{{ form.calificacion.id_for_label }}" name="{{ form.calificacion.html_name }}" value="{{ form.nombre.value|default:'' }}">
+        </div>
+        <div class="col">
+            <label for="{{ form.comentario.id_for_label }}" class="form-label">Comentario</label>
+            <textarea type="text" class="form-control" id="{{ form.comentario.id_for_label }}" name="{{ form.comentario.html_name }}" value="{{ form.nombre.value|default:'' }}"></textarea>
+        </div>
+        <div class="col-12 mt-3 d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>
+</section>
+
+{% endblock %}

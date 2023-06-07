@@ -10,26 +10,26 @@ from django.conf import settings
 class Comentario(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     titular = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="titular")
-    emisor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="emisor")
+    fuente = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="fuente")
     estado = models.CharField(max_length=10, default='Creado') 
     calificacion = models.IntegerField()
     comentario = models.TextField(null=True)
 
-    def crearComentario(emisor, titular):
+    def crearComentario(fuente, titular):
         """Crea los dos comentarios de la tutoria"""
        
-        # Creamos el comentario del emisor
+        # Creamos el comentario del fuente
         comentarioEmisor = Comentario(
             titular=titular,
-            emisor=emisor,
+            fuente=fuente,
             calificacion=0,
             comentario=None)
         comentarioEmisor.save()
 
         # Creamos el comentario del titular
         comentarioTitular = Comentario(
-            titular=emisor,
-            emisor=titular,
+            titular=fuente,
+            fuente=titular,
             calificacion=0,
             comentario=None)
         comentarioTitular.save()

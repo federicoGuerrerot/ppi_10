@@ -116,12 +116,12 @@ section {
 .tutor-card {
     cursor: pointer;
     transition: background-color 0.3s, border-color 0.3s;
-    border-color: #1877F2; /* Nuevo color de borde azul */
+    border-color: #9ec4f5; /* Nuevo color de borde azul 1877f2*/
     border-width: 2px; /* Ajusta el grosor del borde */
 }
 
 .tutor-card:hover {
-    background-color: #1877f2;
+    background-color: #9ec4f5;
     color: white;
 }
 
@@ -132,7 +132,7 @@ section {
 }
 
 .tutor-card:hover .badge-info {
-    color: #1877f2;
+    color: #9ec4f5;
     background-color: white;
 }
 

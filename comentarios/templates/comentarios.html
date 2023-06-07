@@ -1,0 +1,66 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+TutoUN - Página principal
+{% endblock %}
+
+{% load static %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="/static/css/home.css">
+{% endblock %}
+
+{% block content %}
+<!-- Contenido HTML -->
+{% if mensaje %}
+<h2 class="px-3">{{ mensaje }}</h2>
+{% endif %}
+
+<div>
+    <h2 class="px-3">Tu calificación</h2>
+    <p class="px-3">{{ request.user.calificacion }}</p>
+</div>
+
+{% if pendientes %}
+<div>
+    <h2 class="px-3">Deja tus comentarios</h2>
+</div>
+<div class="row mb-2 px-3 posts">
+    {% for pendiente in pendientes %}
+    <div class="col-md-6">
+        <div class="cards">
+            <div class="row no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250 tutor-card">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <h3 class="my-1">{{pendiente.titular.nombre}}</h3>
+                    <p class="mb-auto text-muted">Descripción: {{pendiente.titular.descripcion}}</p>
+                    <a href="{% url 'calificar' pendiente.id %}" type="button" class="btn btn-primary btn-sm my-3">Calificar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if comentarios %}
+<div>
+    <h2 class="px-3">Tus comentarios</h2>
+</div>
+<div class="row mb-2 px-3 posts">
+    {% for comentario in comentarios %}
+    <div class="col-md-6">
+        <div class="cards">
+            <div class="row no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <h3 class="my-1">{{comentario.fuente.nombre}}</h3>
+                    <p>{{ cometario.calificacion }}</p>
+                    <p class="mb-auto text-muted">{{comentario.comentario}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% endblock %}

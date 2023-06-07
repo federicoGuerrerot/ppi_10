@@ -11,8 +11,8 @@ def listarcomentarios(request):
     """Vista de los comentarios del usuario"""
 
     # Recuperamos los comentarios del usuario
-    comentarios = Comentario.filter(titular=request.user, estado='Publicado')
-    pendientes = Comentario.filter(titular=request.user, estado='Creado')
+    comentarios = Comentario.objects.filter(titular=request.user, estado='Publicado')
+    pendientes = Comentario.objects.filter(fuente=request.user, estado='Creado')
 
     # Mensaje de "error"
     mensaje = None
@@ -31,7 +31,7 @@ def calificar(request, comentario_id):
 
     # Recuperamos el comentario
     comentario = Comentario.objects.get(id=comentario_id)
-    
+
     if request.method == 'POST':
         # Recuperamos info del formulario
         form = ActualizarComentario(request.POST, instance=comentario)
