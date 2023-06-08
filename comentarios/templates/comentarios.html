@@ -1,30 +1,38 @@
+<!-- Heredar caracteristicas de plantilla base -->
 {% extends 'core/base.html' %}
 
+<!-- Definir titulo de la pagina -->
 {% block title %}
 TutoUN - Página principal
 {% endblock %}
 
+<!-- Cargar archivos estaticos, incluye js y css -->
 {% load static %}
 
 {% block head_extra %}
 <link rel="stylesheet" href="/static/css/home.css">
 {% endblock %}
 
+<!-- Agregar contenido propio de la vista -->
 {% block content %}
-<!-- Contenido HTML -->
+
+<!-- Mensaje en caso de que no existan comentarios -->
 {% if mensaje %}
 <h2 class="px-3">{{ mensaje }}</h2>
 {% endif %}
 
+<!-- Calificacion del usuario -->
 <div>
     <h2 class="px-3">Tu calificación</h2>
     <p class="px-3">{{ request.user.calificacion }}</p>
 </div>
 
+<!-- Comentarios pendientes por realizar de tutorias terminadas -->
 {% if pendientes %}
 <div>
     <h2 class="px-3">Deja tus comentarios</h2>
 </div>
+
 <div class="row mb-2 px-3 posts">
     {% for pendiente in pendientes %}
     <div class="col-md-6">
@@ -42,6 +50,7 @@ TutoUN - Página principal
 </div>
 {% endif %}
 
+<!-- Comentarios dirigidos al usuario -->
 {% if comentarios %}
 <div>
     <h2 class="px-3">Tus comentarios</h2>

@@ -1,15 +1,23 @@
+<!-- Plantilla base del proyecto -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Formato de codificacion -->
     <meta charset="utf-8">
+
+    <!-- Caracteristicas basicas de proporcion con respecto al dispositivo -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Importar recursos css -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/css/tagsinput.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-iBBgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjptBC+D+h7lK0l8WG2Y" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
+    <!-- importar logo principal junto con el titulo a mostrar en la pestaña -->
     <link rel="icon" href="../../../static/grado.png">
     <title>{% block title %}TutoUN{% endblock %}</title>
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -124,50 +132,60 @@
             display: block;
         }
     </style>
-    
-{% load static %}
 
+<!-- Cargar archivos estaticos, incluyendo js y css -->
+{% load static %}
 
 
 {% block head_extra %}{% endblock %}
 </head>
+
+<!-- Cabecera del documento, dentro esta la barra de navegacion -->
 <body>
 <div class="navbar">
-<div class="container">
-    <a class="logo" href="/">Tuto<span>UN</span><img src="../../../static/grado.png" alt="Grado Icon" style="height: 24px; margin-right: 5px;"></a>
-</div>
+    <div class="container">
+        <a class="logo" href="/">Tuto<span>UN</span><img src="../../../static/grado.png" alt="Grado Icon" style="height: 24px; margin-right: 5px;"></a>
+    </div>
 
-<div class="buttons">
-    {% if not user.is_authenticated %}
-    <a href="/users/login/" class="button">Log In</a>
-    <a href="/users/signup/" class="button">Sign Up</a>
-    {% endif %}
-    {% if user.is_authenticated %}
-    <a href="/users/logout/" class="button">Log Out</a>
-    {% endif %}
-    <div class="dropdown">
-        <button class="dropdown-toggle">Menú</button>
-        <div class="dropdown-menu">
-            <a href="/">Inicio</a>
-            {% if user.is_authenticated %}
-            <a href="{% url 'tutorias' %}">Mis tutorías</a>
-            <a href="{% url 'mi_perfil' %}">Mi perfil</a> 
-            <a href="/favoritos/">Mis favoritos</a> 
-            <a href="{% url 'comentarios' %}">Comentarios</a>
-            {% endif %}
-            <a href="/contacto/">Contacto</a>
+    <div class="buttons">
+        <!-- Botones para autenticarse dentro del aplicativo -->
+        {% if not user.is_authenticated %}
+        <a href="/users/login/" class="button">Log In</a>
+        <a href="/users/signup/" class="button">Sign Up</a>
+        {% endif %}
+
+        <!-- Opciones para usuarios registrados -->
+        {% if user.is_authenticated %}
+        <a href="/users/logout/" class="button">Log Out</a>
+        {% endif %}
+        <div class="dropdown">
+            <button class="dropdown-toggle">Menú</button>
+            <div class="dropdown-menu">
+                <a href="/">Inicio</a>
+
+                <!-- Funcionalidades propias del aplicativo -->
+                {% if user.is_authenticated %}
+                <a href="{% url 'tutorias' %}">Mis tutorías</a>
+                <a href="{% url 'mi_perfil' %}">Mi perfil</a> 
+                <a href="/favoritos/">Mis favoritos</a> 
+                <a href="{% url 'comentarios' %}">Comentarios</a>
+                {% endif %}
+
+                <!-- Vista perfil de los desarrolladores -->
+                <a href="/contacto/">Contacto</a>
+            </div>
         </div>
     </div>
 </div>
-</div>
-    </div>
-</div>
-</div>
 
+<!-- Cuerpo del documento, dentro se encuentra el block content -->
 <main>
+
 {% block content %}
 <!-- El contenido de esta sección será reemplazado por las plantillas que extiendan 'base.html' -->
 {% endblock %}
+
+<!-- Importar contenido JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -175,17 +193,26 @@
 <script type="text/javascript" src="{% static 'vue/vue.js' %}"></script>
 <script type="text/javascript" src="{% static 'vue/axios.js' %}"></script>
 <script type="text/javascript" src="{% static 'vue/apps/tuto.js' %}"></script>
+
+<!-- Script para evitar que se envíe el formulario al presionar enter -->
 <script>
-$("#post-form").submit(function(e){
-    e.preventDefault();
-});</script>
+    $("#post-form").submit(function(e){
+        e.preventDefault();
+    });
+</script>
+
 </main>
 
+<!-- Pie de página -->
 <footer>
 &copy; TutoUN. Todos los derechos reservados.
-<div><a href="https://www.flaticon.es/iconos-gratis/facebook" title="facebook iconos">Facebook iconos creados por Pixel perfect - Flaticon</a></div>
+    <div>
+        <a href="https://www.flaticon.es/iconos-gratis/facebook" title="facebook iconos">Facebook iconos creados por Pixel perfect - Flaticon</a>
+    </div>
 </footer>
+
 {% block extra_js %}
 {% endblock %}
 </body>
+
 </html>

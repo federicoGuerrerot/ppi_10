@@ -1,18 +1,25 @@
+<!-- Heredar de la plantilla base -->
 {% extends 'core/base.html' %}
 
+<!-- Definir titulo de la pagina -->
 {% block title %}
 TutoUN - Contacto
 {% endblock %}
 
+<!-- Cargar archivos estaticos -->
 {% load static %}
+
 
 {% block head_extra %}
 <link rel="stylesheet" href="/static/css/home.css">
 {% endblock %}
 
+<!-- Contenido propio de la vista -->
 {% block content %}
 <div style="padding: 15px;">
     <div class="row mb-2 posts">
+
+        <!-- Tarjeta desarrollador Federico guerrero -->
         <div class="col-md-6">
             <div class="cards">
                 <a href="https://github.com/federicoGuerrerot">
@@ -30,9 +37,11 @@ TutoUN - Contacto
                 </a>
             </div>
         </div>
+
+        <!-- Tarjeta desarrollador Juan Jose Ospina -->
         <div class="col-md-6">
             <div class="cards">
-                <a href="https://github.com/federicoGuerrerot">
+                <a href="https://github.com/JuanOspina05">
                     <div class="row no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250 tutor-card" id="desarrollador-card-1" href="https://github.com/JuanOspina05">
                         <div class="col p-4 d-flex flex-column position-static">
                             <h3 class="my-1"> Juan David Ospina Erazo </h3>
@@ -47,6 +56,7 @@ TutoUN - Contacto
                 </a>
             </div>
         </div>
+        
     </div>
 </div>
 {% endblock %}

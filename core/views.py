@@ -9,6 +9,7 @@ def home(request):
     """
     # Recupera la lista de tutores
     tutores = Usuario.listarTutores(request)
+    
     # Lista los tags mas populares (5)
     populares = Usuario.tags.most_common()[:5]
 

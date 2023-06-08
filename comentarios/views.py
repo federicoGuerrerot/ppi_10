@@ -33,14 +33,17 @@ def calificar(request, comentario_id):
     comentario = Comentario.objects.get(id=comentario_id)
 
     if request.method == 'POST':
+
         # Recuperamos info del formulario
         form = ActualizarComentario(request.POST, instance=comentario)
+        
         # Guardamos los cambios y actualizamos la calificacion
         if form.is_valid():
             form.save()
             comentario.estado = 'Publicado'
             comentario.save()
             comentario.actualizarCalificacion()
+        
             return redirect('comentarios')
     else:
         # creamos el formulario y lo mostramos

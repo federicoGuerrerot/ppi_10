@@ -1,17 +1,22 @@
+<!-- Heredar del documento base -->
 {% extends 'core/base.html' %}
 
+<!-- Definir el título de la página -->
 {% block title %}
 TutoUN - Página principal
 {% endblock %}
 
+<!-- Cargar contenido estatico -->
 {% load static %}
 
 {% block head_extra %}
 <link rel="stylesheet" href="/static/css/home.css">
 {% endblock %}
 
+<!-- Contenido propio de la base -->
 {% block content %}
-<!-- Contenido HTML -->
+
+<!-- Mensajes de error -->
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
@@ -19,10 +24,13 @@ TutoUN - Página principal
     {% endfor %}
 </ul>
 {% endif %}
+
 <div style="padding: 15px;">
+    <!-- Slogan -->
     <div class="slogan">TutoUN el lugar que te conecta con el aprendizaje</div>
     <img class="degree-icon" src="../../../static/grado.png" alt="Grado icon">
-    <!-- ... -->
+    
+    <!-- Seccion de busqueda -->
     <div class="search-section">
         <form class="search-form" action="/buscarbarra/" method="GET">
             <label for="search-input">Buscar tutores por temática:</label>
@@ -31,12 +39,16 @@ TutoUN - Página principal
             <button type="submit">Buscar</button>
         </form>
     </div>
+
+    <!-- Tags comunes -->
     <div class="common-tags">
         <p>Temas comunes:</p>
         {% for tag in populares %}
         <a href="{% url 'buscar' tag.slug %}" class="badge badge-success">{{tag}}</a>
         {% endfor %}
     </div>
+
+    <!-- Seccion de tutores populares-->
     <div class="row mb-2 posts">
         {% for tutor in tutores %}
         <div class="col-md-6">
@@ -58,9 +70,10 @@ TutoUN - Página principal
         </div>
         {% endfor %}
     </div>
+
 </div>
 
-
+<!-- Scrip para agregar url dinamicamente a las etiquetas y tarjetas -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var tutorCards = document.querySelectorAll('.tutor-card');
@@ -73,4 +86,5 @@ TutoUN - Página principal
         });
     });
 </script>
+
 {% endblock %}
