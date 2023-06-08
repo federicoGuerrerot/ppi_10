@@ -53,13 +53,19 @@ def tutorias(request):
 def solicitarTutoria(request, emailtutor):
     """Vista para solicitar una nueva tutoria"""
 
+    # Recuperar el tutor y verifica que exista
     tutor = get_object_or_404(Usuario, email = emailtutor)
+    
+    # Si el metodo es GET, se muestra el formulario
     if request.method == 'GET':
         return render(request, 'solicitarTutoria.html', {
             'tutor': tutor,
         })
     else:
+        # Si el metodo es POST, se crea la tutoria y se redirecciona a la vista de tutorias
         estudiante = request.user
+
+        # Se hizo sin usar el form para probrar el metodo
         tutoria = Tutoria.objects.create(nombre=request.POST["Nombre"],tema=request.POST["Tema"],tutor=tutor, usuario=estudiante)
         return redirect('nuevaConversacion', emailtutor, tutoria.id)
 
@@ -67,15 +73,23 @@ def solicitarTutoria(request, emailtutor):
 def agendar(request, tutoria_id):
     """Vista para agendar la tutoria en google calendar"""
 
+
+    # Recuperar la tutoria y verifica que exista
     tutoria = get_object_or_404(Tutoria, id = tutoria_id)
+    
+    # Si el metodo es POST, se crea el formulario y se guarda la tutoria
     if request.method == "POST":
         form = Calendario(request.POST, instance=tutoria)
         if form.is_valid():
+            # Guarda info del form
             form.save()
+            # Guarda las credenciales del usuario
             creds = Credentials(**request.session['credentials'])
+            # Llamar metodo para agregar la tutoria al calendario
             tutoria.addCalendario(creds)
             return redirect('tutorias')
     else:
+        # Si el metodo es GET, se muestra el formulario
         form = Calendario(instance=tutoria)
         return render(request, 'agendarTutoria.html', {
             'form': form,
@@ -86,8 +100,11 @@ def agendar(request, tutoria_id):
 def aceptar_tutoria(request, tutoria_id):
     """Vista para aceptar una tutoria"""
 
+    # Recuperar la tutoria y verifica que exista
     tutoria = get_object_or_404(Tutoria, id = tutoria_id)
+    # Cambiar el estado de la tutoria a Aceptada
     tutoria.estado='Aceptada'
+    # Guardar la tutoria
     tutoria.save()
     return redirect('tutorias')
 
@@ -95,8 +112,11 @@ def aceptar_tutoria(request, tutoria_id):
 def rechazar_tutoria(request, tutoria_id):
     """Vista para rechazar una tutoria"""
 
+    # Recuperar la tutoria y verifica que exista
     tutoria = get_object_or_404(Tutoria, id = tutoria_id)
+    # Cambiar el estado de la tutoria a Rechazada
     tutoria.estado='Rechazada'
+    # Guardar la tutoria
     tutoria.save()
     return redirect('tutorias')
 
@@ -196,7 +216,9 @@ def test_api2(request):
     
     return redirect('tutorias')
 
+#
 # Vistas de prueba Vue (reactividad)
+#
 
 @login_required(login_url='users:login')
 def tuto(request):

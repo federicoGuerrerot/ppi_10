@@ -8,8 +8,6 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 # Create your models here.
-
-
 class Tutoria(models.Model):
     """Modelo para las tutorias que representa su estructura en la base de datos"""
 
@@ -23,19 +21,19 @@ class Tutoria(models.Model):
     usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="usuario_tutorias")
     tutor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="tutor_tutorias")
 
-    def __str__(self):
-        """Devuelve el nombre de la tutoria junto a su tema"""
-        return "Tutoria: " + self.nombre + ". (" + self.tema + ")"
-    
     def addCalendario(self,creds):
         """Agrega la tutoria al calendario"""
 
+        # recuperar la fecha y hora de la tutoria
         start_time = self.fecha
+        # Calcular la hora de finalizacion de la tutoria
         end_time= start_time + timedelta(minutes=120)
         
         try:
+            # Crear servicio de google calendar
             service = build('calendar', 'v3', credentials=creds)
 
+            # Crear evento en el calendario
             event = (
                 service.events()
                 .insert(
