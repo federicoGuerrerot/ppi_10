@@ -1,11 +1,15 @@
+<!-- Heredar de plantilla base -->
 {% extends 'core/base.html' %}
 
+<!-- Establecer titulo de la pagina -->
 {% block title %}
     TutoUN - {{tutor.nombre}}
 {% endblock %}
 
+<!-- Cargar archivos estaticos -->
 {% load static %}
 
+<!-- Contenido propio de la vista -->
 {% block content %}
 <style>
     section {
@@ -77,10 +81,13 @@
 </style>
 
 <section>
+    <!-- Titulo de la vista -->
     <h1>Solicitar Tutoria</h1>
-
+    <!-- Formulario para solicitar tutoria -->
     <form method="POST">
         {% csrf_token %}
+
+        <!-- Info basica del tutor -->
         <div class="tutor-info">
             {% if tutor.foto_perfil %}
             <img src="{{ tutor.foto_perfil.url }}" class="foto" alt="Foto de perfil del tutor">
@@ -91,8 +98,10 @@
             <input type="hidden" name="tutor_id" id="tutor_id" value="{{ tutor.email }}">
         </div>
 
+        <!-- nombre del solicitante -->
         <label for="estudiante">Estudiante: {{user.email}}</label>
 
+        <!-- Tema a tratar, mostrado como lista -->
         <label for="Tema">Tema:</label>
         <select name="Tema" id="Tema" required>
             <!-- Lista de materias disponibles -->            
@@ -101,9 +110,11 @@
             {% endfor %}
         </select>
 
+        <!-- Tema o concepto mas especifico -->
         <label for="Nombre">Tema o concepto a tratar:</label>
         <textarea name="Nombre" id="Nombre" rows="3" required></textarea>
 
+        <!-- Algun comentario adicional aclarando necesidades del solicitante -->
         <label for="comentarios">Comentarios adicionales (opcional):</label>
         <textarea name="comentarios" id="comentarios" rows="3"></textarea>
 

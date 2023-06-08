@@ -14,12 +14,19 @@ from tutorias.models import Tutoria
 def directs(request, email, tutoria_id):
 	"""Vista para ver los chats de una conversacion"""
 
+	# Recuperamos el usuario actual
 	usuario = request.user
+	# Recuperamos los chats del usuario
 	chats = Mensaje.getMensajes(usuario=usuario)
+	# Recuperamos el usuario con el que se va a conversar
 	chatActivo = Usuario.objects.get(email=email)
+	# Recuperamos los mensajes de la conversacion
 	mensajes = Mensaje.objects.filter(usuario=usuario, receptor__email=email, tutoria__id=tutoria_id)
+	# Marcamos los mensajes como leidos
 	mensajes.update(leido=True)
+	# Recuperamos la tutoria activa
 	tutoriaActiva = Tutoria.objects.get(id=tutoria_id)
+	# Marcamos el chat como leido
 	for chat in chats:
 		if chat['Usuario'] == chatActivo:
 			chat['sinleer'] = 0
@@ -40,10 +47,12 @@ def nuevaConversacion(request, email, tutoria_id):
 	por defecto de solicitud de tutoria"""
 
 	emisor = request.user
+	# Mensaje por defecto de solicitud de tutoria
 	cuerpo = 'Hola, estoy interesado en una tutoria, que horario hay disponible?.'
 	tutoria = Tutoria.objects.get(id=tutoria_id)
 	receptor = Usuario.objects.get(email=email)
 
+	# Comprobamos que el emisor y el receptor no sean el mismo usuario
 	if emisor != receptor:
 		Mensaje.enviarMensaje(emisor, receptor, cuerpo, tutoria)
 	return redirect('tutorias')
@@ -52,6 +61,8 @@ def nuevaConversacion(request, email, tutoria_id):
 def enviar(request):
 	"""Envia un mensaje a un usuario"""
 
+	# Recuperamos los datos del formulario de envio de mensaje
+	# usuario actual, receptor, cuerpo del mensaje y tutoria
 	emisor = request.user
 	receptor_username = request.POST.get('receptor')
 	cuerpo = request.POST.get('cuerpo')
@@ -60,6 +71,7 @@ def enviar(request):
 	if request.method == 'POST':
 		receptor = Usuario.objects.get(username=receptor_username)
 		tutoria = Tutoria.objects.get(id=tutoria)
+		# Crea los mensajes en la base de datos
 		Mensaje.enviarMensaje(emisor, receptor, cuerpo, tutoria)
 		return redirect('tutorias')
 	else:

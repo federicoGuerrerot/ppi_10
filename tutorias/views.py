@@ -50,15 +50,6 @@ def tutorias(request):
     return redirect('home')
 
 @login_required(login_url='users:login')
-def detalle_tutoria(request, tutoria_id):
-    """Vista de la tutoria seleccionada, muestra los detalles de la tutoria"""
-
-    tutoria = get_object_or_404(Tutoria, id = tutoria_id)
-    return render(request, 'detalleTutoria.html', {
-        'tutoria':tutoria,
-    })
-
-@login_required(login_url='users:login')
 def solicitarTutoria(request, emailtutor):
     """Vista para solicitar una nueva tutoria"""
 
@@ -86,7 +77,7 @@ def agendar(request, tutoria_id):
             return redirect('tutorias')
     else:
         form = Calendario(instance=tutoria)
-        return render(request, 'detalleTutoria.html', {
+        return render(request, 'agendarTutoria.html', {
             'form': form,
             'tutoria': tutoria,
         })

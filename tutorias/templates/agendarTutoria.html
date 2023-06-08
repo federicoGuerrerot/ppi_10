@@ -1,12 +1,17 @@
+<!-- Heredar de plantilla base -->
 {% extends 'core/base.html' %}
+<!-- Necesario para funcionamiento de tags -->
 {% load templatetags %}
 
+<!-- Especificar titula de la pagina -->
 {% block title %}
     TutoUN - {{tutoria.nombre}}
 {% endblock %}
 
+<!-- Cargar archivos estaticos -->
 {% load static %}
 
+<!-- Contenido propio de la vista -->
 {% block content %}
 <style>
     section {
@@ -79,12 +84,16 @@
 
 
 <section>
+    <!-- tags del tutor -->
     <div style="display:flex">
         {% for tag in tutoria.tutor.tags.all %}
         <a href="{% url 'buscar' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
         {% endfor %}
     </div>
+
+    <!-- ficha de presentacion del tutor -->
     <div class="tutor-info col">
+        <!-- Encabezado con Correo y foto -->
         <div class="text-center mb-4">
             {% if chatActivo.foto_perfil %}
                 <img src="{{ tutoria.tutor.foto_perfil.url }}" alt="{{ tutoria.tutor.username }}'s profile picture" class="rounded-circle" style="width: 150px; height: 150px;">
@@ -93,38 +102,47 @@
             {% endif %}
         </div>
         <div class="list-group rounded-0">
+            <!-- Nombre del tutor -->
             <div>
                 <small class="small font-weight-bold"> {{ tutoria.tutor.nombre }} </small>
             </div>
+            <!-- Tarifa -->
             <div>
                 <span>${{ tutoria.tutor.tarifa }} /hora</span>
             </div>
         </div>
     </div>
 
+    <!-- Formulario para actualizar y Agendar la tutoria -->
     <form method="post" enctype="multipart/form-data" class="row g-3">
         {% csrf_token %}
+        <!-- nombre de la tutoria -->
         <div class="col-md-6">
             <label for="{{ form.nombre.id_for_label }}" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="{{ form.nombre.id_for_label }}" name="{{ form.nombre.html_name }}" value="{{ form.nombre.value|default:'' }}">
         </div>
+        <!-- fecha y hora -->
         <div class="col-md-6">
             <label for="{{ form.fecha.id_for_label }}" class="form-label">Fecha</label>
             <input type="datetime-local" class="form-control" id="{{ form.fecha.id_for_label }}" name="{{ form.fecha.html_name }}" value="{{ form.fecha.value|default:'' }}">
         </div>
+        <!-- tema -->
         <div class="col-md-6">
             <label for="{{ form.tema.id_for_label }}" class="form-label">Tema</label>
             <input type="text" class="form-control" id="{{ form.tema.id_for_label }}" name="{{ form.tema.html_name }}" value="{{ form.tema.value|default:'' }}">
         </div>
+        <!-- lugar -->
         <div class="col-md-6">
             <label for="{{ form.lugar.id_for_label }}" class="form-label">Lugar</label>
             <input type="text" class="form-control" id="{{ form.lugar.id_for_label }}" name="{{ form.lugar.html_name }}" value="{{ form.lugar.value|default:'' }}">
         </div>
+        <!-- duracion -->
         <div class="col-md-6">
             <label for="{{ form.duracion.id_for_label }}" class="form-label">Duracion</label>
-            <span>En minutos</span>
+            <small>En minutos</small>
             <input type="text" class="form-control" id="{{ form.duracion.id_for_label }}" name="{{ form.duracion.html_name }}" value="{{ form.duracion.value|default:'' }}">
         </div>
+        <!-- Boton -->
         <div class="col-12 mt-3 d-flex justify-content-center">
             <button type="submit" class="btn btn-primary">Agendar Tutoria</button>
         </div>
