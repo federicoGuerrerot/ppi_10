@@ -5,16 +5,59 @@ Política de privacidad - TutoUN
 {% endblock %}
 
 {% block content %}
-<h1>Política de Privacidad</h1>
-<p>Última actualización: (09/06/2023)</p>
 
-<p>En TutoUN, la privacidad de nuestros visitantes es extremadamente importante para nosotros. Este documento de Política de Privacidad describe los tipos de información personal que TutoUN recopila y cómo se utiliza.</p>
+<style>
+    .privacy-policy-container {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        padding: 1em;
+        margin: 1em auto;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #fafafa;
+        width: 80%;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .privacy-policy-container h1 {
+        color: #446cb3;
+        text-align: center;
+    }
+    .privacy-policy-container h2 {
+        color: #6c7a89;
+    }
+    .privacy-policy-container p {
+        padding: 0.5em 0;
+    }
+    .close-button {
+        background-color: #446cb3;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 10px 2px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
 
-<h2>Información personal</h2>
-<p>Recopilamos información personal como nombres, direcciones de correo electrónico, etc. cuando dicha información es voluntariamente enviada por nuestros visitantes. La información que nos proporcionas se utiliza para procesar transacciones, enviar correos electrónicos periódicos y mejorar el servicio que te ofrecemos. No compartimos esta información con terceros.</p>
+    </style>
+<div class="privacy-policy-container">
+    <h1>Política de Privacidad</h1>
+    <p>Última actualización: (09/06/2023)</p>
 
-<h2>Archivos de registro</h2>
-<p>Como muchos otros sitios web, TutoUN utiliza archivos de registros. Usamos esta información para analizar tendencias, administrar el sitio, rastrear el movimiento de los usuarios en el sitio y recopilar información demográfica.</p>
+    <p>En TutoUN, la privacidad de nuestros visitantes es extremadamente importante para nosotros. Este documento de Política de Privacidad describe los tipos de información personal que TutoUN recopila y cómo se utiliza.</p>
 
-<p>Si necesitas más información o tienes alguna pregunta sobre nuestra política de privacidad, no dudes en contactarnos.</p>
+    <h2>Información personal</h2>
+    <p>Recopilamos información personal como nombres, direcciones de correo electrónico, etc. cuando dicha información es voluntariamente enviada por nuestros visitantes. La información que nos proporcionas se utiliza para procesar transacciones, enviar correos electrónicos periódicos y mejorar el servicio que te ofrecemos. No compartimos esta información con terceros.</p>
+
+    <h2>Archivos de registro</h2>
+    <p>Como muchos otros sitios web, TutoUN utiliza archivos de registros. Usamos esta información para analizar tendencias, administrar el sitio, rastrear el movimiento de los usuarios en el sitio y recopilar información demográfica.</p>
+
+    <p>Si necesitas más información o tienes alguna pregunta sobre nuestra política de privacidad, no dudes en contactarnos.</p>
+    <a href="{% url 'users:signup' %}" class="close-button">Cerrar</a>
+    </div>
+
 {% endblock %}
