@@ -2,9 +2,11 @@
 {% load templatetags %}
 
 {% block content %}
+
 <div class="container mt-5">
     <h1 class="mb-4">Mi perfil</h1>
     
+    {# CSS interno para estilizar los tags y su botón de eliminar #}
     <style>
 .tag {
     display: inline-block;
@@ -23,6 +25,9 @@
 
 
     </style>
+
+{# Verifica si el usuario tiene una foto de perfil, si es así la muestra, sino muestra un mensaje #}
+
     {% if usuario.foto_perfil %}
         <div class="text-center mb-4">
             <img src="{{ usuario.foto_perfil.url }}" alt="{{ usuario.username }}'s profile picture" class="rounded-circle" style="width: 150px; height: 150px;">
@@ -31,6 +36,7 @@
         <p class="text-center mb-4">No se ha subido ninguna foto de perfil.</p>
     {% endif %}
 
+    {# Formulario para actualizar el perfil del usuario #}
     <form method="post" enctype="multipart/form-data" class="row g-3">
         {% csrf_token %}
         <div class="col-md-6">
@@ -81,62 +87,70 @@
     </form>
 </div>
 {% endblock %}
-
+{# Sección para Javascript extra que se necesita en esta página específica #}
 {% block extra_js %}
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    var isTutorCheckbox = document.getElementById("{{ form.is_tutor.id_for_label }}");
-    var tarifaContainer = document.getElementById("tarifa-container");
-    var tagsContainer = document.getElementById("tags-container");
+    // Ejecuta este código cuando se ha cargado la página
+    document.addEventListener('DOMContentLoaded', function() {
+        // Selecciona los elementos necesarios
+        var isTutorCheckbox = document.getElementById("{{ form.is_tutor.id_for_label }}");
+        var tarifaContainer = document.getElementById("tarifa-container");
+        var tagsContainer = document.getElementById("tags-container");
 
-    isTutorCheckbox.addEventListener('change', function() {
-        if (isTutorCheckbox.checked) {
-            tarifaContainer.style.display = "block";
-            tagsContainer.style.display = "block";
-        } else {
-            tarifaContainer.style.display = "none";
-            tagsContainer.style.display = "none";
+        // Agrega un listener para mostrar u ocultar los campos de tarifa y temáticas dependiendo si el usuario es tutor o no
+        isTutorCheckbox.addEventListener('change', function() {
+            if (isTutorCheckbox.checked) {
+                tarifaContainer.style.display = "block";
+                tagsContainer.style.display = "block";
+            } else {
+                tarifaContainer.style.display = "none";
+                tagsContainer.style.display = "none";
+            }
+        });
+    });
+
+    var tagInput = document.getElementById("tag-input");
+    var tagContainer = document.getElementById("tag-container");
+    var tagsValue = document.getElementById("tags-value");
+
+    // Listener para agregar un tag cuando se presiona Enter
+    tagInput.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            var tag = tagInput.value.trim();
+            if (tag.length > 0) {
+                addTag(tag);
+                tagInput.value = "";
+                updateTagsValue();
+            }
         }
     });
-});
 
-var tagInput = document.getElementById("tag-input");
-var tagContainer = document.getElementById("tag-container");
-var tagsValue = document.getElementById("tags-value");
-
-tagInput.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-        event.preventDefault();
-        var tag = tagInput.value.trim();
-        if (tag.length > 0) {
-            addTag(tag);
-            tagInput.value = "";
+    // Listener para remover un tag cuando se presiona su botón de eliminar
+    tagContainer.addEventListener("click", function (event) {
+        if (event.target.classList.contains("tag-remove")) {
+            event.target.parentElement.remove();
+            // Actualiza el valor de los tags en el formulario
             updateTagsValue();
         }
-    }
-});
-
-tagContainer.addEventListener("click", function (event) {
-    if (event.target.classList.contains("tag-remove")) {
-        event.target.parentElement.remove();
-        updateTagsValue();
-    }
-});
-
-function addTag(tagName) {
-    var tagElement = document.createElement("span");
-    tagElement.className = "tag";
-    tagElement.innerHTML = tagName + ' <span class="tag-remove">&times;</span>';
-    tagContainer.appendChild(tagElement);
-}
-
-function updateTagsValue() {
-    var tags = [];
-    tagContainer.querySelectorAll(".tag").forEach(function (tagElement) {
-        tags.push(tagElement.childNodes[0].textContent.trim());
     });
-    tagsValue.value = tags.join(", ");
-}
+
+    // Función para agregar un tag al contenedor de tags
+    function addTag(tagName) {
+        var tagElement = document.createElement("span");
+        tagElement.className = "tag";
+        tagElement.innerHTML = tagName + ' <span class="tag-remove">&times;</span>';
+        tagContainer.appendChild(tagElement);
+    }
+
+    // Función para actualizar el valor de los tags en el formulario
+    function updateTagsValue() {
+        var tags = [];
+        tagContainer.querySelectorAll(".tag").forEach(function (tagElement) {
+            tags.push(tagElement.childNodes[0].textContent.trim());
+        });
+        tagsValue.value = tags.join(", ");
+    }
 
 </script>
 {% endblock %}
