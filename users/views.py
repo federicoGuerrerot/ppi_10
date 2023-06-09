@@ -6,6 +6,11 @@ from django.http.response import JsonResponse
 
 from users.forms import FormCrearUsuario
 
+
+def privacy_policy(request):
+    return render(request, 'users/privacy_policy.html')
+
+
 def user_login(request):
     """Función para iniciar sesión, se encarga de autenticar al usuario y de redirigir a la pagina principal
     si este existe y las credenciales son correctas, de lo contrario muestra un mensaje de error"""

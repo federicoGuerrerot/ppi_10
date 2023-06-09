@@ -151,48 +151,55 @@ h1 {
 
     </style>
 
-    <div class="signup-container">
-        <img src="{% static 'grado.png' %}" alt="Icon" class="signup-icon">
-        <h1>Registrarse</h1>
-        <form method="POST" action="{% url 'users:signup' %}" class="signup-form">
-            {% csrf_token %}
-            <div class="form-group">
-              {% for field in form %}
-              <p>
-                {{ field.label_tag }}
-                {{ field }}
-                <!-- {% trans 'I have read and accept the' %} -->
-      
-              {% if field.help_text %}
-              <small class="form-text text-muted"><p>{{ field.help_text }}</p></small>
-              {% endif %}
-      
-              {% if field.errors %}
-              <div class="alert alert-danger" role="alert">
-                  {% for error in field.errors %}
-                      {{ error }}</br>
-                  {% endfor %}
-              </div>
-              {% endif %}
-      
-              </p>
-              {% endfor %}
-      
-            </div>
-            <div>
-              <button type="submit" class="signup-button">Registrarse</button>
-            </div>
-        </form>
-        <div class="social-login-buttons">
-            <a href="#" class="social-login-button facebook-button">
-                <img src="{% static 'facebook.png' %}" alt="Facebook icon" class="icon"> Facebook
-            </a>
-            <a href="#" class="social-login-button google-button">
-                <img src="{% static 'google.png' %}" alt="Google icon" class="icon"> Google
-            </a>            
-        </div>
+<div class="signup-container">
+  <img src="{% static 'grado.png' %}" alt="Icon" class="signup-icon">
+  <h1>Registrarse</h1>
+  <form method="POST" action="{% url 'users:signup' %}" class="signup-form">
+      {% csrf_token %}
+      <div class="form-group">
+        {% for field in form %}
+        <p>
+          {{ field.label_tag }}
+          {{ field }}
 
-    </div>
+        {% if field.help_text %}
+        <small class="form-text text-muted"><p>{{ field.help_text }}</p></small>
+        {% endif %}
+
+        {% if field.errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for error in field.errors %}
+                {{ error }}</br>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        </p>
+        {% endfor %}
+      </div>
+
+      <div class="form-group">
+          <label for="privacy-policy">
+              <input type="checkbox" id="privacy-policy" required>
+              Acepto la <a href="{% url 'users:privacy_policy' %}">Política de privacidad</a>
+          </label>
+      </div>
+
+      <div>
+        <button type="submit" class="signup-button">Registrarse</button>
+      </div>
+  </form>
+
+  <div class="social-login-buttons">
+      <a href="#" class="social-login-button facebook-button">
+          <img src="{% static 'facebook.png' %}" alt="Facebook icon" class="icon"> Facebook
+      </a>
+      <a href="#" class="social-login-button google-button">
+          <img src="{% static 'google.png' %}" alt="Google icon" class="icon"> Google
+      </a>            
+  </div>
+
+</div>
 
 {% endblock %}
 
