@@ -16,60 +16,61 @@ TutoUN - Página principal
 <!-- Agregar contenido propio de la vista -->
 {% block content %}
 
-<!-- Mensaje en caso de que no existan comentarios -->
-{% if mensaje %}
-<h2 class="px-3">{{ mensaje }}</h2>
-{% endif %}
+<div class="container mt-5">
 
-<!-- Calificacion del usuario -->
-<div>
-    <h2 class="px-3">Tu calificación</h2>
-    <p class="px-3">{{ request.user.calificacion }}</p>
-</div>
+    <!-- Mensaje en caso de que no existan comentarios -->
+    {% if mensaje %}
+    <div class="alert alert-info" role="alert">
+        {{ mensaje }}
+    </div>
+    {% endif %}
 
-<!-- Comentarios pendientes por realizar de tutorias terminadas -->
-{% if pendientes %}
-<div>
-    <h2 class="px-3">Deja tus comentarios</h2>
-</div>
+    <!-- Calificación del usuario -->
+    <div class="card text-center mb-5">
+        <div class="card-header">
+            Tu calificación
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ request.user.calificacion }}</h5>
+        </div>
+    </div>
 
-<div class="row mb-2 px-3 posts">
-    {% for pendiente in pendientes %}
-    <div class="col-md-6">
-        <div class="cards">
-            <div class="row no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250 tutor-card">
-                <div class="col p-4 d-flex flex-column position-static">
-                    <h3 class="my-1">{{pendiente.titular.nombre}}</h3>
-                    <p class="mb-auto text-muted">Descripción: {{pendiente.titular.descripcion}}</p>
-                    <a href="{% url 'calificar' pendiente.id %}" type="button" class="btn btn-primary btn-sm my-3">Calificar</a>
+    <!-- Comentarios pendientes por realizar de tutorias terminadas -->
+    {% if pendientes %}
+    <h2 class="text-center mb-4">Deja tus comentarios</h2>
+    <div class="row">
+        {% for pendiente in pendientes %}
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{pendiente.titular.nombre}}</h5>
+                    <p class="card-text text-muted">Descripción: {{pendiente.titular.descripcion}}</p>
+                    <a href="{% url 'calificar' pendiente.id %}" class="btn btn-primary">Calificar</a>
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
-{% endif %}
+    {% endif %}
 
-<!-- Comentarios dirigidos al usuario -->
-{% if comentarios %}
-<div>
-    <h2 class="px-3">Tus comentarios</h2>
-</div>
-<div class="row mb-2 px-3 posts">
-    {% for comentario in comentarios %}
-    <div class="col-md-6">
-        <div class="cards">
-            <div class="row no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250">
-                <div class="col p-4 d-flex flex-column position-static">
-                    <h3 class="my-1">{{comentario.fuente.nombre}}</h3>
-                    <p>{{ cometario.calificacion }}</p>
-                    <p class="mb-auto text-muted">{{comentario.comentario}}</p>
+    <!-- Comentarios dirigidos al usuario -->
+    {% if comentarios %}
+    <h2 class="text-center mb-4">Tus comentarios</h2>
+    <div class="row">
+        {% for comentario in comentarios %}
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{comentario.fuente.nombre}}</h5>
+                    <p class="card-text">Calificación: {{ comentario.calificacion }}</p>
+                    <p class="card-text text-muted">{{comentario.comentario}}</p>
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
+    {% endif %}
+    
 </div>
-{% endif %}
 
 {% endblock %}
