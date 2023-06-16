@@ -27,7 +27,7 @@
                             {% endfor %}
                         </div>
                         <p class="mb-auto">Calificacion: {{favorito.tutor.calificacion}}</p>
-                        <p class="mb-auto text-muted">Descripción: {{favorito.tutor.descripcion}}</p>
+                        <p class="mb-auto text-muted-email">Descripción: {{favorito.tutor.descripcion}}</p>
                     </div>
                     <a href="{% url 'eliminarFavorito' favorito.tutor.email %}" class="btn btn-danger btn-lg"><span class="material-icons">favorite</span></a>
                 </div>

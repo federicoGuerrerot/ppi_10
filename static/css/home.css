@@ -116,14 +116,34 @@ section {
 .tutor-card {
     cursor: pointer;
     transition: background-color 0.3s, border-color 0.3s;
-    border-color: #9ec4f5; /* Nuevo color de borde azul 1877f2*/
+    border-color: #007bff; /* Nuevo color de borde azul 1877f2*/
     border-width: 2px; /* Ajusta el grosor del borde */
 }
 
-.tutor-card:hover {
+/* .tutor-card:hover {
     background-color: #9ec4f5;
     color: white;
+} */
+
+/* nuevo */
+/* Añadir efecto hover a las tarjetas */
+.tutor-card:hover {
+    transform: scale(1.05);
+    transition: transform .2s;
+    background-color: #007bff;
+    color: white;
 }
+
+/* Cambiar el color del correo a negro */
+.email {
+    color: black !important;
+}
+
+/* Cambiar el color del correo al pasar el mouse a blanco */
+.tutor-card:hover .email {
+    color: white !important;
+}
+/* fin nuevo */
 
 .tutor-link {
     display: block;
@@ -132,7 +152,7 @@ section {
 }
 
 .tutor-card:hover .badge-info {
-    color: #9ec4f5;
+    color: #007bff;
     background-color: white;
 }
 
