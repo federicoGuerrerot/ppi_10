@@ -1,22 +1,56 @@
 {% extends 'core/base.html' %}
+
 {% block title %}Mis Tutores Favoritos{% endblock %}
+
+<!-- Cargar contenido estatico -->
+{% load static %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="/static/css/home.css">
+{% endblock %}
 
 {% block content %}
 <div class="container">
     <h1>Mis Tutores Favoritos</h1>
     <hr>
     {% if favoritos %}
-        <ul>
-            {% for tutor in favoritos %}
-                <li>
-                    <h2>{{ tutor.nombre }}</h2>
-                    <p>{{ tutor.descripcion }}</p>
-                    <a href="{% url 'tutor_detalle' tutor.id %}">Ver Detalles</a>
-                </li>
-            {% endfor %}
-        </ul>
+        {% for favorito in favoritos %}
+        <div class="col-md-6">
+            <div class="cards">
+                <div class="row no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250 tutor-card"
+                    id="tutor-card-{{ favorito.tutor.id }}" data-url="{% url 'tutor' favorito.tutor.slug %}">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <h3 class="my-1">{{favorito.tutor.nombre}}</h3> <strong>{{favorito.tutor.tarifa}}</strong>
+                        <div style="display:flex">
+                            {% for tag in favorito.tutor.tags.all %}
+                            <a href="{% url 'buscar' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
+                            {% endfor %}
+                        </div>
+                        <p class="mb-auto">Calificacion: {{favorito.tutor.calificacion}}</p>
+                        <p class="mb-auto text-muted">Descripción: {{favorito.tutor.descripcion}}</p>
+                    </div>
+                    <a href="{% url 'eliminarFavorito' favorito.tutor.email %}" class="btn btn-danger btn-lg"><span class="material-icons">favorite</span></a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     {% else %}
         <p>Aún no tienes tutores favoritos.</p>
     {% endif %}
 </div>
+
+<!-- Scrip para agregar url dinamicamente a las etiquetas y tarjetas -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var tutorCards = document.querySelectorAll('.tutor-card');
+
+        tutorCards.forEach(function (card) {
+            card.addEventListener('click', function () {
+                var url = this.getAttribute('data-url');
+                location.href = url;
+            });
+        });
+    });
+</script>
+
 {% endblock %}

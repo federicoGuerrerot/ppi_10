@@ -124,6 +124,7 @@
             <p class="mb-auto text-muted">Descripción: {{tutor.descripcion}}</p>
 
             <a href="{% url 'solicitarTutoria' tutor.email %}?next={{ request.path|urlencode }}" class="button is-success">Solicita tutoria</a>
+            <a href="{% url 'añadirFavorito' tutor.email %}" class="btn btn-info btn-lg"><span class="material-icons">favorite</span></a>
         </div>
         <div style="margin-left: 1rem; display: flex; justify-content: center; align-items: flex-start; width: 150px;">
             {% if tutor.foto_perfil %}
