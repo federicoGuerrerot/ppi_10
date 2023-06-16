@@ -9,54 +9,59 @@ TutoUN - Contacto
 <!-- Cargar archivos estaticos -->
 {% load static %}
 
-
 {% block head_extra %}
 <link rel="stylesheet" href="/static/css/home.css">
+
+<style>
+    /* Añadir efecto hover a las tarjetas */
+    .tutor-card:hover {
+        transform: scale(1.05);
+        transition: transform .2s;
+        background-color: #007bff;
+        color: white;
+    }
+
+    /* Cambiar el color del correo a negro */
+    .email {
+        color: black !important;
+    }
+
+    /* Cambiar el color del correo al pasar el mouse a blanco */
+    .tutor-card:hover .email {
+        color: white !important;
+    }
+</style>
 {% endblock %}
 
 <!-- Contenido propio de la vista -->
 {% block content %}
-<div style="padding: 15px;">
-    <div class="row mb-2 posts">
+<div class="container py-5">
+    <div class="row">
 
         <!-- Tarjeta desarrollador Federico guerrero -->
-        <div class="col-md-6">
-            <div class="cards">
-                <a href="https://github.com/federicoGuerrerot">
-                    <div class="row no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250 tutor-card" id="desarrollador-card-1" href="https://github.com/federicoGuerrerot">
-                        <div class="col p-4 d-flex flex-column position-static">
-                            <h3 class="my-1"> Federo Guerrero Trejos </h3>
-                            <p class="mb-auto text-muted"> fguerrerot@unal.edu.co </p>
-                            <div style="display:flex">
-                                <p>Estudiante de ingenieria en sistemas e informatica de la universidad Nacional de
-                                    Colombia.</p>
-                            </div>
-
-                        </div>
-                    </div>
-                </a>
+        <div class="col-md-6 mb-4">
+            <div class="card tutor-card">
+                <div class="card-body">
+                    <h3 class="card-title">Federico Guerrero Trejos</h3>
+                    <p class="card-text email">fguerrerot@unal.edu.co</p>
+                    <p>Estudiante de ingenieria en sistemas e informatica de la universidad Nacional de Colombia.</p>
+                    <a href="https://github.com/federicoGuerrerot" class="stretched-link"></a>
+                </div>
             </div>
         </div>
 
         <!-- Tarjeta desarrollador Juan Jose Ospina -->
-        <div class="col-md-6">
-            <div class="cards">
-                <a href="https://github.com/JuanOspina05">
-                    <div class="row no-gutters border rounded flex-md-row mb-4 shadow-sm h-md-250 tutor-card" id="desarrollador-card-1" href="https://github.com/JuanOspina05">
-                        <div class="col p-4 d-flex flex-column position-static">
-                            <h3 class="my-1"> Juan José Ospina Erazo </h3>
-                            <p class="mb-auto text-muted"> juospinae@unal.edu.co </p>
-                            <div style="display:flex">
-                                <p>Estudiante de ingenieria en sistemas e informatica de la universidad Nacional de
-                                    Colombia.</p>
-                            </div>
-
-                        </div>
-                    </div>
-                </a>
+        <div class="col-md-6 mb-4">
+            <div class="card tutor-card">
+                <div class="card-body">
+                    <h3 class="card-title">Juan José Ospina Erazo</h3>
+                    <p class="card-text email">juospinae@unal.edu.co</p>
+                    <p>Estudiante de ingenieria en sistemas e informatica de la universidad Nacional de Colombia.</p>
+                    <a href="https://github.com/JuanOspina05" class="stretched-link"></a>
+                </div>
             </div>
         </div>
-        
+
     </div>
 </div>
 {% endblock %}
