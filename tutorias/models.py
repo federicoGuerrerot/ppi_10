@@ -27,7 +27,7 @@ class Tutoria(models.Model):
         # recuperar la fecha y hora de la tutoria
         start_time = self.fecha
         # Calcular la hora de finalizacion de la tutoria
-        end_time= start_time + timedelta(minutes=120)
+        end_time= start_time + timedelta(minutes=self.duracion)
         
         try:
             # Crear servicio de google calendar
@@ -49,7 +49,7 @@ class Tutoria(models.Model):
                             "dateTime": end_time.isoformat(),
                             'timeZone': 'America/Bogota',
                         },
-                        "attendees":[{"email":self.usuario.email}]
+                        "attendees":[{"email":self.usuario.email},{"email":self.tutor.email}]
                     },
                 ).execute()
             )

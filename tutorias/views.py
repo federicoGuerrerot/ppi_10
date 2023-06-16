@@ -204,6 +204,8 @@ def test_api2(request):
 
     # Verifica las credenciales
     flow.fetch_token(authorization_response=request.build_absolute_uri().replace('http', 'https'))
+    # para despliegue
+    #flow.fetch_token(authorization_response=request.build_absolute_uri())
     
     creds = flow.credentials
     # refresca las credenciales por si estas se han actualizado

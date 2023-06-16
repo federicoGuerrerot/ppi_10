@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Para despliegue
 #DEBUG = False
 
-#ALLOWED_HOSTS = ['https://fguerrerot.pythonanywhere.com/']
+#ALLOWED_HOSTS = ['fguerrerot.pythonanywhere.com']
 
 # Application definition
 
