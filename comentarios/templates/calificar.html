@@ -1,12 +1,12 @@
-<!-- Heredar caracteristicas de plantilla base -->
+<!-- Heredar características de plantilla base -->
 {% extends 'core/base.html' %}
 
-<!-- Agregar titulo a la pagina -->
+<!-- Agregar título a la página -->
 {% block title %}
 TutoUN - Página principal
 {% endblock %}
 
-<!-- Cargar archivos estaticos, incluye elementos js y css -->
+<!-- Cargar archivos estáticos, incluye elementos js y css -->
 {% load static %}
 
 <!-- Verificar si se puede retirar -->
@@ -16,33 +16,41 @@ TutoUN - Página principal
 
 <!-- Agregar contenido propio de la vista -->
 {% block content %}
-<section>
 
-    <!-- Formulario para agragar comentarios y calificacion al usuario -->
-    <form method="post" enctype="multipart/form-data" class="col g-3">
-        {% csrf_token %}
-        
-        <!-- Nombre del usuario a calificar -->
-        <div class="col-md-9">
-            <h3>{{ comentario.titular.nombre }}</h3>
+<div class="container my-5">
+
+    <div class="card">
+        <div class="card-body">
+
+            <!-- Formulario para agregar comentarios y calificación al usuario -->
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+            
+                <!-- Nombre del usuario a calificar -->
+                <h3 class="card-title mb-4">{{ comentario.titular.nombre }}</h3>
+            
+                <!-- Campo para agregar calificación -->
+                <div class="mb-3">
+                    <label for="{{ form.calificacion.id_for_label }}" class="form-label">Calificación</label>
+                    <input type="number" min="1" max="5" class="form-control" id="{{ form.calificacion.id_for_label }}" name="{{ form.calificacion.html_name }}" value="{{ form.nombre.value|default:'' }}">
+                </div>
+            
+                <!-- Campo para agregar comentario -->
+                <div class="mb-3">
+                    <label for="{{ form.comentario.id_for_label }}" class="form-label">Comentario</label>
+                    <textarea class="form-control" id="{{ form.comentario.id_for_label }}" name="{{ form.comentario.html_name }}" value="{{ form.nombre.value|default:'' }}"></textarea>
+                </div>
+            
+                <!-- Botón -->
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+
+            </form>
+
         </div>
-        
-        <!-- Campo para agregar calificacion -->
-        <div class="col-md-9">
-            <label for="{{ form.calificacion.id_for_label }}" class="form-label">Calificacion</label>
-            <input type="number" min="1" max="5" class="form-control" id="{{ form.calificacion.id_for_label }}" name="{{ form.calificacion.html_name }}" value="{{ form.nombre.value|default:'' }}">
-        </div>
-        
-        <!-- Campo para agregar comentario -->
-        <div class="col">
-            <label for="{{ form.comentario.id_for_label }}" class="form-label">Comentario</label>
-            <textarea type="text" class="form-control" id="{{ form.comentario.id_for_label }}" name="{{ form.comentario.html_name }}" value="{{ form.nombre.value|default:'' }}"></textarea>
-        </div>
-        
-        <!-- Boton -->
-        <div class="col-12 mt-3 d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary">Enviar</button>
-        </div>
-</section>
+    </div>
+
+</div>
 
 {% endblock %}
