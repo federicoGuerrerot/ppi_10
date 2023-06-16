@@ -1,3 +1,4 @@
+
 {% extends 'core/base.html' %}
 
 {% block title %}
@@ -14,6 +15,7 @@
     {% endfor %}
 {% endif %}
 
+    
     <style>
         body {
             background-color: #f6f7fb;
@@ -150,6 +152,8 @@
 
     </style>
 
+    </style>
+
     <div class="login-container">
         <img src="{% static 'grado.png' %}" alt="Icon" class="login-icon">
         <h1>Iniciar sesión</h1>
@@ -162,14 +166,6 @@
             <input type="hidden" name="next" value="{{ request.GET.next }}">
             <button type="submit">Iniciar sesión</button>
         </form>
-        <div class="social-login-buttons">
-            <a href="{}" class="social-login-button facebook-button">
-                <img src="{% static 'facebook.png' %}" alt="Facebook icon" class="icon"> Facebook
-            </a>
-            <a href="{}" class="social-login-button google-button">
-                <img src="{% static 'google.png' %}" alt="Google icon" class="icon"> Google
-            </a>            
-        </div>
 
         <div class="extra-links">
             <a href="/password_reset/">¿Olvidaste tu contraseña?</a>
@@ -177,28 +173,4 @@
         </div>
 
     </div>
-
-    
-<script>
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : '{your-app-id}',
-        cookie     : true,
-        xfbml      : true,
-        version    : '{api-version}'
-      });
-        
-      FB.AppEvents.logPageView();   
-        
-    };
-  
-    (function(d, s, id){
-       var js, fjs = d.getElementsByTagName(s)[0];
-       if (d.getElementById(id)) {return;}
-       js = d.createElement(s); js.id = id;
-       js.src = "https://connect.facebook.net/en_US/sdk.js";
-       fjs.parentNode.insertBefore(js, fjs);
-     }(document, 'script', 'facebook-jssdk'));
-  </script>
 {% endblock %}
-
