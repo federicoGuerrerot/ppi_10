@@ -47,8 +47,10 @@ def calificar(request, comentario_id):
             return redirect('comentarios')
     else:
         # creamos el formulario y lo mostramos
+        ya_es_favorito = request.session.get('ya_es_favorito', False)
         form = ActualizarComentario(instance=comentario)
         return render(request, 'calificar.html', {
             'form': form,
             'comentario': comentario,
+            'ya_es_favorito': ya_es_favorito
         })

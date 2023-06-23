@@ -16,11 +16,18 @@ def favoritos(request):
 def añadirFavorito(request, emailtutor):
     """Añade un favorito"""
 
-    tutor = get_object_or_404(Usuario, email = emailtutor)
-    favorito = Favorito(tutor=tutor, usuario=request.user)
-    favorito.save()
+    tutor = get_object_or_404(Usuario, email=emailtutor)
+    ya_es_favorito = Favorito.objects.filter(tutor=tutor, usuario=request.user).exists()
+
+    if not ya_es_favorito:
+        favorito = Favorito(tutor=tutor, usuario=request.user)
+        favorito.save()
+        request.session['ya_es_favorito'] = True
+    else:
+        request.session['ya_es_favorito'] = False
 
     return redirect('favoritos')
+
 
 def eliminarFavorito(request, emailtutor):
     """Elimina un favorito"""
@@ -28,5 +35,6 @@ def eliminarFavorito(request, emailtutor):
     tutor = get_object_or_404(Usuario, email = emailtutor)
     favorito = Favorito.objects.get(tutor=tutor, usuario=request.user)
     favorito.delete()
+    request.session['ya_es_favorito'] = False
 
     return redirect('favoritos')

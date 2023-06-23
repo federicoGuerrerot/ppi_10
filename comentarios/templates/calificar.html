@@ -40,6 +40,10 @@ TutoUN - Página principal
                     <label for="{{ form.comentario.id_for_label }}" class="form-label">Comentario</label>
                     <textarea class="form-control" id="{{ form.comentario.id_for_label }}" name="{{ form.comentario.html_name }}" value="{{ form.nombre.value|default:'' }}"></textarea>
                 </div>
+
+                {% if not ya_es_favorito %}
+                <a href="{% url 'añadirFavorito' tutor.email %}" class="btn btn-info btn-lg"><span class="material-icons">favorite</span></a>
+                {% endif %}
             
                 <!-- Botón -->
                 <div class="d-grid gap-2">

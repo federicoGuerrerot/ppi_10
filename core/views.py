@@ -24,10 +24,12 @@ def tutor(request, tutorslug):
 
     # Recupera el tutor, en la plantilla html se accede a sus datos y se muestran 
     tutor = get_object_or_404(Usuario, slug=tutorslug)
-    
+    ya_es_favorito = request.session.get('ya_es_favorito', False)
     return render(request, 'core/tutor.html', {
-        'tutor':tutor
+        'tutor':tutor,
+        'ya_es_favorito': ya_es_favorito
     })
+    
 
 def buscar(request, slug):
     """Vista de busqueda de tutores, muestra los tutores que coinciden
